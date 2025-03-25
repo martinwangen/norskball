@@ -1,32 +1,19 @@
-FROM node:18-alpine AS builder
-
+FROM node:18-alpine AS build
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-COPY yarn.lock ./
-
-# Install dependencies
-RUN yarn install --frozen-lockfile
+RUN npm install
 
 # Copy source code
 COPY . .
 
-# Build the application
-RUN yarn build
+# Build the app
+RUN npm run build
 
 # Production stage
-FROM node:18-alpine
-
-WORKDIR /app
-
-# Copy necessary files from builder
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/yarn.lock ./
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
-
-EXPOSE 3000
-
-CMD ["yarn", "start"] 
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"] 
