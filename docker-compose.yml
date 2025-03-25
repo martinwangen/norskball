@@ -15,7 +15,7 @@ services:
       - norskball-network
 
   backend:
-    image: martinwangen/norskball-backend:latest
+    image: sulfax/norskball-backend:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Server=mssql;Database=Norskball;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
@@ -25,7 +25,9 @@ services:
       - norskball-network
 
   frontend:
-    image: martinwangen/norskball-frontend:latest
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
     networks:
       - norskball-network
 

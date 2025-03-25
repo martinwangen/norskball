@@ -1,9 +1,7 @@
-name: Deploy to Production
+name: Deploy to Windows Server
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -33,19 +31,20 @@ jobs:
       - name: Build and push frontend
         uses: docker/build-push-action@v4
         with:
-          context: ./frontend
+          context: .
+          file: ./frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/norskball-frontend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Deploy to server
+      - name: Deploy to Windows Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /path/to/your/project
+            cd Norskball
             docker-compose pull
-            docker-compose up -d --build 
+            docker-compose up -d 
