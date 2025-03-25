@@ -20,7 +20,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Debug Docker Hub username
-        run: echo "Docker Hub username: ${{ secrets.DOCKERHUB_USERNAME }}"
+        run: |
+          echo "Docker Hub username: ${{ secrets.DOCKERHUB_USERNAME }}"
 
       - name: Build and push backend
         uses: docker/build-push-action@v4
