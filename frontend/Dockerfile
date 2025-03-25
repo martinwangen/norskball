@@ -5,11 +5,11 @@ WORKDIR /app
 RUN apk add --no-cache yarn
 
 # Copy package files
-COPY package.json yarn.lock ./
+COPY frontend/package.json frontend/yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 # Copy source code
-COPY . .
+COPY frontend/ .
 
 # Build the app
 RUN yarn build
