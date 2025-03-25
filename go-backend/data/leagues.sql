@@ -1,0 +1,3 @@
+insert into public.leagues (id, name, short_name, country_code, type, level, logo_url, current_season_id, created_at, updated_at)
+values  ('eliteserien_2025', 'Eliteserien', 'Elite', 'NOR', 'DOMESTIC', 1, null, 'eliteserien_2025_season', '2025-03-19 17:02:43.022615', '2025-03-19 17:02:43.022615'),
+        ('eliteserien_2024', 'Eliteserien', 'Elite', 'NOR', 'DOMESTIC', 1, null, 'eliteserien_2024_season', '2025-03-19 17:02:43.022615', '2025-03-19 17:02:43.022615');

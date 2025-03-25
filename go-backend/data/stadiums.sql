@@ -1,0 +1,17 @@
+insert into public.stadiums (id, name, city, country, country_code, capacity, surface_type, built_year, image_url, address, latitude, longitude, created_at, updated_at)
+values  ('haugesund_stadium', 'Haugesund Stadion', 'Haugesund', 'Norway', 'NOR', 8800, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('aker_stadium', 'Aker Stadion', 'Molde', 'Norway', 'NOR', 11800, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('kfum_arena', 'KFUM Arena', 'Oslo', 'Norway', 'NOR', 1500, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('aspmyra_stadium', 'Aspmyra Stadion', 'Bodø', 'Norway', 'NOR', 7354, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('ullevaal_stadium', 'Ullevaal Stadion', 'Oslo', 'Norway', 'NOR', 28972, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('kristiansund_stadium', 'Kristiansund Stadion', 'Kristiansund', 'Norway', 'NOR', 4000, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('viking_stadium', 'Viking Stadion', 'Stavanger', 'Norway', 'NOR', 16300, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('brann_stadium', 'Brann Stadion', 'Bergen', 'Norway', 'NOR', 17686, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('alfheim_stadium', 'Alfheim Stadion', 'Tromsø', 'Norway', 'NOR', 6859, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('marienlyst_stadium', 'Marienlyst Stadion', 'Drammen', 'Norway', 'NOR', 8935, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('lerkendal_stadium', 'Lerkendal Stadion', 'Trondheim', 'Norway', 'NOR', 21400, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('bryne_stadium', 'Bryne Stadion', 'Bryne', 'Norway', 'NOR', 10000, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('sandefjord_arena', 'Sandefjord Arena', 'Sandefjord', 'Norway', 'NOR', 6000, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('briskeby_stadium', 'Briskeby Gressbane', 'Hamar', 'Norway', 'NOR', 7600, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('sarpsborg_stadium', 'Sarpsborg Stadion', 'Sarpsborg', 'Norway', 'NOR', 6000, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273'),
+        ('fredrikstad_stadium', 'Fredrikstad Stadion', 'Fredrikstad', 'Norway', 'NOR', 12565, 'Grass', null, null, null, null, null, '2025-03-19 16:58:43.139273', '2025-03-19 16:58:43.139273');

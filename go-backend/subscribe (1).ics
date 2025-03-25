@@ -1,0 +1,2772 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eliteserien//NONSGML Event Calendar//NO
+METHOD:PUBLISH
+X-WR-CALNAME:Terminliste Eliteserien
+BEGIN:VEVENT
+UID:97786a32-e3c2-4d42-ba19-11e4fd837bbd
+SUMMARY:Str?msgodset - Rosenborg
+DESCRIPTION: Eliteserien (runde 1)  \n\n Str?msgodset - Rosenborg\n Marienlyst stadion l?rdag 29.03.25 16:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250329T160000
+DTEND:20250329T180000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d027fe2c-2a6b-40bd-bf1e-0308f728876c
+SUMMARY:Fredrikstad - Brann
+DESCRIPTION: Eliteserien (runde 1)  \n\n Fredrikstad - Brann\n Fredrikstad stadion l?rdag 29.03.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250329T180000
+DTEND:20250329T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:bec5b27e-208b-4d7a-ad4e-c257b043da10
+SUMMARY:V?lerenga - Viking
+DESCRIPTION: Eliteserien (runde 1)  \n\n V?lerenga - Viking\n Intility Arena s?ndag 30.03.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250330T143000
+DTEND:20250330T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ec949809-1fcc-47e1-8487-5e352398ad6c
+SUMMARY:HamKam - Kristiansund
+DESCRIPTION: Eliteserien (runde 1)  \n\n HamKam - Kristiansund\n Briskeby s?ndag 30.03.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250330T170000
+DTEND:20250330T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ab987f7c-256a-4697-bb47-1124838b5960
+SUMMARY:Molde - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 1)  \n\n Molde - Sarpsborg 08\n Aker stadion s?ndag 30.03.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250330T170000
+DTEND:20250330T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ef0ce5a0-6257-4a20-a886-455d626f6a63
+SUMMARY:Troms? - Haugesund
+DESCRIPTION: Eliteserien (runde 1)  \n\n Troms? - Haugesund\n Romssa Arena s?ndag 30.03.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250330T170000
+DTEND:20250330T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b6f73284-fef1-44da-a6b8-8e42563ff188
+SUMMARY:KFUM - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 1)  \n\n KFUM - Sandefjord Fotball\n s?ndag 30.03.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+DTSTART:20250330T170000
+DTEND:20250330T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5bb229bc-7bf2-495f-8d34-8d74609ef54f
+SUMMARY:Bryne - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 1)  \n\n Bryne - Bod?/Glimt\n Bryne stadion s?ndag 30.03.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250330T191500
+DTEND:20250330T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c59bf8f0-73a8-4bcb-bde7-62760e445818
+SUMMARY:Rosenborg - Fredrikstad
+DESCRIPTION: Eliteserien (runde 2)  \n\n Rosenborg - Fredrikstad\n Lerkendal stadion l?rdag 05.04.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250405T180000
+DTEND:20250405T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2316e9fc-f359-44f5-99e0-d052fc72e35c
+SUMMARY:Brann - Troms?
+DESCRIPTION: Eliteserien (runde 2)  \n\n Brann - Troms?\n Brann stadion s?ndag 06.04.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250406T143000
+DTEND:20250406T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:f39d4b60-43a1-47b3-bb65-d29eb2f0cff8
+SUMMARY:Haugesund - Str?msgodset
+DESCRIPTION: Eliteserien (runde 2)  \n\n Haugesund - Str?msgodset\n Haugesund Sparebank Arena s?ndag 06.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250406T170000
+DTEND:20250406T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2a9bc01f-5ad2-4635-afc7-592817a1ee49
+SUMMARY:Sarpsborg 08 - V?lerenga
+DESCRIPTION: Eliteserien (runde 2)  \n\n Sarpsborg 08 - V?lerenga\n Sarpsborg st KG s?ndag 06.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250406T170000
+DTEND:20250406T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b642bff2-52dc-47ff-938b-a87b30bf8232
+SUMMARY:Sandefjord Fotball - Molde
+DESCRIPTION: Eliteserien (runde 2)  \n\n Sandefjord Fotball - Molde\n Jotun Arena s?ndag 06.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250406T170000
+DTEND:20250406T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:da0398b7-3308-46b2-8d95-728ef137b199
+SUMMARY:Kristiansund - Bryne
+DESCRIPTION: Eliteserien (runde 2)  \n\n Kristiansund - Bryne\n Nordm?re stadion s?ndag 06.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250406T170000
+DTEND:20250406T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:9527b867-d749-4f95-b6e5-29f49feabe95
+SUMMARY:Bod?/Glimt - HamKam
+DESCRIPTION: Eliteserien (runde 2)  \n\n Bod?/Glimt - HamKam\n Aspmyra stadion s?ndag 06.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250406T170000
+DTEND:20250406T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e56d9ef1-e65d-46e3-841e-d0b4ceb22202
+SUMMARY:Viking - KFUM
+DESCRIPTION: Eliteserien (runde 2)  \n\n Viking - KFUM\n Lyse Arena s?ndag 06.04.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250406T191500
+DTEND:20250406T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:66901248-fb89-4b98-a289-1cb8c909ded7
+SUMMARY:Fredrikstad - V?lerenga
+DESCRIPTION: Eliteserien (runde 17)  \n\n Fredrikstad - V?lerenga\n Fredrikstad stadion onsdag 09.04.25 19:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250409T190000
+DTEND:20250409T210000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7955ddc6-e116-460f-bf3a-d29b695eff32
+SUMMARY:Brann - Str?msgodset
+DESCRIPTION: Eliteserien (runde 17)  \n\n Brann - Str?msgodset\n Brann stadion torsdag 10.04.25 19:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250410T190000
+DTEND:20250410T210000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c2e2157e-f8f4-48d5-9781-c416cf62d5ff
+SUMMARY:Viking - Kristiansund
+DESCRIPTION: Eliteserien (runde 16)  \n\n Viking - Kristiansund\n Lyse Arena torsdag 10.04.25 19:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250410T190000
+DTEND:20250410T210000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d519d763-d421-4fb7-8cbf-9527b0643f60
+SUMMARY:Troms? - Kristiansund
+DESCRIPTION: Eliteserien (runde 3)  \n\n Troms? - Kristiansund\n Romssa Arena s?ndag 20.04.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250420T143000
+DTEND:20250420T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:24792798-24e4-4d8b-9774-113d636e59e3
+SUMMARY:V?lerenga - Rosenborg
+DESCRIPTION: Eliteserien (runde 3)  \n\n V?lerenga - Rosenborg\n Intility Arena mandag 21.04.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250421T143000
+DTEND:20250421T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e2c10cb2-90c1-434f-aad4-1f05973e3b53
+SUMMARY:Str?msgodset - Brann
+DESCRIPTION: Eliteserien (runde 3)  \n\n Str?msgodset - Brann\n Marienlyst stadion mandag 21.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250421T170000
+DTEND:20250421T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:bc157fe3-2715-41bd-bf0a-f51be986503b
+SUMMARY:Fredrikstad - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 3)  \n\n Fredrikstad - Sandefjord Fotball\n Fredrikstad stadion mandag 21.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250421T170000
+DTEND:20250421T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:60402f3a-0682-4ef6-948c-db8c2c427db3
+SUMMARY:KFUM - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 3)  \n\n KFUM - Sarpsborg 08\n KFUM-Arena mandag 21.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250421T170000
+DTEND:20250421T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:97af15c6-4955-4515-a6ec-a33d2a03d5f9
+SUMMARY:Bryne - Haugesund
+DESCRIPTION: Eliteserien (runde 3)  \n\n Bryne - Haugesund\n Bryne stadion mandag 21.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250421T170000
+DTEND:20250421T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:aa7d06c9-64ea-4b1e-ac74-9c11b92fc7f7
+SUMMARY:HamKam - Viking
+DESCRIPTION: Eliteserien (runde 3)  \n\n HamKam - Viking\n Briskeby mandag 21.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250421T170000
+DTEND:20250421T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:16011e28-cd76-47ef-b5a4-2a0d2e03c099
+SUMMARY:Molde - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 3)  \n\n Molde - Bod?/Glimt\n Aker stadion mandag 21.04.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250421T191500
+DTEND:20250421T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7b8f164f-a42e-49e4-96aa-317d4b7a8753
+SUMMARY:Rosenborg - Molde
+DESCRIPTION: Eliteserien (runde 4)  \n\n Rosenborg - Molde\n Lerkendal stadion s?ndag 27.04.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250427T143000
+DTEND:20250427T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:741f5f67-b7fa-4e46-ad24-72360a6f1878
+SUMMARY:Sarpsborg 08 - Str?msgodset
+DESCRIPTION: Eliteserien (runde 4)  \n\n Sarpsborg 08 - Str?msgodset\n Sarpsborg st KG s?ndag 27.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250427T170000
+DTEND:20250427T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8590c062-6be7-4100-869a-ce4d58ad7795
+SUMMARY:Sandefjord Fotball - HamKam
+DESCRIPTION: Eliteserien (runde 4)  \n\n Sandefjord Fotball - HamKam\n Jotun Arena s?ndag 27.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250427T170000
+DTEND:20250427T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0584add5-2e73-4b76-8360-81632a4ad701
+SUMMARY:Kristiansund - V?lerenga
+DESCRIPTION: Eliteserien (runde 4)  \n\n Kristiansund - V?lerenga\n Nordm?re stadion s?ndag 27.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250427T170000
+DTEND:20250427T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d0e5f950-16eb-4c12-a22c-e41c8497e588
+SUMMARY:Haugesund - Fredrikstad
+DESCRIPTION: Eliteserien (runde 4)  \n\n Haugesund - Fredrikstad\n Haugesund Sparebank Arena s?ndag 27.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250427T170000
+DTEND:20250427T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5c88d672-f7d1-4cf0-bd8e-f7afa761dc23
+SUMMARY:Bod?/Glimt - KFUM
+DESCRIPTION: Eliteserien (runde 4)  \n\n Bod?/Glimt - KFUM\n Aspmyra stadion s?ndag 27.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250427T170000
+DTEND:20250427T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:68784bfd-646b-4d86-9722-1cddc38b8650
+SUMMARY:Brann - Bryne
+DESCRIPTION: Eliteserien (runde 4)  \n\n Brann - Bryne\n Brann stadion s?ndag 27.04.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250427T170000
+DTEND:20250427T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:10671385-4c76-49bd-af6c-50aeab75864e
+SUMMARY:Viking - Troms?
+DESCRIPTION: Eliteserien (runde 4)  \n\n Viking - Troms?\n Lyse Arena s?ndag 27.04.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250427T191500
+DTEND:20250427T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:6f4442ce-f04b-416a-9ecd-16041145400b
+SUMMARY:Viking - Haugesund
+DESCRIPTION: Eliteserien (runde 18)  \n\n Viking - Haugesund\n Lyse Arena onsdag 30.04.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250430T180000
+DTEND:20250430T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0e0daa9a-6840-4cb3-8528-26b50a554229
+SUMMARY:Fredrikstad - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 5)  \n\n Fredrikstad - Bod?/Glimt\n Fredrikstad stadion torsdag 01.05.25 16:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250501T160000
+DTEND:20250501T180000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b25e9fd2-3227-4d22-b581-7b796c937a80
+SUMMARY:Rosenborg - Kristiansund
+DESCRIPTION: Eliteserien (runde 17)  \n\n Rosenborg - Kristiansund\n Lerkendal stadion torsdag 01.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250501T180000
+DTEND:20250501T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0245748a-5611-47a1-9a52-b28345f213f5
+SUMMARY:HamKam - KFUM
+DESCRIPTION: Eliteserien (runde 5)  \n\n HamKam - KFUM\n Briskeby fredag 02.05.25 19:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250502T190000
+DTEND:20250502T210000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c74f8e28-e31a-4a03-a2bd-eb0d836ff2d1
+SUMMARY:V?lerenga - Brann
+DESCRIPTION: Eliteserien (runde 5)  \n\n V?lerenga - Brann\n Intility Arena l?rdag 03.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250503T180000
+DTEND:20250503T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:dc7ebd92-8da0-4b3e-893e-24551e97cada
+SUMMARY:Str?msgodset - Kristiansund
+DESCRIPTION: Eliteserien (runde 5)  \n\n Str?msgodset - Kristiansund\n Marienlyst stadion s?ndag 04.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250504T170000
+DTEND:20250504T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d046b02e-f8ce-43ba-8a6d-06d719491bfb
+SUMMARY:Troms? - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 5)  \n\n Troms? - Sandefjord Fotball\n Romssa Arena s?ndag 04.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250504T170000
+DTEND:20250504T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8a86e69a-a3e7-46b3-abe0-8ddba3e150ac
+SUMMARY:Viking - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 5)  \n\n Viking - Sarpsborg 08\n Lyse Arena s?ndag 04.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250504T170000
+DTEND:20250504T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:f57c68ac-d147-4850-a92f-9f2e0bd55daf
+SUMMARY:Molde - Haugesund
+DESCRIPTION: Eliteserien (runde 5)  \n\n Molde - Haugesund\n Aker stadion s?ndag 04.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250504T170000
+DTEND:20250504T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8c07fe48-1ab4-4922-8214-d2e3dc3ba814
+SUMMARY:Rosenborg - Bryne
+DESCRIPTION: Eliteserien (runde 5)  \n\n Rosenborg - Bryne\n Lerkendal stadion s?ndag 04.05.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250504T191500
+DTEND:20250504T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:26764acd-e988-4437-9f27-a3a048f697d7
+SUMMARY:Bod?/Glimt - Str?msgodset
+DESCRIPTION: Eliteserien (runde 6)  \n\n Bod?/Glimt - Str?msgodset\n Aspmyra stadion l?rdag 10.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250510T180000
+DTEND:20250510T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:76b70f7a-86c0-479c-afac-c23a37565a98
+SUMMARY:Brann - Rosenborg
+DESCRIPTION: Eliteserien (runde 6)  \n\n Brann - Rosenborg\n Brann stadion s?ndag 11.05.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250511T143000
+DTEND:20250511T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:98bf854e-a67d-4910-82ca-f738d7c2c9bb
+SUMMARY:Kristiansund - Fredrikstad
+DESCRIPTION: Eliteserien (runde 6)  \n\n Kristiansund - Fredrikstad\n Nordm?re stadion s?ndag 11.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250511T170000
+DTEND:20250511T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:41f87fad-c0fd-4e7b-a45a-9bc12ef756c2
+SUMMARY:KFUM - Troms?
+DESCRIPTION: Eliteserien (runde 6)  \n\n KFUM - Troms?\n KFUM-Arena s?ndag 11.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250511T170000
+DTEND:20250511T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:664d0a98-85ed-4f7c-923e-ffd484be3314
+SUMMARY:Bryne - Molde
+DESCRIPTION: Eliteserien (runde 6)  \n\n Bryne - Molde\n Bryne stadion s?ndag 11.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250511T170000
+DTEND:20250511T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:cd6b3708-4fb0-48c4-afef-3739e05527a8
+SUMMARY:Sandefjord Fotball - V?lerenga
+DESCRIPTION: Eliteserien (runde 6)  \n\n Sandefjord Fotball - V?lerenga\n Jotun Arena s?ndag 11.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250511T170000
+DTEND:20250511T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5e21ed20-3c23-4674-986f-b03a21f98a5b
+SUMMARY:Sarpsborg 08 - HamKam
+DESCRIPTION: Eliteserien (runde 6)  \n\n Sarpsborg 08 - HamKam\n Sarpsborg st KG s?ndag 11.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250511T170000
+DTEND:20250511T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a42107a3-7d9d-4fbe-9773-51d9d572a1b1
+SUMMARY:Haugesund - Viking
+DESCRIPTION: Eliteserien (runde 6)  \n\n Haugesund - Viking\n Haugesund Sparebank Arena s?ndag 11.05.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250511T191500
+DTEND:20250511T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3f25c8fe-d9ce-48c8-b3d7-18631ad6c361
+SUMMARY:Brann - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 7)  \n\n Brann - Sarpsborg 08\n Brann stadion fredag 16.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250516T180000
+DTEND:20250516T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:53b4fb0b-da2c-4960-86b0-f92056ffa54d
+SUMMARY:Rosenborg - Haugesund
+DESCRIPTION: Eliteserien (runde 7)  \n\n Rosenborg - Haugesund\n Lerkendal stadion fredag 16.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250516T180000
+DTEND:20250516T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:6f42ee73-6b0a-4ff2-85ff-c8a7ef9ba6e4
+SUMMARY:Str?msgodset - Bryne
+DESCRIPTION: Eliteserien (runde 7)  \n\n Str?msgodset - Bryne\n Marienlyst stadion fredag 16.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250516T180000
+DTEND:20250516T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:294e0f17-9160-4c81-a913-725f0711b33c
+SUMMARY:Molde - Kristiansund
+DESCRIPTION: Eliteserien (runde 7)  \n\n Molde - Kristiansund\n Aker stadion fredag 16.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250516T180000
+DTEND:20250516T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:edbc81b5-1bba-464e-a307-158fda0bbcba
+SUMMARY:Fredrikstad - KFUM
+DESCRIPTION: Eliteserien (runde 7)  \n\n Fredrikstad - KFUM\n Fredrikstad stadion fredag 16.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250516T180000
+DTEND:20250516T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a7531bb7-2684-4d3b-9289-f2a5c0e68034
+SUMMARY:Viking - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 7)  \n\n Viking - Sandefjord Fotball\n Lyse Arena fredag 16.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250516T180000
+DTEND:20250516T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:f355c151-805f-44c6-8b38-570046885fa7
+SUMMARY:Troms? - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 7)  \n\n Troms? - Bod?/Glimt\n Romssa Arena fredag 16.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250516T180000
+DTEND:20250516T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1872160c-8a55-4875-bb68-e9ba7f02b6e2
+SUMMARY:V?lerenga - HamKam
+DESCRIPTION: Eliteserien (runde 7)  \n\n V?lerenga - HamKam\n Intility Arena fredag 16.05.25 20:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250516T200000
+DTEND:20250516T220000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:84b9e6b5-17b7-40e7-a53d-2e7ab22a81ee
+SUMMARY:Bryne - Fredrikstad
+DESCRIPTION: Eliteserien (runde 8)  \n\n Bryne - Fredrikstad\n Bryne stadion l?rdag 24.05.25 16:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250524T160000
+DTEND:20250524T180000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3a207c88-6fa2-489f-94bb-ee5c7c50c3c4
+SUMMARY:Bod?/Glimt - Rosenborg
+DESCRIPTION: Eliteserien (runde 8)  \n\n Bod?/Glimt - Rosenborg\n Aspmyra stadion l?rdag 24.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250524T180000
+DTEND:20250524T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1d57a479-d6f6-4723-9320-546918f8f2dc
+SUMMARY:HamKam - Molde
+DESCRIPTION: Eliteserien (runde 8)  \n\n HamKam - Molde\n Briskeby s?ndag 25.05.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250525T143000
+DTEND:20250525T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3093199a-59b8-4a46-a89d-5ff34236a15a
+SUMMARY:Sandefjord Fotball - Str?msgodset
+DESCRIPTION: Eliteserien (runde 8)  \n\n Sandefjord Fotball - Str?msgodset\n Jotun Arena s?ndag 25.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250525T170000
+DTEND:20250525T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a089e05a-09eb-479b-a63c-c1badcf98960
+SUMMARY:Kristiansund - Viking
+DESCRIPTION: Eliteserien (runde 8)  \n\n Kristiansund - Viking\n Nordm?re stadion s?ndag 25.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250525T170000
+DTEND:20250525T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d9d0abc2-0f39-4b9c-86be-8c43910da4c3
+SUMMARY:Sarpsborg 08 - Troms?
+DESCRIPTION: Eliteserien (runde 8)  \n\n Sarpsborg 08 - Troms?\n Sarpsborg st KG s?ndag 25.05.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250525T170000
+DTEND:20250525T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:eacaf053-e60d-4393-98ba-2762a6550284
+SUMMARY:Haugesund - Brann
+DESCRIPTION: Eliteserien (runde 8)  \n\n Haugesund - Brann\n Haugesund Sparebank Arena s?ndag 25.05.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250525T191500
+DTEND:20250525T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:10690746-0663-499d-a9ec-bf868097f933
+SUMMARY:KFUM - V?lerenga
+DESCRIPTION: Eliteserien (runde 8)  \n\n KFUM - V?lerenga\n KFUM-Arena mandag 26.05.25 19:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250526T190000
+DTEND:20250526T210000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:716cfe24-edb7-4c4a-b0f4-4966cc16a174
+SUMMARY:Fredrikstad - Rosenborg
+DESCRIPTION: Eliteserien (runde 18)  \n\n Fredrikstad - Rosenborg\n Fredrikstad stadion onsdag 28.05.25 19:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250528T190000
+DTEND:20250528T210000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:40cf648a-1a34-4510-8507-92be75f39116
+SUMMARY:Bod?/Glimt - Viking
+DESCRIPTION: Eliteserien (runde 19)  \n\n Bod?/Glimt - Viking\n Aspmyra stadion onsdag 28.05.25 21:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250528T210000
+DTEND:20250528T230000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:03ba3a9d-2bc0-4af6-b69e-9f8fb1d3c4fe
+SUMMARY:Brann - Molde
+DESCRIPTION: Eliteserien (runde 15)  \n\n Brann - Molde\n Brann stadion torsdag 29.05.25 18:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250529T180000
+DTEND:20250529T200000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:223651a5-8eb8-4f16-b7c2-3945ec604fc8
+SUMMARY:Str?msgodset - HamKam
+DESCRIPTION: Eliteserien (runde 9)  \n\n Str?msgodset - HamKam\n Marienlyst stadion l?rdag 31.05.25 16:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250531T160000
+DTEND:20250531T180000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:568ba95d-29eb-48b7-82c6-c1d7ae83ecec
+SUMMARY:Troms? - V?lerenga
+DESCRIPTION: Eliteserien (runde 9)  \n\n Troms? - V?lerenga\n Romssa Arena l?rdag 31.05.25 18:45\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250531T184500
+DTEND:20250531T204500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e502674c-23ff-4b06-b8ce-1e025b0bff4d
+SUMMARY:Fredrikstad - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 9)  \n\n Fredrikstad - Sarpsborg 08\n Fredrikstad stadion s?ndag 01.06.25 14:30\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250601T143000
+DTEND:20250601T163000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d8415dd1-9e5d-420e-9724-496a61e746c3
+SUMMARY:Bryne - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 9)  \n\n Bryne - Sandefjord Fotball\n Bryne stadion s?ndag 01.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250601T170000
+DTEND:20250601T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7366976b-e2c3-4e8d-8f87-c76a723ab45a
+SUMMARY:Rosenborg - KFUM
+DESCRIPTION: Eliteserien (runde 9)  \n\n Rosenborg - KFUM\n Lerkendal stadion s?ndag 01.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250601T170000
+DTEND:20250601T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4b76a87f-2889-4148-8ea1-34dd7719ee3c
+SUMMARY:Haugesund - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 9)  \n\n Haugesund - Bod?/Glimt\n Haugesund Sparebank Arena s?ndag 01.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250601T170000
+DTEND:20250601T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2c31021b-157f-4300-8cf0-c69890950873
+SUMMARY:Brann - Kristiansund
+DESCRIPTION: Eliteserien (runde 9)  \n\n Brann - Kristiansund\n Brann stadion s?ndag 01.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250601T170000
+DTEND:20250601T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:661e20a1-4cf6-4674-830f-622a10d41204
+SUMMARY:Molde - Viking
+DESCRIPTION: Eliteserien (runde 9)  \n\n Molde - Viking\n Aker stadion s?ndag 01.06.25 19:15\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250601T191500
+DTEND:20250601T211500
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:93b7645b-c8fe-4197-b2e1-6e651b9aac8e
+SUMMARY:Bod?/Glimt - Brann
+DESCRIPTION: Eliteserien (runde 10)  \n\n Bod?/Glimt - Brann\n Aspmyra stadion s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8c811ba6-9b00-4879-a215-a9b898cb506b
+SUMMARY:Sandefjord Fotball - Haugesund
+DESCRIPTION: Eliteserien (runde 10)  \n\n Sandefjord Fotball - Haugesund\n Jotun Arena s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:99eb435a-da8d-4c59-88ae-14325e4de164
+SUMMARY:Kristiansund - Rosenborg
+DESCRIPTION: Eliteserien (runde 10)  \n\n Kristiansund - Rosenborg\n Nordm?re stadion s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:15ceda46-8b42-445e-973d-cc5afaf7e086
+SUMMARY:KFUM - Str?msgodset
+DESCRIPTION: Eliteserien (runde 10)  \n\n KFUM - Str?msgodset\n KFUM-Arena s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7f91611f-f141-4730-9493-95ff9535c139
+SUMMARY:HamKam - Troms?
+DESCRIPTION: Eliteserien (runde 10)  \n\n HamKam - Troms?\n Briskeby s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d90e8844-bafb-4548-ba43-929f244c87d9
+SUMMARY:Sarpsborg 08 - Bryne
+DESCRIPTION: Eliteserien (runde 10)  \n\n Sarpsborg 08 - Bryne\n Sarpsborg st KG s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a387750d-9e48-4bde-958d-1da12f8dfd9e
+SUMMARY:V?lerenga - Molde
+DESCRIPTION: Eliteserien (runde 10)  \n\n V?lerenga - Molde\n Intility Arena s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5eefc3f3-d58c-4c93-a812-6141d14136aa
+SUMMARY:Viking - Fredrikstad
+DESCRIPTION: Eliteserien (runde 10)  \n\n Viking - Fredrikstad\n Lyse Arena s?ndag 22.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250622T170000
+DTEND:20250622T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:cb9b96a3-69ef-4aca-934e-5b2533481dea
+SUMMARY:Haugesund - Kristiansund
+DESCRIPTION: Eliteserien (runde 11)  \n\n Haugesund - Kristiansund\n Haugesund Sparebank Arena s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0a2b505c-0278-4414-8d45-0166e98e9ffc
+SUMMARY:Brann - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 11)  \n\n Brann - Sandefjord Fotball\n Brann stadion s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b558d584-7f8d-44f0-966d-814f9a5dbd82
+SUMMARY:Fredrikstad - Troms?
+DESCRIPTION: Eliteserien (runde 11)  \n\n Fredrikstad - Troms?\n Fredrikstad stadion s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a8ed658d-99d7-4a2c-8c3d-1092a6d5a1ec
+SUMMARY:Bryne - HamKam
+DESCRIPTION: Eliteserien (runde 11)  \n\n Bryne - HamKam\n Bryne stadion s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:6be114d4-007c-4631-9db9-b1f9d0dddf94
+SUMMARY:Bod?/Glimt - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 11)  \n\n Bod?/Glimt - Sarpsborg 08\n Aspmyra stadion s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ad86b906-328b-4171-99ce-303f55a7f724
+SUMMARY:Str?msgodset - V?lerenga
+DESCRIPTION: Eliteserien (runde 11)  \n\n Str?msgodset - V?lerenga\n Marienlyst stadion s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b3b3b08a-3e94-400d-87d2-69fce84492d4
+SUMMARY:Rosenborg - Viking
+DESCRIPTION: Eliteserien (runde 11)  \n\n Rosenborg - Viking\n Lerkendal stadion s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:9f27f3b6-0a55-4e97-9fa8-46b02f13d437
+SUMMARY:Molde - KFUM
+DESCRIPTION: Eliteserien (runde 11)  \n\n Molde - KFUM\n Aker stadion s?ndag 29.06.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250629T170000
+DTEND:20250629T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d1b5783e-ae99-46f1-aae4-b8d71d4d2dc6
+SUMMARY:V?lerenga - Fredrikstad
+DESCRIPTION: Eliteserien (runde 12)  \n\n V?lerenga - Fredrikstad\n Intility Arena s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:6b676e2b-5df1-4cb9-891b-fd36f116d3d5
+SUMMARY:Viking - Str?msgodset
+DESCRIPTION: Eliteserien (runde 12)  \n\n Viking - Str?msgodset\n Lyse Arena s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4af64fd8-c1ce-4fe5-b5db-c9d6d476ef38
+SUMMARY:Troms? - Molde
+DESCRIPTION: Eliteserien (runde 12)  \n\n Troms? - Molde\n Romssa Arena s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:91081a0a-126b-4a11-9f58-a3132348f4e7
+SUMMARY:HamKam - Brann
+DESCRIPTION: Eliteserien (runde 12)  \n\n HamKam - Brann\n Briskeby s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:eed52bc3-08f5-4e03-93dc-8830e64471fc
+SUMMARY:Sandefjord Fotball - Rosenborg
+DESCRIPTION: Eliteserien (runde 12)  \n\n Sandefjord Fotball - Rosenborg\n Jotun Arena s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:806249c0-6b16-47f1-bd9a-6d824ca6553e
+SUMMARY:Kristiansund - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 12)  \n\n Kristiansund - Bod?/Glimt\n Nordm?re stadion s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8007cced-6448-46e2-a63c-aa37db1cafbb
+SUMMARY:Sarpsborg 08 - Haugesund
+DESCRIPTION: Eliteserien (runde 12)  \n\n Sarpsborg 08 - Haugesund\n Sarpsborg st KG s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7627db5a-9462-4ad7-b49c-70fa85915dda
+SUMMARY:KFUM - Bryne
+DESCRIPTION: Eliteserien (runde 12)  \n\n KFUM - Bryne\n KFUM-Arena s?ndag 06.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250706T170000
+DTEND:20250706T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:95977272-738f-43e3-a065-cbfacf2de992
+SUMMARY:Bod?/Glimt - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 13)  \n\n Bod?/Glimt - Sandefjord Fotball\n Aspmyra stadion s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5c3da957-0923-44f2-808a-07a146f2bb60
+SUMMARY:Kristiansund - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 13)  \n\n Kristiansund - Sarpsborg 08\n Nordm?re stadion s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:979a8e13-8675-4815-851f-dfcac4fa7794
+SUMMARY:Str?msgodset - Troms?
+DESCRIPTION: Eliteserien (runde 13)  \n\n Str?msgodset - Troms?\n Marienlyst stadion s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4b0cb556-2a4e-4eb6-9cfd-39b45b3fe557
+SUMMARY:Rosenborg - HamKam
+DESCRIPTION: Eliteserien (runde 13)  \n\n Rosenborg - HamKam\n Lerkendal stadion s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1760b4ad-4415-443a-948c-eedb621b8e32
+SUMMARY:Haugesund - KFUM
+DESCRIPTION: Eliteserien (runde 13)  \n\n Haugesund - KFUM\n Haugesund Sparebank Arena s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2cf37faa-5874-4308-ab91-05440f15f8b4
+SUMMARY:Fredrikstad - Molde
+DESCRIPTION: Eliteserien (runde 13)  \n\n Fredrikstad - Molde\n Fredrikstad stadion s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8ffbf2eb-56d8-426f-8cad-fa2fce438cc0
+SUMMARY:Bryne - V?lerenga
+DESCRIPTION: Eliteserien (runde 13)  \n\n Bryne - V?lerenga\n Bryne stadion s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:bd7f2e38-10c3-4bc7-ac8e-d16e05e18ccd
+SUMMARY:Brann - Viking
+DESCRIPTION: Eliteserien (runde 13)  \n\n Brann - Viking\n Brann stadion s?ndag 13.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250713T170000
+DTEND:20250713T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:90efd397-93ad-4d06-a603-4c3bda522110
+SUMMARY:HamKam - Fredrikstad
+DESCRIPTION: Eliteserien (runde 14)  \n\n HamKam - Fredrikstad\n Briskeby s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:cdbc1b8c-9fa9-41d8-8ff0-546557683c39
+SUMMARY:V?lerenga - Haugesund
+DESCRIPTION: Eliteserien (runde 14)  \n\n V?lerenga - Haugesund\n Intility Arena s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:65be8890-ffe0-4245-aa6b-1cb4e709f9a0
+SUMMARY:Viking - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 14)  \n\n Viking - Bod?/Glimt\n Lyse Arena s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:181df6d1-5681-4da4-adcf-f42a2fcbc373
+SUMMARY:Troms? - Bryne
+DESCRIPTION: Eliteserien (runde 14)  \n\n Troms? - Bryne\n Romssa Arena s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:660ed015-ea98-4f50-bd5e-a0edeb4f2c28
+SUMMARY:Sandefjord Fotball - Kristiansund
+DESCRIPTION: Eliteserien (runde 14)  \n\n Sandefjord Fotball - Kristiansund\n Jotun Arena s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:10d30a56-7843-43f0-af32-b685414dd93b
+SUMMARY:Sarpsborg 08 - Rosenborg
+DESCRIPTION: Eliteserien (runde 14)  \n\n Sarpsborg 08 - Rosenborg\n Sarpsborg st KG s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:654feeb5-fbdb-40fe-b5f8-f1faed8d45b1
+SUMMARY:Molde - Str?msgodset
+DESCRIPTION: Eliteserien (runde 14)  \n\n Molde - Str?msgodset\n Aker stadion s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ad1c2621-4cab-4a63-9bc1-e010004fc403
+SUMMARY:KFUM - Brann
+DESCRIPTION: Eliteserien (runde 14)  \n\n KFUM - Brann\n KFUM-Arena s?ndag 20.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250720T170000
+DTEND:20250720T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:6ddb342b-ce11-4be4-aca7-5842880f4bfa
+SUMMARY:Bod?/Glimt - V?lerenga
+DESCRIPTION: Eliteserien (runde 15)  \n\n Bod?/Glimt - V?lerenga\n Aspmyra stadion s?ndag 27.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250727T170000
+DTEND:20250727T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:6f6c454f-99fb-46e1-bbdc-1db6cfcf741f
+SUMMARY:Fredrikstad - Str?msgodset
+DESCRIPTION: Eliteserien (runde 15)  \n\n Fredrikstad - Str?msgodset\n Fredrikstad stadion s?ndag 27.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250727T170000
+DTEND:20250727T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8fdae960-d394-4bbc-806a-139505ec8e3d
+SUMMARY:Kristiansund - KFUM
+DESCRIPTION: Eliteserien (runde 15)  \n\n Kristiansund - KFUM\n Nordm?re stadion s?ndag 27.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250727T170000
+DTEND:20250727T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c842b3a6-b07a-4483-ad82-9dd576e8564b
+SUMMARY:Haugesund - HamKam
+DESCRIPTION: Eliteserien (runde 15)  \n\n Haugesund - HamKam\n Haugesund Sparebank Arena s?ndag 27.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250727T170000
+DTEND:20250727T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:f8dd45fa-a3e1-446d-b04e-67e46a1d94e9
+SUMMARY:Bryne - Viking
+DESCRIPTION: Eliteserien (runde 15)  \n\n Bryne - Viking\n Bryne stadion s?ndag 27.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250727T170000
+DTEND:20250727T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a8f1c99e-1ddc-4b85-a42d-e453387aa995
+SUMMARY:Sandefjord Fotball - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 15)  \n\n Sandefjord Fotball - Sarpsborg 08\n Jotun Arena s?ndag 27.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250727T170000
+DTEND:20250727T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:37d01a47-0231-4de6-954d-582f1ce350a6
+SUMMARY:Rosenborg - Troms?
+DESCRIPTION: Eliteserien (runde 15)  \n\n Rosenborg - Troms?\n Lerkendal stadion s?ndag 27.07.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250727T170000
+DTEND:20250727T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7cf9eab0-6b06-4a96-8e28-e7f5081eb9d2
+SUMMARY:HamKam - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 16)  \n\n HamKam - Bod?/Glimt\n Briskeby s?ndag 03.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250803T170000
+DTEND:20250803T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:bd53bb9d-4777-4fbf-9d79-4b7265bc1a78
+SUMMARY:V?lerenga - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 16)  \n\n V?lerenga - Sandefjord Fotball\n Intility Arena s?ndag 03.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250803T170000
+DTEND:20250803T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3fde9f7e-1f63-4d3b-8b2c-def3a8d0f8d9
+SUMMARY:Troms? - Fredrikstad
+DESCRIPTION: Eliteserien (runde 16)  \n\n Troms? - Fredrikstad\n Romssa Arena s?ndag 03.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250803T170000
+DTEND:20250803T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4003a1de-ec64-439e-8561-4b3f00691e37
+SUMMARY:KFUM - Rosenborg
+DESCRIPTION: Eliteserien (runde 16)  \n\n KFUM - Rosenborg\n KFUM-Arena s?ndag 03.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250803T170000
+DTEND:20250803T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a01bd5f3-5ba8-4895-a5aa-c231797b6ad5
+SUMMARY:Molde - Bryne
+DESCRIPTION: Eliteserien (runde 16)  \n\n Molde - Bryne\n Aker stadion s?ndag 03.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250803T170000
+DTEND:20250803T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:88f40541-01d5-467a-b963-55ea0525f105
+SUMMARY:Str?msgodset - Haugesund
+DESCRIPTION: Eliteserien (runde 16)  \n\n Str?msgodset - Haugesund\n Marienlyst stadion s?ndag 03.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250803T170000
+DTEND:20250803T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:42cea0d1-5872-4b8e-bbf2-1c4b525f0b0e
+SUMMARY:Sarpsborg 08 - Brann
+DESCRIPTION: Eliteserien (runde 16)  \n\n Sarpsborg 08 - Brann\n Sarpsborg st KG s?ndag 03.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250803T170000
+DTEND:20250803T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:757aa0f1-0367-453e-97bf-888202ec235c
+SUMMARY:Bod?/Glimt - Troms?
+DESCRIPTION: Eliteserien (runde 17)  \n\n Bod?/Glimt - Troms?\n Aspmyra stadion s?ndag 10.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250810T170000
+DTEND:20250810T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:bc91bee7-ca1e-4bbc-8c7a-3fa59035eaf0
+SUMMARY:Bryne - KFUM
+DESCRIPTION: Eliteserien (runde 17)  \n\n Bryne - KFUM\n Bryne stadion s?ndag 10.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250810T170000
+DTEND:20250810T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:482ef32b-c4d7-4b09-8f2c-74e1c70c8838
+SUMMARY:Molde - HamKam
+DESCRIPTION: Eliteserien (runde 17)  \n\n Molde - HamKam\n Aker stadion s?ndag 10.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250810T170000
+DTEND:20250810T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:235eef5b-2259-405a-88db-c308f9872c13
+SUMMARY:Haugesund - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 17)  \n\n Haugesund - Sarpsborg 08\n Haugesund Sparebank Arena s?ndag 10.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250810T170000
+DTEND:20250810T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:f2cb9b8a-1c9a-4703-a56e-02d3eef38127
+SUMMARY:Sandefjord Fotball - Viking
+DESCRIPTION: Eliteserien (runde 17)  \n\n Sandefjord Fotball - Viking\n Jotun Arena s?ndag 10.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250810T170000
+DTEND:20250810T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:fd3d83c0-8b2f-436f-89fd-56713dca5cae
+SUMMARY:V?lerenga - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 18)  \n\n V?lerenga - Sarpsborg 08\n Intility Arena s?ndag 17.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250817T170000
+DTEND:20250817T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5bb6987e-0603-414c-8ea1-541d2abec2e5
+SUMMARY:Kristiansund - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 18)  \n\n Kristiansund - Sandefjord Fotball\n Nordm?re stadion s?ndag 17.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250817T170000
+DTEND:20250817T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5a9aa078-75e1-4ea6-aa49-de4c1ba6e711
+SUMMARY:Str?msgodset - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 18)  \n\n Str?msgodset - Bod?/Glimt\n Marienlyst stadion s?ndag 17.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250817T170000
+DTEND:20250817T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:fe47145e-467b-4d4c-a342-7aed5d43d3e8
+SUMMARY:HamKam - Bryne
+DESCRIPTION: Eliteserien (runde 18)  \n\n HamKam - Bryne\n Briskeby s?ndag 17.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250817T170000
+DTEND:20250817T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3475c35c-52da-499a-9b1a-708af06e7d51
+SUMMARY:KFUM - Molde
+DESCRIPTION: Eliteserien (runde 18)  \n\n KFUM - Molde\n KFUM-Arena s?ndag 17.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250817T170000
+DTEND:20250817T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:84cb0429-198e-4530-96ad-d5aa82e55b56
+SUMMARY:Troms? - Brann
+DESCRIPTION: Eliteserien (runde 18)  \n\n Troms? - Brann\n Romssa Arena s?ndag 17.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250817T170000
+DTEND:20250817T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ece69152-a13b-4e5c-bf4e-84bec6bcd223
+SUMMARY:Bryne - Str?msgodset
+DESCRIPTION: Eliteserien (runde 19)  \n\n Bryne - Str?msgodset\n Bryne stadion s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1910f261-50e5-4722-af9d-8565db49a9a4
+SUMMARY:Haugesund - V?lerenga
+DESCRIPTION: Eliteserien (runde 19)  \n\n Haugesund - V?lerenga\n Haugesund Sparebank Arena s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5e9be538-fb97-4380-bbd1-75ed05689369
+SUMMARY:KFUM - HamKam
+DESCRIPTION: Eliteserien (runde 19)  \n\n KFUM - HamKam\n KFUM-Arena s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e957246c-852e-452e-9294-b64c83918a67
+SUMMARY:Molde - Troms?
+DESCRIPTION: Eliteserien (runde 19)  \n\n Molde - Troms?\n Aker stadion s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4f27a0dd-43fb-40dd-9926-3093ff25197e
+SUMMARY:Rosenborg - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 19)  \n\n Rosenborg - Sandefjord Fotball\n Lerkendal stadion s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3ffd8f7d-8e8a-4cba-8643-140487b57d1b
+SUMMARY:Sarpsborg 08 - Kristiansund
+DESCRIPTION: Eliteserien (runde 19)  \n\n Sarpsborg 08 - Kristiansund\n Sarpsborg st KG s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7633195f-0389-4e2d-b9de-8322ce724c81
+SUMMARY:Haugesund - V?lerenga
+DESCRIPTION: Eliteserien (runde 19)  \n\n Haugesund - V?lerenga\n Haugesund Sparebank Arena s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e33fa4ba-56a8-4534-b11b-fe1b82eaed9b
+SUMMARY:Bryne - Str?msgodset
+DESCRIPTION: Eliteserien (runde 19)  \n\n Bryne - Str?msgodset\n Bryne stadion s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0e400596-82ef-49ce-8ebe-f0a4e6eb5f86
+SUMMARY:KFUM - HamKam
+DESCRIPTION: Eliteserien (runde 19)  \n\n KFUM - HamKam\n KFUM-Arena s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d6f65d1d-dd3d-40d9-94b3-aee09adaf362
+SUMMARY:Brann - Fredrikstad
+DESCRIPTION: Eliteserien (runde 19)  \n\n Brann - Fredrikstad\n Brann stadion s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0cabbcac-541a-42aa-a555-0891906c4015
+SUMMARY:Rosenborg - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 19)  \n\n Rosenborg - Sandefjord Fotball\n Lerkendal stadion s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1633b453-3696-4db6-a0fb-21d78c08df12
+SUMMARY:Molde - Troms?
+DESCRIPTION: Eliteserien (runde 19)  \n\n Molde - Troms?\n Aker stadion s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b9c5395c-0b1e-4ec5-a154-00f17b593300
+SUMMARY:Sarpsborg 08 - Kristiansund
+DESCRIPTION: Eliteserien (runde 19)  \n\n Sarpsborg 08 - Kristiansund\n Sarpsborg st KG s?ndag 24.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250824T170000
+DTEND:20250824T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b9ad3fae-035b-4789-8b70-d8c312d51daa
+SUMMARY:Fredrikstad - Haugesund
+DESCRIPTION: Eliteserien (runde 20)  \n\n Fredrikstad - Haugesund\n Fredrikstad stadion s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:dda16a13-1784-4794-9f4c-527a2fa5bbfd
+SUMMARY:Kristiansund - Brann
+DESCRIPTION: Eliteserien (runde 20)  \n\n Kristiansund - Brann\n Nordm?re stadion s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:af5d9aeb-4b30-4483-8b28-8a3fcca6e8f9
+SUMMARY:Sandefjord Fotball - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 20)  \n\n Sandefjord Fotball - Bod?/Glimt\n Jotun Arena s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:f866c64e-1919-45d1-9e7e-52a719ee2bc3
+SUMMARY:Str?msgodset - Molde
+DESCRIPTION: Eliteserien (runde 20)  \n\n Str?msgodset - Molde\n Marienlyst stadion s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4b6b48e3-b4a0-47b8-aac0-217fb8fa7433
+SUMMARY:Sandefjord Fotball - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 20)  \n\n Sandefjord Fotball - Bod?/Glimt\n Jotun Arena s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:dedc2347-04e1-415a-8745-c248d809f8ba
+SUMMARY:Kristiansund - Brann
+DESCRIPTION: Eliteserien (runde 20)  \n\n Kristiansund - Brann\n Nordm?re stadion s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c5ca3a81-6db4-4968-ba75-2dfbf05cfe42
+SUMMARY:Str?msgodset - Molde
+DESCRIPTION: Eliteserien (runde 20)  \n\n Str?msgodset - Molde\n Marienlyst stadion s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:73d8ce7f-f2d4-4756-8d5e-d029d1b6b5c4
+SUMMARY:HamKam - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 20)  \n\n HamKam - Sarpsborg 08\n Briskeby s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a6721480-c4e6-4e8d-bacf-53fda92274d0
+SUMMARY:V?lerenga - Bryne
+DESCRIPTION: Eliteserien (runde 20)  \n\n V?lerenga - Bryne\n Intility Arena s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1231aaad-d45e-4596-82cb-9ca338f8933b
+SUMMARY:Viking - Rosenborg
+DESCRIPTION: Eliteserien (runde 20)  \n\n Viking - Rosenborg\n Lyse Arena s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8e69efc5-635a-4cd0-bd3d-9a706138e7b6
+SUMMARY:Troms? - KFUM
+DESCRIPTION: Eliteserien (runde 20)  \n\n Troms? - KFUM\n Romssa Arena s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:eed339a5-c83e-4278-af04-65bee2b9a4d0
+SUMMARY:Fredrikstad - Haugesund
+DESCRIPTION: Eliteserien (runde 20)  \n\n Fredrikstad - Haugesund\n Fredrikstad stadion s?ndag 31.08.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250831T170000
+DTEND:20250831T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d2bea089-de39-4856-9f2b-83c3c3e2b7cf
+SUMMARY:Haugesund - Rosenborg
+DESCRIPTION: Eliteserien (runde 21)  \n\n Haugesund - Rosenborg\n Haugesund Sparebank Arena s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1e7bd942-2a5b-48da-84b8-fc21408002a3
+SUMMARY:HamKam - Str?msgodset
+DESCRIPTION: Eliteserien (runde 21)  \n\n HamKam - Str?msgodset\n Briskeby s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:abeb386a-0f3b-4bf7-a892-849cf9635ae3
+SUMMARY:Brann - V?lerenga
+DESCRIPTION: Eliteserien (runde 21)  \n\n Brann - V?lerenga\n Brann stadion s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a7f6b804-ce11-4bff-83d5-c30cb3ec1135
+SUMMARY:Bryne - Troms?
+DESCRIPTION: Eliteserien (runde 21)  \n\n Bryne - Troms?\n Bryne stadion s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ff0b19c2-5d14-44a8-848c-ae12e725eff0
+SUMMARY:Sarpsborg 08 - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 21)  \n\n Sarpsborg 08 - Sandefjord Fotball\n Sarpsborg st KG s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e35ffe07-3dd4-4ccb-b804-0064fa13eb7e
+SUMMARY:Molde - Fredrikstad
+DESCRIPTION: Eliteserien (runde 21)  \n\n Molde - Fredrikstad\n Aker stadion s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:02f6c33f-db25-44ad-8fb1-f5de01b14d7c
+SUMMARY:KFUM - Viking
+DESCRIPTION: Eliteserien (runde 21)  \n\n KFUM - Viking\n KFUM-Arena s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:abd244ef-fb12-415d-af05-4733714a087e
+SUMMARY:Bod?/Glimt - Kristiansund
+DESCRIPTION: Eliteserien (runde 21)  \n\n Bod?/Glimt - Kristiansund\n Aspmyra stadion s?ndag 14.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20250914T170000
+DTEND:20250914T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7c079ea1-9a80-4da7-a65a-870167ff7d2b
+SUMMARY:Fredrikstad - Bryne
+DESCRIPTION: Eliteserien (runde 22)  \n\n Fredrikstad - Bryne\n Fredrikstad stadion s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:ddc19f4b-b5b2-4845-8d69-94ec92d3c573
+SUMMARY:V?lerenga - KFUM
+DESCRIPTION: Eliteserien (runde 22)  \n\n V?lerenga - KFUM\n Intility Arena s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b5db23d5-6707-4d4f-b015-53240dc93dba
+SUMMARY:Troms? - HamKam
+DESCRIPTION: Eliteserien (runde 22)  \n\n Troms? - HamKam\n Romssa Arena s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b0fd4896-e786-48dd-999f-f3840431c4ba
+SUMMARY:Viking - Molde
+DESCRIPTION: Eliteserien (runde 22)  \n\n Viking - Molde\n Lyse Arena s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1afeb921-002e-4735-8235-0dc0373b03b0
+SUMMARY:Str?msgodset - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 22)  \n\n Str?msgodset - Sarpsborg 08\n Marienlyst stadion s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:686b7f2e-4d59-4f3a-850c-ecf13af13e01
+SUMMARY:Kristiansund - Haugesund
+DESCRIPTION: Eliteserien (runde 22)  \n\n Kristiansund - Haugesund\n Nordm?re stadion s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:9d0f13b2-faaa-41be-abf1-f4f2747a4202
+SUMMARY:Sandefjord Fotball - Brann
+DESCRIPTION: Eliteserien (runde 22)  \n\n Sandefjord Fotball - Brann\n Jotun Arena s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2b531a50-bbd3-4e6e-9972-c402888d2da8
+SUMMARY:Rosenborg - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 22)  \n\n Rosenborg - Bod?/Glimt\n Lerkendal stadion s?ndag 21.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20250921T170000
+DTEND:20250921T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:37e87f75-e7c9-4274-80a0-a5707fed0d34
+SUMMARY:Brann - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 23)  \n\n Brann - Bod?/Glimt\n Brann stadion s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:61e80a31-1b46-4fbd-9dcc-b13d3ffcf8be
+SUMMARY:Troms? - Str?msgodset
+DESCRIPTION: Eliteserien (runde 23)  \n\n Troms? - Str?msgodset\n Romssa Arena s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c6d20755-d50c-4101-9582-ec374e3987eb
+SUMMARY:Sarpsborg 08 - Viking
+DESCRIPTION: Eliteserien (runde 23)  \n\n Sarpsborg 08 - Viking\n Sarpsborg st KG s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:cf24ea76-03df-4a22-b7d6-180f6571ee58
+SUMMARY:Molde - V?lerenga
+DESCRIPTION: Eliteserien (runde 23)  \n\n Molde - V?lerenga\n Aker stadion s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0da8640d-de4f-443e-9f0f-93aad5ba9caa
+SUMMARY:Haugesund - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 23)  \n\n Haugesund - Sandefjord Fotball\n Haugesund Sparebank Arena s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e3b5b169-dd69-4938-a628-d493c2e95e46
+SUMMARY:Bryne - Kristiansund
+DESCRIPTION: Eliteserien (runde 23)  \n\n Bryne - Kristiansund\n Bryne stadion s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:54fcab1e-98d4-4633-ace9-bef12ea80346
+SUMMARY:KFUM - Fredrikstad
+DESCRIPTION: Eliteserien (runde 23)  \n\n KFUM - Fredrikstad\n KFUM-Arena s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3d1ba8c4-9475-4c78-888a-2f07fee3cee1
+SUMMARY:HamKam - Rosenborg
+DESCRIPTION: Eliteserien (runde 23)  \n\n HamKam - Rosenborg\n Briskeby s?ndag 28.09.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20250928T170000
+DTEND:20250928T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:91764872-8c8b-4829-955c-4ebcc7867061
+SUMMARY:Sandefjord Fotball - Bryne
+DESCRIPTION: Eliteserien (runde 24)  \n\n Sandefjord Fotball - Bryne\n Jotun Arena s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:08307f64-600c-4b9a-a0f6-e0ed66ad417d
+SUMMARY:Str?msgodset - KFUM
+DESCRIPTION: Eliteserien (runde 24)  \n\n Str?msgodset - KFUM\n Marienlyst stadion s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:46856cb4-97c5-42c0-89a5-21b75feb8bd1
+SUMMARY:V?lerenga - Troms?
+DESCRIPTION: Eliteserien (runde 24)  \n\n V?lerenga - Troms?\n Intility Arena s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:6e36f5d9-660e-42b1-a8e1-ef8ef4ce5d8a
+SUMMARY:Viking - Brann
+DESCRIPTION: Eliteserien (runde 24)  \n\n Viking - Brann\n Lyse Arena s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0bc2fd62-f5e3-465b-9a32-5c4ce21dd19a
+SUMMARY:Bod?/Glimt - Haugesund
+DESCRIPTION: Eliteserien (runde 24)  \n\n Bod?/Glimt - Haugesund\n Aspmyra stadion s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c05ffa39-3bd2-4b09-9ad0-97276c79acfa
+SUMMARY:Fredrikstad - HamKam
+DESCRIPTION: Eliteserien (runde 24)  \n\n Fredrikstad - HamKam\n Fredrikstad stadion s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:3065f39c-2958-4e47-b7f4-bb0502d29bcc
+SUMMARY:Rosenborg - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 24)  \n\n Rosenborg - Sarpsborg 08\n Lerkendal stadion s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:619b2b24-5b09-4b42-8951-43fbc5a10c53
+SUMMARY:Kristiansund - Molde
+DESCRIPTION: Eliteserien (runde 24)  \n\n Kristiansund - Molde\n Nordm?re stadion s?ndag 05.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20251005T170000
+DTEND:20251005T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:458f5925-362d-42fb-9567-286c4bc2697a
+SUMMARY:KFUM - Kristiansund
+DESCRIPTION: Eliteserien (runde 25)  \n\n KFUM - Kristiansund\n KFUM-Arena s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8bbe98a1-1519-4c36-b073-85492cb75d61
+SUMMARY:HamKam - V?lerenga
+DESCRIPTION: Eliteserien (runde 25)  \n\n HamKam - V?lerenga\n Briskeby s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:918b3b9f-b83e-4a70-88cc-028b25c03a8e
+SUMMARY:Str?msgodset - Fredrikstad
+DESCRIPTION: Eliteserien (runde 25)  \n\n Str?msgodset - Fredrikstad\n Marienlyst stadion s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8559b7ff-c9e9-450c-aa13-5f42bf35cb12
+SUMMARY:Troms? - Viking
+DESCRIPTION: Eliteserien (runde 25)  \n\n Troms? - Viking\n Romssa Arena s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:066cdbfd-37bf-43bf-85f8-73161a59ba67
+SUMMARY:Brann - Haugesund
+DESCRIPTION: Eliteserien (runde 25)  \n\n Brann - Haugesund\n Brann stadion s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:259d4fc6-dac9-4d2a-ba90-ee298c4e6cec
+SUMMARY:Bryne - Rosenborg
+DESCRIPTION: Eliteserien (runde 25)  \n\n Bryne - Rosenborg\n Bryne stadion s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5ea9b7c7-f49d-4333-be4e-98d6d5031778
+SUMMARY:Sarpsborg 08 - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 25)  \n\n Sarpsborg 08 - Bod?/Glimt\n Sarpsborg st KG s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:82531d45-4576-4e21-bea6-d5bfaebeec28
+SUMMARY:Molde - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 25)  \n\n Molde - Sandefjord Fotball\n Aker stadion s?ndag 19.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20251019T170000
+DTEND:20251019T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0018542e-bc16-4dde-bdaa-4505c2af4d10
+SUMMARY:Rosenborg - Brann
+DESCRIPTION: Eliteserien (runde 26)  \n\n Rosenborg - Brann\n Lerkendal stadion s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a3f1f652-37d9-46df-9523-f80b0f9f55e5
+SUMMARY:Kristiansund - HamKam
+DESCRIPTION: Eliteserien (runde 26)  \n\n Kristiansund - HamKam\n Nordm?re stadion s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:fe0d849f-9e16-44ef-a843-0e4845e2a06a
+SUMMARY:Haugesund - Troms?
+DESCRIPTION: Eliteserien (runde 26)  \n\n Haugesund - Troms?\n Haugesund Sparebank Arena s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2b6f1674-321d-41c7-b831-49fcb0fa2d47
+SUMMARY:Bod?/Glimt - Molde
+DESCRIPTION: Eliteserien (runde 26)  \n\n Bod?/Glimt - Molde\n Aspmyra stadion s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:760a320f-398b-4c90-b51b-99ebd69d1df7
+SUMMARY:Sandefjord Fotball - Fredrikstad
+DESCRIPTION: Eliteserien (runde 26)  \n\n Sandefjord Fotball - Fredrikstad\n Jotun Arena s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:9e0001f5-410d-4e4b-b8f7-fe2b36a08b12
+SUMMARY:Sarpsborg 08 - KFUM
+DESCRIPTION: Eliteserien (runde 26)  \n\n Sarpsborg 08 - KFUM\n Sarpsborg st KG s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:96107c49-f5d6-4261-b7a7-bc4054d770df
+SUMMARY:V?lerenga - Str?msgodset
+DESCRIPTION: Eliteserien (runde 26)  \n\n V?lerenga - Str?msgodset\n Intility Arena s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:213e82d7-5bc0-4d3d-b581-cc3d08aa9bb4
+SUMMARY:Viking - Bryne
+DESCRIPTION: Eliteserien (runde 26)  \n\n Viking - Bryne\n Lyse Arena s?ndag 26.10.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20251026T170000
+DTEND:20251026T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:9a5568d5-d366-4ab2-be66-278893502e14
+SUMMARY:V?lerenga - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 27)  \n\n V?lerenga - Bod?/Glimt\n Intility Arena s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:dd5a8470-c33b-41e6-b0a0-80383fe6bcd0
+SUMMARY:Str?msgodset - Viking
+DESCRIPTION: Eliteserien (runde 27)  \n\n Str?msgodset - Viking\n Marienlyst stadion s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0ec7c958-9771-440d-8b06-d10a391349a2
+SUMMARY:Troms? - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 27)  \n\n Troms? - Sarpsborg 08\n Romssa Arena s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5f4682d6-f8dc-4877-81d1-253ddf1b4311
+SUMMARY:Molde - Rosenborg
+DESCRIPTION: Eliteserien (runde 27)  \n\n Molde - Rosenborg\n Aker stadion s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:9c2e903f-45e5-4a51-a9a3-f6027fc55d7d
+SUMMARY:Fredrikstad - Kristiansund
+DESCRIPTION: Eliteserien (runde 27)  \n\n Fredrikstad - Kristiansund\n Fredrikstad stadion s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d3a32e64-7e88-4843-a1ee-824dbb58e64e
+SUMMARY:HamKam - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 27)  \n\n HamKam - Sandefjord Fotball\n Briskeby s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:bd15ecb0-4c62-4a14-bf6c-b82678ce0d53
+SUMMARY:KFUM - Haugesund
+DESCRIPTION: Eliteserien (runde 27)  \n\n KFUM - Haugesund\n KFUM-Arena s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:37c72bf1-0ac0-4cb9-afbe-b79a3496beae
+SUMMARY:Bryne - Brann
+DESCRIPTION: Eliteserien (runde 27)  \n\n Bryne - Brann\n Bryne stadion s?ndag 02.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20251102T170000
+DTEND:20251102T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:51165765-4fd0-4f67-8024-d3c5f60785ca
+SUMMARY:Sandefjord Fotball - Troms?
+DESCRIPTION: Eliteserien (runde 28)  \n\n Sandefjord Fotball - Troms?\n Jotun Arena s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0a75dd67-3fe3-483a-80ff-1c6b173c58f1
+SUMMARY:Sarpsborg 08 - Fredrikstad
+DESCRIPTION: Eliteserien (runde 28)  \n\n Sarpsborg 08 - Fredrikstad\n Sarpsborg st KG s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:5162300d-7258-4bb7-a96a-925fc54bf3a2
+SUMMARY:Rosenborg - V?lerenga
+DESCRIPTION: Eliteserien (runde 28)  \n\n Rosenborg - V?lerenga\n Lerkendal stadion s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:47efb73c-3e0e-4535-9472-2c7e1eb53f53
+SUMMARY:Viking - HamKam
+DESCRIPTION: Eliteserien (runde 28)  \n\n Viking - HamKam\n Lyse Arena s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b4f49ecb-cadf-4bf7-a54f-5915441a2cbb
+SUMMARY:Kristiansund - Str?msgodset
+DESCRIPTION: Eliteserien (runde 28)  \n\n Kristiansund - Str?msgodset\n Nordm?re stadion s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4a678da4-6e65-4a3e-a334-9803a5305f6e
+SUMMARY:Haugesund - Molde
+DESCRIPTION: Eliteserien (runde 28)  \n\n Haugesund - Molde\n Haugesund Sparebank Arena s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:d1db0f3e-d0e1-44b9-84d8-e7e770d8a632
+SUMMARY:Bod?/Glimt - Bryne
+DESCRIPTION: Eliteserien (runde 28)  \n\n Bod?/Glimt - Bryne\n Aspmyra stadion s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1a633438-d59e-4aa7-a0f4-661fdff1e080
+SUMMARY:Brann - KFUM
+DESCRIPTION: Eliteserien (runde 28)  \n\n Brann - KFUM\n Brann stadion s?ndag 09.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20251109T170000
+DTEND:20251109T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:8f47e8de-9905-481c-9df5-f19b23521f32
+SUMMARY:Str?msgodset - Sandefjord Fotball
+DESCRIPTION: Eliteserien (runde 29)  \n\n Str?msgodset - Sandefjord Fotball\n Marienlyst stadion l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Marienlyst stadion
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:7af48621-cbbb-4ff3-9df4-e478a84ac786
+SUMMARY:V?lerenga - Kristiansund
+DESCRIPTION: Eliteserien (runde 29)  \n\n V?lerenga - Kristiansund\n Intility Arena l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Intility Arena
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:c7ffb407-a315-443e-bcd8-5955094b4b48
+SUMMARY:Troms? - Rosenborg
+DESCRIPTION: Eliteserien (runde 29)  \n\n Troms? - Rosenborg\n Romssa Arena l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Romssa Arena
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:330b919b-b5f9-42eb-8fff-2827b5850b51
+SUMMARY:Molde - Brann
+DESCRIPTION: Eliteserien (runde 29)  \n\n Molde - Brann\n Aker stadion l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aker stadion
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:949c24b6-9207-4ada-a027-a3efaa2eb722
+SUMMARY:Fredrikstad - Viking
+DESCRIPTION: Eliteserien (runde 29)  \n\n Fredrikstad - Viking\n Fredrikstad stadion l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Fredrikstad stadion
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:93c92f18-db9e-431b-9a36-f87274f5f679
+SUMMARY:Bryne - Sarpsborg 08
+DESCRIPTION: Eliteserien (runde 29)  \n\n Bryne - Sarpsborg 08\n Bryne stadion l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Bryne stadion
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:4aeef48c-2c6b-4157-bf6b-de4e19e1177c
+SUMMARY:KFUM - Bod?/Glimt
+DESCRIPTION: Eliteserien (runde 29)  \n\n KFUM - Bod?/Glimt\n KFUM-Arena l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:KFUM-Arena
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:0d6496e8-1bab-4188-834c-5a872af5587d
+SUMMARY:HamKam - Haugesund
+DESCRIPTION: Eliteserien (runde 29)  \n\n HamKam - Haugesund\n Briskeby l?rdag 22.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Briskeby
+DTSTART:20251122T170000
+DTEND:20251122T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2bf4dd59-12da-4e57-9409-333c13881b13
+SUMMARY:Kristiansund - Troms?
+DESCRIPTION: Eliteserien (runde 30)  \n\n Kristiansund - Troms?\n Nordm?re stadion s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Nordm?re stadion
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:a905f68e-cce7-47cb-8369-7df92eeb2269
+SUMMARY:Bod?/Glimt - Fredrikstad
+DESCRIPTION: Eliteserien (runde 30)  \n\n Bod?/Glimt - Fredrikstad\n Aspmyra stadion s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Aspmyra stadion
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:96cbf3f0-6691-45cf-8264-435514e03714
+SUMMARY:Haugesund - Bryne
+DESCRIPTION: Eliteserien (runde 30)  \n\n Haugesund - Bryne\n Haugesund Sparebank Arena s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Haugesund Sparebank Arena
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:b22df671-a9e4-4869-8096-d3783a1cabf8
+SUMMARY:Brann - HamKam
+DESCRIPTION: Eliteserien (runde 30)  \n\n Brann - HamKam\n Brann stadion s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Brann stadion
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:2a14e58a-f698-4330-9694-35e9347f6870
+SUMMARY:Rosenborg - Str?msgodset
+DESCRIPTION: Eliteserien (runde 30)  \n\n Rosenborg - Str?msgodset\n Lerkendal stadion s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lerkendal stadion
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:e6dbcc3f-a70a-4167-866f-786bf3b3d9cd
+SUMMARY:Sandefjord Fotball - KFUM
+DESCRIPTION: Eliteserien (runde 30)  \n\n Sandefjord Fotball - KFUM\n Jotun Arena s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Jotun Arena
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:403c5151-279b-4151-98a3-a0acd9df1214
+SUMMARY:Sarpsborg 08 - Molde
+DESCRIPTION: Eliteserien (runde 30)  \n\n Sarpsborg 08 - Molde\n Sarpsborg st KG s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Sarpsborg st KG
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VEVENT
+UID:1f608ee5-c28e-49b3-a418-1836e0bbf04b
+SUMMARY:Viking - V?lerenga
+DESCRIPTION: Eliteserien (runde 30)  \n\n Viking - V?lerenga\n Lyse Arena s?ndag 30.11.25 17:00\n\n www.eliteserien.no/
+ORGANIZER:Eliteserien
+LOCATION:Lyse Arena
+DTSTART:20251130T170000
+DTEND:20251130T190000
+DTSTAMP:20250315T134518Z
+URL:https://www.eliteserien.no/
+END:VEVENT
+BEGIN:VTIMEZONE
+TZID:W. Europe Standard Time
+BEGIN:STANDARD
+DTSTART:20161002T030000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYHOUR=3;BYMINUTE=0;BYMONTH=10
+TZNAME:W. Europe Standard Time
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:20160301T020000
+RRULE:FREQ=YEARLY;BYDAY=-1SU;BYHOUR=2;BYMINUTE=0;BYMONTH=3
+TZNAME:W. Europe Daylight Time
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+END:DAYLIGHT
+END:VTIMEZONE
+END:VCALENDAR

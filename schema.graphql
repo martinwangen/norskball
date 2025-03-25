@@ -1,0 +1,878 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Represents a lineup in a match."
+type Lineup {
+  id: String!
+  teamId: String!
+  matchId: String!
+  formation: Formation!
+  isStarting: Boolean!
+  players: [MatchPlayer!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  team: Team
+}
+
+type Match {
+  id: String!
+  homeTeamId: String!
+  awayTeamId: String!
+  homeTeamLineupId: String
+  awayTeamLineupId: String
+  scheduledDate: DateTime!
+  status: Status!
+  score: Score
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  homeTeam: Team
+  awayTeam: Team
+  events: [MatchEvent!]
+  homeTeamLineup: Lineup
+  awayTeamLineup: Lineup
+}
+
+type MatchEvent {
+  id: String!
+  matchId: String!
+  type: EventType!
+  timestamp: DateTime!
+  minuteOfMatch: Int!
+  playerId: String
+  secondaryPlayerId: String
+  teamId: String
+  description: String
+  match: Match!
+  player: Player
+  secondaryPlayer: Player
+  team: Team
+}
+
+"A connection to a list of items."
+type MatchEventsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [MatchEventsEdge!]
+  "A flattened list of the nodes."
+  nodes: [MatchEvent!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int! @cost(weight: "10")
+}
+
+"An edge in a connection."
+type MatchEventsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: MatchEvent!
+}
+
+type MatchPlayer {
+  id: String!
+  lineupId: String!
+  playerId: String!
+  teamId: String!
+  isStarter: Boolean!
+  position: String!
+  substitutedInAt: DateTime
+  substitutedOutAt: DateTime
+  player: Player
+  lineup: Lineup
+  team: Team
+  ratings: [Rating!]
+  averageRating: Float
+}
+
+"A connection to a list of items."
+type MatchPlayersConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [MatchPlayersEdge!]
+  "A flattened list of the nodes."
+  nodes: [MatchPlayer!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int! @cost(weight: "10")
+}
+
+"An edge in a connection."
+type MatchPlayersEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: MatchPlayer!
+}
+
+"A connection to a list of items."
+type MatchesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [MatchesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Match!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int! @cost(weight: "10")
+}
+
+"An edge in a connection."
+type MatchesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Match!
+}
+
+"Represents the mutations available."
+type Mutation {
+  addPlayer(player: PlayerInput!): Player! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
+  updatePlayer(player: PlayerInput!): Player! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
+  deletePlayer(id: String!): Player! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
+  addTeam(team: TeamInput!): Team! @cost(weight: "10")
+  updateTeam(team: TeamInput!): Team! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  deleteTeam(id: String!): Team! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  addMatch(match: MatchInput!): Match! @cost(weight: "10")
+  updateMatch(match: MatchInput!): Match! @cost(weight: "10")
+  deleteMatch(id: String!): Match! @cost(weight: "10")
+  updateMatchStatus(id: String! status: Status!): Match! @cost(weight: "10")
+  updateMatchScore(id: String! score: ScoreInput!): Match! @cost(weight: "10")
+  addMatchPlayer(matchPlayer: MatchPlayerInput!): MatchPlayer! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  updateMatchPlayer(matchPlayer: MatchPlayerInput!): MatchPlayer! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  deleteMatchPlayer(id: String!): MatchPlayer! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  substitutePlayer(matchPlayerId: String! substitutionTime: DateTime!): MatchPlayer! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  addRating(rating: RatingInput!): Rating! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
+  updateRating(rating: RatingInput!): Rating! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
+  deleteRating(id: String!): Rating! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  addSimpleRating(matchPlayerId: String! score: Int!): Rating! @cost(weight: "10")
+  addMatchEvent(matchEvent: MatchEventInput!): MatchEvent! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  updateMatchEvent(matchEvent: MatchEventInput!): MatchEvent! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  deleteMatchEvent(id: String!): MatchEvent! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  addGoalEvent(matchId: String! scorerId: String! assisterId: String teamId: String! timestamp: DateTime! minuteOfMatch: Int! isOwnGoal: Boolean! = false): MatchEvent! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  addCardEvent(matchId: String! playerId: String! teamId: String! cardType: EventType! timestamp: DateTime! minuteOfMatch: Int!): MatchEvent! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  addSubstitutionEvent(matchId: String! playerOutId: String! playerInId: String! teamId: String! timestamp: DateTime! minuteOfMatch: Int!): MatchEvent! @authorize(roles: [ "Admin" ]) @cost(weight: "10")
+  saveLineup(lineup: LineupInput!): Lineup! @cost(weight: "10")
+  deleteLineup(id: String!): Lineup! @cost(weight: "10")
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
+type Player {
+  id: String!
+  firstName: String!
+  lastName: String!
+  position: Position!
+  nationality: String
+  imageUrl: String
+  dateOfBirth: DateTime
+  teamId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  team: Team
+}
+
+type PlayerStats {
+  playerId: String!
+  playerName: String!
+  averageRating: Float!
+  ratingCount: Int!
+  matchesPlayed: Int!
+}
+
+"A connection to a list of items."
+type PlayersConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [PlayersEdge!]
+  "A flattened list of the nodes."
+  nodes: [Player!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int! @cost(weight: "10")
+}
+
+"An edge in a connection."
+type PlayersEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Player!
+}
+
+"Represents the queries available."
+type Query {
+  players("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: PlayerFilterInput @cost(weight: "10") order: [PlayerSortInput!] @cost(weight: "10")): PlayersConnection @listSize(assumedSize: 35, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
+  teams("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: TeamFilterInput @cost(weight: "10") order: [TeamSortInput!] @cost(weight: "10")): TeamsConnection @listSize(assumedSize: 20, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
+  matches("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: MatchFilterInput @cost(weight: "10") order: [MatchSortInput!] @cost(weight: "10")): MatchesConnection @listSize(assumedSize: 50, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
+  matchPlayers("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: MatchPlayerFilterInput @cost(weight: "10") order: [MatchPlayerSortInput!] @cost(weight: "10")): MatchPlayersConnection @listSize(assumedSize: 50, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
+  ratings("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: RatingFilterInput @cost(weight: "10") order: [RatingSortInput!] @cost(weight: "10")): RatingsConnection @listSize(assumedSize: 100, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
+  lineup(id: String!): Lineup @cost(weight: "10")
+  teamLineups(teamId: String! matchId: String "Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: LineupFilterInput @cost(weight: "10") order: [LineupSortInput!] @cost(weight: "10")): TeamLineupsConnection @listSize(assumedSize: 50, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
+  matchEvents("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: MatchEventFilterInput @cost(weight: "10") order: [MatchEventSortInput!] @cost(weight: "10")): MatchEventsConnection @listSize(assumedSize: 100, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
+  "Get average ratings for a team across all matches"
+  teamRatings(teamId: String!): [TeamPlayerStats!]! @cost(weight: "10")
+  "Get top rated players across all matches"
+  topPlayers(limit: Int = 10): [PlayerStats!]! @cost(weight: "10")
+}
+
+type Rating {
+  id: String!
+  matchPlayerId: String!
+  userId: String!
+  score: Int!
+  createdAt: DateTime!
+  matchPlayer: MatchPlayer!
+}
+
+"A connection to a list of items."
+type RatingsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [RatingsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Rating!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int! @cost(weight: "10")
+}
+
+"An edge in a connection."
+type RatingsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Rating!
+}
+
+type Score {
+  homeTeamScore: Int!
+  awayTeamScore: Int!
+}
+
+type Stadium {
+  name: String!
+  city: String!
+  surface: String!
+}
+
+type Team {
+  id: String!
+  name: String!
+  shortName: String!
+  logo: String
+  website: String
+  stadium: Stadium
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  players: [Player!]
+}
+
+"A connection to a list of items."
+type TeamLineupsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [TeamLineupsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Lineup!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int! @cost(weight: "10")
+}
+
+"An edge in a connection."
+type TeamLineupsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Lineup!
+}
+
+type TeamPlayerStats {
+  playerId: String!
+  playerName: String!
+  averageRating: Float!
+  ratingCount: Int!
+  matchesPlayed: Int!
+}
+
+"A connection to a list of items."
+type TeamsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [TeamsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Team!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int! @cost(weight: "10")
+}
+
+"An edge in a connection."
+type TeamsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Team!
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean @cost(weight: "10")
+  neq: Boolean @cost(weight: "10")
+}
+
+input DateTimeOperationFilterInput {
+  eq: DateTime @cost(weight: "10")
+  neq: DateTime @cost(weight: "10")
+  in: [DateTime] @cost(weight: "10")
+  nin: [DateTime] @cost(weight: "10")
+  gt: DateTime @cost(weight: "10")
+  ngt: DateTime @cost(weight: "10")
+  gte: DateTime @cost(weight: "10")
+  ngte: DateTime @cost(weight: "10")
+  lt: DateTime @cost(weight: "10")
+  nlt: DateTime @cost(weight: "10")
+  lte: DateTime @cost(weight: "10")
+  nlte: DateTime @cost(weight: "10")
+}
+
+input EventTypeOperationFilterInput {
+  eq: EventType @cost(weight: "10")
+  neq: EventType @cost(weight: "10")
+  in: [EventType!] @cost(weight: "10")
+  nin: [EventType!] @cost(weight: "10")
+}
+
+input FloatOperationFilterInput {
+  eq: Float @cost(weight: "10")
+  neq: Float @cost(weight: "10")
+  in: [Float] @cost(weight: "10")
+  nin: [Float] @cost(weight: "10")
+  gt: Float @cost(weight: "10")
+  ngt: Float @cost(weight: "10")
+  gte: Float @cost(weight: "10")
+  ngte: Float @cost(weight: "10")
+  lt: Float @cost(weight: "10")
+  nlt: Float @cost(weight: "10")
+  lte: Float @cost(weight: "10")
+  nlte: Float @cost(weight: "10")
+}
+
+input FormationOperationFilterInput {
+  eq: Formation @cost(weight: "10")
+  neq: Formation @cost(weight: "10")
+  in: [Formation!] @cost(weight: "10")
+  nin: [Formation!] @cost(weight: "10")
+}
+
+input IntOperationFilterInput {
+  eq: Int @cost(weight: "10")
+  neq: Int @cost(weight: "10")
+  in: [Int] @cost(weight: "10")
+  nin: [Int] @cost(weight: "10")
+  gt: Int @cost(weight: "10")
+  ngt: Int @cost(weight: "10")
+  gte: Int @cost(weight: "10")
+  ngte: Int @cost(weight: "10")
+  lt: Int @cost(weight: "10")
+  nlt: Int @cost(weight: "10")
+  lte: Int @cost(weight: "10")
+  nlte: Int @cost(weight: "10")
+}
+
+"Represents a lineup in a match."
+input LineupFilterInput {
+  and: [LineupFilterInput!]
+  or: [LineupFilterInput!]
+  id: StringOperationFilterInput
+  teamId: StringOperationFilterInput
+  matchId: StringOperationFilterInput
+  formation: FormationOperationFilterInput
+  isStarting: BooleanOperationFilterInput
+  players: ListFilterInputTypeOfMatchPlayerFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  team: TeamFilterInput
+}
+
+"Represents a lineup in a match."
+input LineupInput {
+  id: String!
+  teamId: String!
+  matchId: String!
+  formation: Formation!
+  isStarting: Boolean!
+  players: [MatchPlayerInput!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  team: TeamInput
+}
+
+"Represents a lineup in a match."
+input LineupSortInput {
+  id: SortEnumType @cost(weight: "10")
+  teamId: SortEnumType @cost(weight: "10")
+  matchId: SortEnumType @cost(weight: "10")
+  formation: SortEnumType @cost(weight: "10")
+  isStarting: SortEnumType @cost(weight: "10")
+  createdAt: SortEnumType @cost(weight: "10")
+  updatedAt: SortEnumType @cost(weight: "10")
+  team: TeamSortInput @cost(weight: "10")
+}
+
+input ListFilterInputTypeOfMatchEventFilterInput {
+  all: MatchEventFilterInput @cost(weight: "10")
+  none: MatchEventFilterInput @cost(weight: "10")
+  some: MatchEventFilterInput @cost(weight: "10")
+  any: Boolean @cost(weight: "10")
+}
+
+input ListFilterInputTypeOfMatchPlayerFilterInput {
+  all: MatchPlayerFilterInput @cost(weight: "10")
+  none: MatchPlayerFilterInput @cost(weight: "10")
+  some: MatchPlayerFilterInput @cost(weight: "10")
+  any: Boolean @cost(weight: "10")
+}
+
+input ListFilterInputTypeOfPlayerFilterInput {
+  all: PlayerFilterInput @cost(weight: "10")
+  none: PlayerFilterInput @cost(weight: "10")
+  some: PlayerFilterInput @cost(weight: "10")
+  any: Boolean @cost(weight: "10")
+}
+
+input ListFilterInputTypeOfRatingFilterInput {
+  all: RatingFilterInput @cost(weight: "10")
+  none: RatingFilterInput @cost(weight: "10")
+  some: RatingFilterInput @cost(weight: "10")
+  any: Boolean @cost(weight: "10")
+}
+
+input MatchEventFilterInput {
+  and: [MatchEventFilterInput!]
+  or: [MatchEventFilterInput!]
+  id: StringOperationFilterInput
+  matchId: StringOperationFilterInput
+  type: EventTypeOperationFilterInput
+  timestamp: DateTimeOperationFilterInput
+  minuteOfMatch: IntOperationFilterInput
+  playerId: StringOperationFilterInput
+  secondaryPlayerId: StringOperationFilterInput
+  teamId: StringOperationFilterInput
+  description: StringOperationFilterInput
+  match: MatchFilterInput
+  player: PlayerFilterInput
+  secondaryPlayer: PlayerFilterInput
+  team: TeamFilterInput
+}
+
+input MatchEventInput {
+  id: String!
+  matchId: String!
+  type: EventType!
+  timestamp: DateTime!
+  minuteOfMatch: Int!
+  playerId: String
+  secondaryPlayerId: String
+  teamId: String
+  description: String
+  match: MatchInput!
+  player: PlayerInput
+  secondaryPlayer: PlayerInput
+  team: TeamInput
+}
+
+input MatchEventSortInput {
+  id: SortEnumType @cost(weight: "10")
+  matchId: SortEnumType @cost(weight: "10")
+  type: SortEnumType @cost(weight: "10")
+  timestamp: SortEnumType @cost(weight: "10")
+  minuteOfMatch: SortEnumType @cost(weight: "10")
+  playerId: SortEnumType @cost(weight: "10")
+  secondaryPlayerId: SortEnumType @cost(weight: "10")
+  teamId: SortEnumType @cost(weight: "10")
+  description: SortEnumType @cost(weight: "10")
+  match: MatchSortInput @cost(weight: "10")
+  player: PlayerSortInput @cost(weight: "10")
+  secondaryPlayer: PlayerSortInput @cost(weight: "10")
+  team: TeamSortInput @cost(weight: "10")
+}
+
+input MatchFilterInput {
+  and: [MatchFilterInput!]
+  or: [MatchFilterInput!]
+  id: StringOperationFilterInput
+  homeTeamId: StringOperationFilterInput
+  awayTeamId: StringOperationFilterInput
+  homeTeamLineupId: StringOperationFilterInput
+  awayTeamLineupId: StringOperationFilterInput
+  scheduledDate: DateTimeOperationFilterInput
+  status: StatusOperationFilterInput
+  score: ScoreFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  homeTeam: TeamFilterInput
+  awayTeam: TeamFilterInput
+  events: ListFilterInputTypeOfMatchEventFilterInput
+  homeTeamLineup: LineupFilterInput
+  awayTeamLineup: LineupFilterInput
+}
+
+input MatchInput {
+  id: String!
+  homeTeamId: String!
+  awayTeamId: String!
+  homeTeamLineupId: String
+  awayTeamLineupId: String
+  scheduledDate: DateTime!
+  status: Status!
+  score: ScoreInput
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  homeTeam: TeamInput
+  awayTeam: TeamInput
+  events: [MatchEventInput!]
+  homeTeamLineup: LineupInput
+  awayTeamLineup: LineupInput
+}
+
+input MatchPlayerFilterInput {
+  and: [MatchPlayerFilterInput!]
+  or: [MatchPlayerFilterInput!]
+  id: StringOperationFilterInput
+  lineupId: StringOperationFilterInput
+  playerId: StringOperationFilterInput
+  teamId: StringOperationFilterInput
+  isStarter: BooleanOperationFilterInput
+  position: StringOperationFilterInput
+  substitutedInAt: DateTimeOperationFilterInput
+  substitutedOutAt: DateTimeOperationFilterInput
+  player: PlayerFilterInput
+  lineup: LineupFilterInput
+  team: TeamFilterInput
+  ratings: ListFilterInputTypeOfRatingFilterInput
+  averageRating: FloatOperationFilterInput
+}
+
+input MatchPlayerInput {
+  id: String!
+  lineupId: String!
+  playerId: String!
+  teamId: String!
+  isStarter: Boolean!
+  position: String!
+  substitutedInAt: DateTime
+  substitutedOutAt: DateTime
+  player: PlayerInput
+  lineup: LineupInput
+  team: TeamInput
+  ratings: [RatingInput!]
+}
+
+input MatchPlayerSortInput {
+  id: SortEnumType @cost(weight: "10")
+  lineupId: SortEnumType @cost(weight: "10")
+  playerId: SortEnumType @cost(weight: "10")
+  teamId: SortEnumType @cost(weight: "10")
+  isStarter: SortEnumType @cost(weight: "10")
+  position: SortEnumType @cost(weight: "10")
+  substitutedInAt: SortEnumType @cost(weight: "10")
+  substitutedOutAt: SortEnumType @cost(weight: "10")
+  player: PlayerSortInput @cost(weight: "10")
+  lineup: LineupSortInput @cost(weight: "10")
+  team: TeamSortInput @cost(weight: "10")
+  averageRating: SortEnumType @cost(weight: "10")
+}
+
+input MatchSortInput {
+  id: SortEnumType @cost(weight: "10")
+  homeTeamId: SortEnumType @cost(weight: "10")
+  awayTeamId: SortEnumType @cost(weight: "10")
+  homeTeamLineupId: SortEnumType @cost(weight: "10")
+  awayTeamLineupId: SortEnumType @cost(weight: "10")
+  scheduledDate: SortEnumType @cost(weight: "10")
+  status: SortEnumType @cost(weight: "10")
+  score: ScoreSortInput @cost(weight: "10")
+  createdAt: SortEnumType @cost(weight: "10")
+  updatedAt: SortEnumType @cost(weight: "10")
+  homeTeam: TeamSortInput @cost(weight: "10")
+  awayTeam: TeamSortInput @cost(weight: "10")
+  homeTeamLineup: LineupSortInput @cost(weight: "10")
+  awayTeamLineup: LineupSortInput @cost(weight: "10")
+}
+
+input PlayerFilterInput {
+  and: [PlayerFilterInput!]
+  or: [PlayerFilterInput!]
+  id: StringOperationFilterInput
+  firstName: StringOperationFilterInput
+  lastName: StringOperationFilterInput
+  position: PositionOperationFilterInput
+  nationality: StringOperationFilterInput
+  imageUrl: StringOperationFilterInput
+  dateOfBirth: DateTimeOperationFilterInput
+  teamId: StringOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  team: TeamFilterInput
+}
+
+input PlayerInput {
+  id: String!
+  firstName: String!
+  lastName: String!
+  position: Position!
+  nationality: String
+  imageUrl: String
+  dateOfBirth: DateTime
+  teamId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  team: TeamInput
+}
+
+input PlayerSortInput {
+  id: SortEnumType @cost(weight: "10")
+  firstName: SortEnumType @cost(weight: "10")
+  lastName: SortEnumType @cost(weight: "10")
+  position: SortEnumType @cost(weight: "10")
+  nationality: SortEnumType @cost(weight: "10")
+  imageUrl: SortEnumType @cost(weight: "10")
+  dateOfBirth: SortEnumType @cost(weight: "10")
+  teamId: SortEnumType @cost(weight: "10")
+  createdAt: SortEnumType @cost(weight: "10")
+  updatedAt: SortEnumType @cost(weight: "10")
+  team: TeamSortInput @cost(weight: "10")
+}
+
+input PositionOperationFilterInput {
+  eq: Position @cost(weight: "10")
+  neq: Position @cost(weight: "10")
+  in: [Position!] @cost(weight: "10")
+  nin: [Position!] @cost(weight: "10")
+}
+
+input RatingFilterInput {
+  and: [RatingFilterInput!]
+  or: [RatingFilterInput!]
+  id: StringOperationFilterInput
+  matchPlayerId: StringOperationFilterInput
+  userId: StringOperationFilterInput
+  score: IntOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  matchPlayer: MatchPlayerFilterInput
+}
+
+input RatingInput {
+  id: String!
+  matchPlayerId: String!
+  userId: String!
+  score: Int!
+  createdAt: DateTime!
+  matchPlayer: MatchPlayerInput!
+}
+
+input RatingSortInput {
+  id: SortEnumType @cost(weight: "10")
+  matchPlayerId: SortEnumType @cost(weight: "10")
+  userId: SortEnumType @cost(weight: "10")
+  score: SortEnumType @cost(weight: "10")
+  createdAt: SortEnumType @cost(weight: "10")
+  matchPlayer: MatchPlayerSortInput @cost(weight: "10")
+}
+
+input ScoreFilterInput {
+  and: [ScoreFilterInput!]
+  or: [ScoreFilterInput!]
+  homeTeamScore: IntOperationFilterInput
+  awayTeamScore: IntOperationFilterInput
+}
+
+input ScoreInput {
+  homeTeamScore: Int!
+  awayTeamScore: Int!
+}
+
+input ScoreSortInput {
+  homeTeamScore: SortEnumType @cost(weight: "10")
+  awayTeamScore: SortEnumType @cost(weight: "10")
+}
+
+input StadiumFilterInput {
+  and: [StadiumFilterInput!]
+  or: [StadiumFilterInput!]
+  name: StringOperationFilterInput
+  city: StringOperationFilterInput
+  surface: StringOperationFilterInput
+}
+
+input StadiumInput {
+  name: String!
+  city: String!
+  surface: String!
+}
+
+input StadiumSortInput {
+  name: SortEnumType @cost(weight: "10")
+  city: SortEnumType @cost(weight: "10")
+  surface: SortEnumType @cost(weight: "10")
+}
+
+input StatusOperationFilterInput {
+  eq: Status @cost(weight: "10")
+  neq: Status @cost(weight: "10")
+  in: [Status!] @cost(weight: "10")
+  nin: [Status!] @cost(weight: "10")
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String @cost(weight: "10")
+  neq: String @cost(weight: "10")
+  contains: String @cost(weight: "20")
+  ncontains: String @cost(weight: "20")
+  in: [String] @cost(weight: "10")
+  nin: [String] @cost(weight: "10")
+  startsWith: String @cost(weight: "20")
+  nstartsWith: String @cost(weight: "20")
+  endsWith: String @cost(weight: "20")
+  nendsWith: String @cost(weight: "20")
+}
+
+input TeamFilterInput {
+  and: [TeamFilterInput!]
+  or: [TeamFilterInput!]
+  id: StringOperationFilterInput
+  name: StringOperationFilterInput
+  shortName: StringOperationFilterInput
+  logo: StringOperationFilterInput
+  website: StringOperationFilterInput
+  stadium: StadiumFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  players: ListFilterInputTypeOfPlayerFilterInput
+}
+
+input TeamInput {
+  id: String!
+  name: String!
+  shortName: String!
+  logo: String
+  website: String
+  stadium: StadiumInput
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  players: [PlayerInput!]
+}
+
+input TeamSortInput {
+  id: SortEnumType @cost(weight: "10")
+  name: SortEnumType @cost(weight: "10")
+  shortName: SortEnumType @cost(weight: "10")
+  logo: SortEnumType @cost(weight: "10")
+  website: SortEnumType @cost(weight: "10")
+  stadium: StadiumSortInput @cost(weight: "10")
+  createdAt: SortEnumType @cost(weight: "10")
+  updatedAt: SortEnumType @cost(weight: "10")
+}
+
+"Defines when a policy shall be executed."
+enum ApplyPolicy {
+  "Before the resolver was executed."
+  BEFORE_RESOLVER
+  "After the resolver was executed."
+  AFTER_RESOLVER
+  "The policy is applied in the validation step before the execution."
+  VALIDATION
+}
+
+enum EventType {
+  GOAL
+  OWN_GOAL
+  YELLOW_CARD
+  RED_CARD
+  SUBSTITUTION
+  PENALTY_SCORED
+  PENALTY_MISSED
+  GAME_START
+  GAME_END
+  HALF_TIME_START
+  HALF_TIME_END
+}
+
+enum Formation {
+  "Custom"
+  FORMATION_CUSTOM
+  "4-4-2"
+  FORMATION442
+  "4-3-3"
+  FORMATION433
+  "3-5-2"
+  FORMATION352
+  "3-4-3"
+  FORMATION343
+  "4-2-3-1"
+  FORMATION4231
+  "4-3-2-1"
+  FORMATION4321
+  "5-3-2"
+  FORMATION532
+  "5-4-1"
+  FORMATION541
+  "4-5-1"
+  FORMATION451
+  "5-2-3"
+  FORMATION523
+  "4-1-4-1"
+  FORMATION4141
+  "3-1-4-2"
+  FORMATION3142
+}
+
+enum Position {
+  UNDEFINED
+  GOALKEEPER
+  DEFENDER
+  MIDFIELDER
+  FORWARD
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+enum Status {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  POSTPONED
+  CANCELLED
+}
+
+"The authorize directive."
+directive @authorize("The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!] "Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER) repeatable on OBJECT | FIELD_DEFINITION
+
+"The purpose of the `cost` directive is to define a `weight` for GraphQL types, fields, and arguments. Static analysis can use these weights when calculating the overall cost of a query or response."
+directive @cost("The `weight` argument defines what value to add to the overall cost for every appearance, or possible appearance, of a type, field, argument, etc." weight: String!) on SCALAR | OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | ENUM | INPUT_FIELD_DEFINITION
+
+"The purpose of the `@listSize` directive is to either inform the static analysis about the size of returned lists (if that information is statically available), or to point the analysis to where to find that information."
+directive @listSize("The `assumedSize` argument can be used to statically define the maximum length of a list returned by a field." assumedSize: Int "The `slicingArguments` argument can be used to define which of the field's arguments with numeric type are slicing arguments, so that their value determines the size of the list returned by that field. It may specify a list of multiple slicing arguments." slicingArguments: [String!] "The `slicingArgumentDefaultValue` argument can be used to define a default value for a slicing argument, which is used if the argument is not present in a query." slicingArgumentDefaultValue: Int "The `sizedFields` argument can be used to define that the value of the `assumedSize` argument or of a slicing argument does not affect the size of a list returned by a field itself, but that of a list returned by one of its sub-fields." sizedFields: [String!] "The `requireOneSlicingArgument` argument can be used to inform the static analysis that it should expect that exactly one of the defined slicing arguments is present in a query. If that is not the case (i.e., if none or multiple slicing arguments are present), the static analysis may throw an error." requireOneSlicingArgument: Boolean! = true) on FIELD_DEFINITION
+
+"The `@specifiedBy` directive is used within the type system definition language to provide a URL for specifying the behavior of custom scalar definitions."
+directive @specifiedBy("The specifiedBy URL points to a human-readable specification. This field will only read a result for scalar types." url: String!) on SCALAR
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime @specifiedBy(url: "https:\/\/www.graphql-scalars.com\/date-time")

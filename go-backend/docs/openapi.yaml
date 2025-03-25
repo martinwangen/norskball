@@ -1,0 +1,380 @@
+openapi: 3.0.3
+info:
+  title: Norskball API
+  description: API for managing Norwegian football data including players, teams, and matches
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the player
+        name:
+          type: string
+          description: Full name of the player
+        date_of_birth:
+          type: string
+          format: date
+          description: Player's date of birth
+        nationality:
+          type: string
+          description: Player's nationality (country code)
+        position:
+          type: string
+          enum: [GK, DF, MF, FW]
+          description: Player's primary position
+        team_id:
+          type: string
+          description: ID of the player's current team
+        jersey_number:
+          type: integer
+          description: Player's jersey number
+        height:
+          type: integer
+          description: Player's height in centimeters
+        weight:
+          type: integer
+          description: Player's weight in kilograms
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - name
+        - date_of_birth
+        - nationality
+        - position
+
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        short_name:
+          type: string
+        country_code:
+          type: string
+        founded:
+          type: integer
+        stadium_id:
+          type: string
+        league_id:
+          type: string
+        logo:
+          type: string
+        primary_color:
+          type: string
+        secondary_color:
+          type: string
+        website:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - name
+        - short_name
+        - country_code
+        - founded
+
+    Match:
+      type: object
+      properties:
+        id:
+          type: string
+        home_team_id:
+          type: string
+        away_team_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        competition:
+          type: string
+        season:
+          type: string
+        venue:
+          type: string
+        status:
+          type: string
+          enum: [SCHEDULED, IN_PROGRESS, COMPLETED, CANCELLED]
+        score:
+          type: object
+          properties:
+            home_team:
+              type: integer
+            away_team:
+              type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - home_team_id
+        - away_team_id
+        - date
+        - competition
+        - season
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+  parameters:
+    pageSize:
+      name: page_size
+      in: query
+      description: Number of items to return per page
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 100
+    pageToken:
+      name: page_token
+      in: query
+      description: Token for pagination
+      schema:
+        type: string
+
+paths:
+  /api/players:
+    get:
+      summary: List players
+      parameters:
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          description: List of players
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  players:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Player'
+                  next_page_token:
+                    type: string
+    post:
+      summary: Create a new player
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        '201':
+          description: Player created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+
+  /api/players/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a player by ID
+      responses:
+        '200':
+          description: Player details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+    put:
+      summary: Update a player
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        '200':
+          description: Player updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+    delete:
+      summary: Delete a player
+      responses:
+        '204':
+          description: Player deleted
+
+  /api/teams:
+    get:
+      summary: List teams
+      parameters:
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+                  next_page_token:
+                    type: string
+    post:
+      summary: Create a new team
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '201':
+          description: Team created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+
+  /api/teams/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a team by ID
+      responses:
+        '200':
+          description: Team details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+    put:
+      summary: Update a team
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '200':
+          description: Team updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+    delete:
+      summary: Delete a team
+      responses:
+        '204':
+          description: Team deleted
+
+  /api/matches:
+    get:
+      summary: List matches
+      parameters:
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+      responses:
+        '200':
+          description: List of matches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  matches:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Match'
+                  next_page_token:
+                    type: string
+    post:
+      summary: Create a new match
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Match'
+      responses:
+        '201':
+          description: Match created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Match'
+
+  /api/matches/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a match by ID
+      responses:
+        '200':
+          description: Match details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Match'
+    put:
+      summary: Update a match
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Match'
+      responses:
+        '200':
+          description: Match updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Match'
+    delete:
+      summary: Delete a match
+      responses:
+        '204':
+          description: Match deleted 
