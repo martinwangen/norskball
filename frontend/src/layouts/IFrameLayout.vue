@@ -22,10 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { useQuasar } from 'quasar';
-
-const q = useQuasar();
-q.dark.toggle();
+// No setup needed - theme will be inherited from system
 </script>
 
 <style lang="scss">

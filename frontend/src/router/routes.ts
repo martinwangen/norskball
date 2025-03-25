@@ -58,6 +58,32 @@ const routes: RouteRecordRaw[] = [
     ],
   },
 
+  // IFrame routes with IFrameLayout
+  {
+    path: '/iframes',
+    component: () => import('layouts/IFrameLayout.vue'),
+    children: [
+      {
+        path: 'statistics/player/:id',
+        name: 'player-statistics',
+        component: () => import('pages/IFrames/PlayerStatistics.vue'),
+        props: true
+      },
+      {
+        path: 'statistics/team/:id',
+        name: 'team-statistics',
+        component: () => import('pages/IFrames/TeamStatistics.vue'),
+        props: true
+      },
+      {
+        path: 'statistics/match/:id',
+        name: 'match-ratings',
+        component: () => import('pages/IFrames/MatchRatings.vue'),
+        props: true
+      }
+    ]
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {
