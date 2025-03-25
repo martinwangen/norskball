@@ -22,12 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 
 const q = useQuasar();
 q.dark.toggle();
-
 </script>
 
 <style lang="scss">

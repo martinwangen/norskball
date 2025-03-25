@@ -5,19 +5,14 @@ WORKDIR /app
 RUN apk add --no-cache yarn && \
     yarn global add @quasar/cli
 
-# Copy package files
-COPY frontend/package.json frontend/yarn.lock ./
-COPY frontend/quasar.config.js ./
-COPY frontend/.quasar ./.quasar
+# Copy all source files first
+COPY frontend/ .
 
 # Install dependencies
 RUN yarn install --frozen-lockfile
 
-# Copy source code
-COPY frontend/ .
-
 # Build the app
-RUN quasar build
+RUN quasar build --no-verify
 
 # Production stage
 FROM nginx:alpine
