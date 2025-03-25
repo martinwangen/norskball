@@ -1,3 +1,0 @@
-insert into public.seasons (id, league_id, name, start_date, end_date, current_matchday, total_matchdays, is_active, winner, created_at, updated_at)
-values  ('eliteserien_2024_season', 'eliteserien_2024', '2024', '2024-04-01 00:00:00.000000', '2024-12-01 00:00:00.000000', 1, 30, true, null, '2025-03-19 17:02:43.035201', '2025-03-19 17:02:43.035201'),
-        ('eliteserien_2025_season', 'eliteserien_2025', '2025', '2024-04-01 00:00:00.000000', '2024-12-01 00:00:00.000000', 1, 30, true, null, '2025-03-19 17:02:43.035201', '2025-03-19 17:02:43.035201');
