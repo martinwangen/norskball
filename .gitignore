@@ -34,6 +34,7 @@ backend/appsettings.Production.json
 
 # Go specific
 go-backend/
+go-backend/*
 go-backend/tmp/
 go-backend/*.exe
 go-backend/*.exe~
