@@ -73,18 +73,18 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: norskball
+          install_components: 'beta'
 
       - name: Copy Configuration Files
         run: |
+          # Get the service account email from credentials
+          SA_EMAIL=$(echo '${{ secrets.GCP_SA_KEY }}' | jq -r '.client_email')
+          
           # Ensure the Norskball directory exists
-          gcloud compute ssh norskball-vm --zone=europe-north1-a --command '
-            if [ ! -d "~/Norskball" ]; then
-              mkdir -p ~/Norskball
-            fi
-          '
+          gcloud beta compute ssh --zone=europe-north1-a norskball-vm --tunnel-through-iap --command="mkdir -p ~/Norskball" --quiet
           
           # Copy latest docker-compose and nginx configs
-          gcloud compute scp --recurse ./docker-compose.yml ./nginx norskball-vm:~/Norskball/ --zone=europe-north1-a
+          gcloud beta compute scp --zone=europe-north1-a --tunnel-through-iap --recurse ./docker-compose.yml ./nginx norskball-vm:~/Norskball/ --quiet
 
   deploy-services:
     needs: [deploy-infrastructure]
@@ -99,10 +99,14 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: norskball
+          install_components: 'beta'
 
       - name: Deploy and Start Services
         run: |
-          gcloud compute ssh norskball-vm --zone=europe-north1-a --command '
+          # Get the service account email from credentials
+          SA_EMAIL=$(echo '${{ secrets.GCP_SA_KEY }}' | jq -r '.client_email')
+          
+          gcloud beta compute ssh norskball-vm --zone=europe-north1-a --tunnel-through-iap --command='
             cd ~/Norskball
             export DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             
@@ -126,4 +130,4 @@ jobs:
             fi
             
             echo "Deployment completed successfully!"
-          ' 
+          ' --quiet 
