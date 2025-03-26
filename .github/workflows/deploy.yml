@@ -1,4 +1,4 @@
-name: Deploy to Windows Server
+name: Deploy to GCP
 
 on:
   push:
@@ -38,38 +38,57 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/norskball-frontend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          build-args: DOCKER_BUILDKIT=1
+          build-args: |
+            DOCKER_BUILDKIT=1
+            VITE_API_BASE_URL=https://api.norskball.no
+            VITE_API_TIMEOUT=10000
+            VITE_GOOGLE_CLIENT_ID=266076307059-pfaiq2uh5l0dnd0t3q5p8cs7s1i7ilk2.apps.googleusercontent.com
 
-      - name: Test SSH connection
-        run: |
-          echo "Testing SSH port..."
-          nc -zv 79.161.238.249 22 || echo "Port 22 is not reachable"
-          echo "Testing SSH key..."
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 79.161.238.249 >> ~/.ssh/known_hosts
-          ssh -v -o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${{ secrets.SERVER_USERNAME }}@79.161.238.249 'echo "SSH connection successful"' || echo "SSH connection failed"
-
-      - name: Deploy to Windows Server
-        uses: appleboy/ssh-action@master
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
         with:
-          host: 79.161.238.249
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          command_timeout: "20m"
-          debug: true
-          script: |
-            echo "Current directory: $(pwd)"
-            if [ ! -d "Norskball" ]; then
-              echo "Norskball directory not found"
-              ls -la
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: norskball
+
+      - name: Deploy to Compute Engine
+        run: |
+          # Ensure the Norskball directory exists
+          gcloud compute ssh norskball-vm --zone=europe-north1-a --command '
+            if [ ! -d "~/Norskball" ]; then
+              mkdir -p ~/Norskball
+            fi
+          '
+          
+          # Copy latest docker-compose and nginx configs
+          gcloud compute scp --recurse ./docker-compose.yml ./nginx norskball-vm:~/Norskball/ --zone=europe-north1-a
+
+          # Deploy using SSH
+          gcloud compute ssh norskball-vm --zone=europe-north1-a --command '
+            cd ~/Norskball
+            export DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            
+            # Pull new images
+            echo "Pulling new images..."
+            docker compose pull || exit 1
+            
+            # Start services
+            echo "Starting services..."
+            docker compose up -d || exit 1
+            
+            # Verify services are running
+            echo "Verifying services..."
+            docker compose ps
+            
+            # Check for any containers that exited
+            if [ $(docker compose ps -q -a --filter status=exited | wc -l) -gt 0 ]; then
+              echo "Some containers failed to start. Checking logs..."
+              docker compose logs
               exit 1
             fi
-            cd Norskball || exit 1
-            echo "Setting DOCKERHUB_USERNAME environment variable"
-            export DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
-            echo "Pulling new images"
-            docker-compose pull || exit 1
-            echo "Starting services"
-            docker-compose up -d || exit 1 
+            
+            echo "Deployment completed successfully!"
+          ' 

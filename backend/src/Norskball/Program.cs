@@ -11,8 +11,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         
-        // Configure HTTPS port
-        builder.WebHost.UseUrls("https://localhost:5001");
+        // Use configuration instead
+        builder.WebHost.UseUrls(builder.Configuration["Urls"] ?? "http://*:5001");
         
         // Configure services
         var startup = new Startup(builder.Configuration);

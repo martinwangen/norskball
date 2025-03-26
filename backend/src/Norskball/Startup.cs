@@ -111,15 +111,14 @@ namespace Norskball
             // Configure CORS
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll",
-                    builder =>
-                    {
-                        builder
-                            .WithOrigins("https://localhost:9000")
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials();
-                    });
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder
+                        .WithOrigins(Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? Array.Empty<string>())
+                        .AllowCredentials()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
             });
 
             // Add scraper service
@@ -148,7 +147,7 @@ namespace Norskball
             app.UseHttpsRedirection();
             app.UseRouting();
             
-            app.UseCors("AllowAll");
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

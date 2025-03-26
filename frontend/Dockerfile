@@ -1,12 +1,24 @@
 FROM node:22-alpine AS build
 WORKDIR /app
 
+# Define build arguments
+ARG VITE_API_BASE_URL
+ARG VITE_API_TIMEOUT
+ARG VITE_FOOTBALL_API_KEY
+ARG VITE_GOOGLE_CLIENT_ID
+
 # Install yarn and Quasar CLI
 RUN apk add --no-cache yarn && \
     yarn global add @quasar/cli
 
 # Copy all source files first
 COPY frontend/ .
+
+# Create .env file from build arguments
+RUN echo "VITE_API_BASE_URL=$VITE_API_BASE_URL" > .env && \
+    echo "VITE_API_TIMEOUT=$VITE_API_TIMEOUT" >> .env && \
+    echo "VITE_FOOTBALL_API_KEY=$VITE_FOOTBALL_API_KEY" >> .env && \
+    echo "VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID" >> .env
 
 # Install dependencies
 RUN yarn install --frozen-lockfile

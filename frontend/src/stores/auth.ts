@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function loginWithGoogle(requestBody: { idToken: string; email: string; name: string; picture: string }) {
     try {
       console.log('Attempting Google login with:', requestBody);
-      const response = await fetch('https://localhost:5001/api/auth/google', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/google`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     try {
-      const response = await fetch('https://localhost:5001/api/auth/me', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${storedToken}`,
         },

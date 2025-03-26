@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "norskball",
+  "private_key_id": "b37b9b301dbdbd02f585b71d0dfdd55dda756fa7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQDhLPtzaKyBtMtL\nEHrcqstUrtbe5fEmxaklNljqb7750vz+qktqAoAzpy3gLXYQhMdmItJY3AiapTDx\n0pPY1F7YakCsFbZEsbwUru78PvGaMsagY3ZCdY5YahME8sWbkCHb/B59kgepDb/m\nBka8g1VwQkEcmmnE2K7kbZZFXROgZhfnLEeJiobVpefiq1oeAcOxfV/GsUte6TA6\nG7ciDdQHw3ulN8VZdN7DCd69i3XMVqWFld4h6+79Gnd6BFnHi7fHzA5k5iPRxAHb\nABwGj6wVzgNNKFMru8H0lqqmI8XwqWD6oD06RXa6RHCV7B6VWilRrwwnzdN9MsMY\nDmxgnSrBAgMBAAECgf9x+pL37W6547SuX757yaL3+ohJIPDa711EY34egkc+WHji\nGiaSQociSOgFJv3cNARlbrrgFStFxtg/j+0b6bkYqAU/FhPCMd/s7Z+K5Kbm+/dk\nDZ85hMfIzpNSAzvYwocLvf1bvSSjgzzfnSMGc8mLnqiBZ1KikWFLFILmxCEVzvna\ny5hAdobv2kqaz6RHhg4WGsoY8RyVbU3GFbcfQ56uCVmgMHcLimc0+kVb8LFs/K08\nTDwZHcY8mk9yA+g5fVHokC3PM3ZVjJtfd8j+pdqAnGuMWa0PpRlUqYVgJ6P0P4Ay\nFV50LokLZeQj7FL5kzZ41619Np2RAEyv1r1IjPECgYEA+i6Kyll9lN5kXU5SULN1\np27cjBp9GR6ZX1SVV4VOi5TqWfIVIbq65RIhi7rxfYq5718JpIu5UrBasvq6rwgM\nkgeOoU5BlzHIOxYfl5VHvX081d02h2dnQWPFmt+uLw3V0okFkYPnRPTt9bJHNmKM\n5yFckbsQWuVZBysPPj0vN3kCgYEA5mmQ9hkNi+2dnMXdE8YVkxITfYBI2xyCvo4p\nYQOuga+d+GLh7L8lvuw+zIAgXpeFykoohIjT3u+lf5YvyDynuSHEajZTA79nucCd\nCTVSxKXOvNhHnoEFU//BYqyYIUoa7jSGSypU/xyPE0LWh+0yoRZdtN81ccjYMBzL\nocvuk4kCgYBVINkhGWpd6X6FMU1ZIHd8TYDGO40tqvfNNF7MtROQ80765CDEpWFK\n6Ox5O1dIvJegF9qUHuckd9Wk6SP0wuxkFCY4RQSUid/0GwcM8ULD+4Vj0C3pzQmZ\nenWWyV3frPmA9hbq+NMM57rAy7TnkIkZbISvIdPi2f99LO224+LZIQKBgArGmyH3\nT/vgVAO1+T3ogK/NI5419rJQpgi1a1f/LRUhmni4XyqMUf6Y2+MChwEFgxtP1o9E\nOuxtNsc9xeROeeWdn6r7+WvucrJsQKvik4lg28dXMhpGnHIuPuQXgFHmPlYvnKw9\nQZZgxow3DwNyY3DHNAC2g7BbnUi6wAdEG1dJAoGALHHvH5V5+bumoteHzRVaf6LF\nJHuq0YAbX9/3NCQZm9hWyrIUcUTRbclboPFPjIHQCtt4BrGAN5tk2kUNBmdurJ0F\nKkFpOZcST1dmeNQUMcoF9DSH25mwZ5zDhbKOjSQpvsIU9fsgONo8L1s9rxwghP7I\nqi0IXsxdY5Cwj3d5IVw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "github-actions@norskball.iam.gserviceaccount.com",
+  "client_id": "101515641041534023139",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/github-actions%40norskball.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

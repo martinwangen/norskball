@@ -12,7 +12,7 @@ import { useAuthStore } from '../stores/auth';
 
 // Create the http link
 const httpLink = createHttpLink({
-  uri: 'https://localhost:5001/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URL || 'https://localhost:5001/graphql',
   credentials: 'include',
 });
 
