@@ -15,7 +15,7 @@ services:
       - norskball-network
 
   backend:
-    image: ghcr.io/${GITHUB_REPOSITORY}/norskball-backend:latest
+    image: ${DOCKERHUB_USERNAME}/norskball-backend:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Server=mssql;Database=Norskball;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
@@ -25,7 +25,7 @@ services:
       - norskball-network
 
   frontend:
-    image: ghcr.io/${GITHUB_REPOSITORY}/norskball-frontend:latest
+    image: ${DOCKERHUB_USERNAME}/norskball-frontend:latest
     networks:
       - norskball-network
 

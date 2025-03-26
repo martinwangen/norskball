@@ -19,10 +19,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Debug Docker Hub username
-        run: |
-          echo "Docker Hub username: ${{ secrets.DOCKERHUB_USERNAME }}"
-
       - name: Build and push backend
         uses: docker/build-push-action@v4
         with:
@@ -44,13 +40,36 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: DOCKER_BUILDKIT=1
 
+      - name: Test SSH connection
+        run: |
+          echo "Testing SSH port..."
+          nc -zv 79.161.238.249 22 || echo "Port 22 is not reachable"
+          echo "Testing SSH key..."
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 79.161.238.249 >> ~/.ssh/known_hosts
+          ssh -v -o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${{ secrets.SERVER_USERNAME }}@79.161.238.249 'echo "SSH connection successful"' || echo "SSH connection failed"
+
       - name: Deploy to Windows Server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
+          host: 79.161.238.249
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          command_timeout: "20m"
+          debug: true
           script: |
-            cd Norskball
-            docker-compose pull
-            docker-compose up -d 
+            echo "Current directory: $(pwd)"
+            if [ ! -d "Norskball" ]; then
+              echo "Norskball directory not found"
+              ls -la
+              exit 1
+            fi
+            cd Norskball || exit 1
+            echo "Setting DOCKERHUB_USERNAME environment variable"
+            export DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "Pulling new images"
+            docker-compose pull || exit 1
+            echo "Starting services"
+            docker-compose up -d || exit 1 
