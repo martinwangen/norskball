@@ -56,11 +56,11 @@
           <template v-slot:body-cell-rating="props">
             <q-td :props="props">
               <q-chip
-                :color="props.row.rating >= 7 ? 'positive' : props.row.rating >= 6 ? 'warning' : 'negative'"
+                :color="(props.row.rating || 0) >= 7 ? 'positive' : (props.row.rating || 0) >= 6 ? 'warning' : 'negative'"
                 text-color="white"
                 size="sm"
               >
-                {{ props.row.rating.toFixed(1) }}
+                {{ (props.row.rating || 0).toFixed(1) }}
               </q-chip>
             </q-td>
           </template>
@@ -101,10 +101,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.team-logo {
-  background-color: #f5f5f5;
-  border-radius: 8px;
-}
 
 .team-detail {
   animation: fade-in 0.5s ease-in-out;

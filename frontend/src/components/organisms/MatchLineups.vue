@@ -92,7 +92,6 @@ import { ref, onMounted } from 'vue';
 import { usePlayerStore } from 'src/stores/players';
 import LineupCard from 'src/components/organisms/LineupCard.vue';
 import { useQuasar } from 'quasar';
-import { playerService } from 'src/services/playerService';
 import { lineupService } from 'src/services/lineupService';
 import type { Match, Lineup, Team } from 'src/gql/__generated__/graphql';
 import { Position } from 'src/gql/__generated__/graphql';
@@ -125,6 +124,8 @@ const newPlayer = ref({
   last_name: '',
   position: Position.Midfielder,
   number: null as number | null,
+  nationality: '',
+  date_of_birth: ''
 });
 
 const showAddPlayerDialog = (team: 'home' | 'away') => {
@@ -245,8 +246,7 @@ const handleAddPlayer = async () => {
 
   try {
     const teamId = selectedTeam.value === 'home' ? props.match.homeTeamId : props.match.awayTeamId;
-    const { createPlayer } = playerService.useCreatePlayer();
-    await createPlayer({
+    await playerStore.createPlayer({
       firstName: newPlayer.value.first_name,
       lastName: newPlayer.value.last_name,
       position: newPlayer.value.position,
@@ -254,7 +254,7 @@ const handleAddPlayer = async () => {
     });
 
     // Refresh the player list
-    await playerStore.getPlayersByteam_id(teamId);
+    await playerStore.fetchPlayersByTeam(teamId);
 
     q.notify({
       type: 'positive',
@@ -266,10 +266,13 @@ const handleAddPlayer = async () => {
       first_name: '',
       last_name: '',
       position: Position.Midfielder,
-      number: null
+      number: null,
+      nationality: '',
+      date_of_birth: ''
     };
     showDialog.value = false;
-  } catch {
+  } catch (error) {
+    console.error('Error adding player:', error);
     q.notify({
       type: 'negative',
       message: 'Failed to add player'

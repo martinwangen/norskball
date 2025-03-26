@@ -35,7 +35,7 @@ public class RatingMutations
         return rating;
     }
 
-    [Authorize(Roles = new[] {"Admin"})]
+    [Authorize(Roles = new[] {"admin"})]
     public async Task<Rating> DeleteRatingAsync(NorskballDbContext dbContext, string id)
     {
         var rating = await dbContext.Ratings.FindAsync(id);

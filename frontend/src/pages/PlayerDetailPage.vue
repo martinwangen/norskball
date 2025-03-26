@@ -90,9 +90,8 @@
                   <q-item-label class="row items-center">
                     <team-logo
                       v-if="team"
-                      :team="team"
+                      :team-id="team.id"
                       size="40"
-                      class="q-mr-sm"
                     />
                     <q-btn
                       flat
@@ -152,16 +151,16 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import type { Player, Team } from '../gql/__generated__/graphql';
-import { playerService, getPlayerFullName, getPositionColor } from '../services/playerService';
+import { getPlayerFullName, getPositionColor } from '../services/playerService';
 import { teamService } from '../services/teamService';
 import TeamLogo from '../components/atoms/TeamLogo.vue';
 import { date } from 'quasar';
 import { useQuasar } from 'quasar';
+import { usePlayerStore } from 'src/stores/players';
 
 const route = useRoute();
-const router = useRouter();
 const player = ref<Player | null>(null);
 const team = ref<Team | null>(null);
 const loading = ref(true);
@@ -169,6 +168,7 @@ const error = ref<string | null>(null);
 const userRating = ref(0);
 const playerRating = ref(0);
 const $q = useQuasar();
+const playerStore = usePlayerStore();
 
 // Format date
 const formatDate = (dateStr: string): string => {
@@ -196,7 +196,7 @@ const submitRating = () => {
 const playerFullName = computed(() => player.value ? getPlayerFullName(player.value) : '');
 
 // Fetch player and team details on component mount
-onMounted(() => {
+onMounted(async () => {
   const playerId = route.params.id as string;
 
   if (!playerId) {
@@ -207,12 +207,11 @@ onMounted(() => {
 
   try {
     loading.value = true;
-    const { player: playerData } = playerService.usePlayer(playerId);
-    player.value = playerData.value;
+    const playerData = await playerStore.fetchPlayerById(playerId);
+    player.value = playerData;
 
     if (!player.value) {
-      void router.push('/players');
-      return;
+      throw new Error('Player not found');
     }
 
     // Fetch team data if player has a team
@@ -224,11 +223,12 @@ onMounted(() => {
         console.error('Error loading team:', err);
       }
     }
-  } catch (err) {
-    console.error('Error loading player:', err);
+  } catch (error) {
+    console.error('Error fetching player:', error);
     $q.notify({
-      type: 'negative',
-      message: 'Failed to load player'
+      color: 'negative',
+      message: 'Failed to load player details',
+      icon: 'error',
     });
   } finally {
     loading.value = false;

@@ -9,10 +9,6 @@ export const PLAYER_FIELDS = gql`
     nationality
     dateOfBirth
     imageUrl
-    team {
-      id
-      name
-      shortName
-    }
+    teamId
   }
 `;

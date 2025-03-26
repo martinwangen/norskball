@@ -13,16 +13,18 @@ import {
 
 export const teamService = {
   useTeams(first = 16, after?: string) {
-    const { result, loading, error, refetch } = useQuery(GET_TEAMS, {
+    const { result, loading, error, refetch, onResult } = useQuery(GET_TEAMS, {
       first,
       after
     });
 
     // Update store when data changes
     const teamStore = useTeamStore();
-    if (result.value?.teams?.nodes) {
-      teamStore.teams = result.value.teams.nodes;
-    }
+    onResult((queryResult) => {
+      if (queryResult.data?.teams?.nodes) {
+        teamStore.teams = queryResult.data.teams.nodes;
+      }
+    });
 
     return {
       teams: result,

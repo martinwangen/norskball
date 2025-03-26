@@ -21,7 +21,7 @@ export const useTeamStore = defineStore('teams', () => {
     error.value = null;
     try {
       const { teams: fetchedTeams } = teamService.useTeams();
-      teams.value = fetchedTeams.value;
+      // The store will be updated by the onResult callback in the service
       return fetchedTeams.value;
     } catch (e) {
       error.value = e instanceof Error ? e.message : 'Failed to fetch teams';

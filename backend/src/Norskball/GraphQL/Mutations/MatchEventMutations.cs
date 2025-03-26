@@ -10,7 +10,7 @@ namespace Norskball.GraphQL.Mutations;
 [ExtendObjectType(typeof(Mutation))]
 public class MatchEventMutations
 {
-    [Authorize(Roles = new[] {"Admin"})]
+    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddMatchEventAsync(NorskballDbContext dbContext, MatchEvent matchEvent)
     {
         dbContext.MatchEvents.Add(matchEvent);
@@ -18,7 +18,7 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"Admin"})]
+    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> UpdateMatchEventAsync(NorskballDbContext dbContext, MatchEvent matchEvent)
     {
         dbContext.MatchEvents.Update(matchEvent);
@@ -26,7 +26,7 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"Admin"})]
+    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> DeleteMatchEventAsync(NorskballDbContext dbContext, string id)
     {
         var matchEvent = await dbContext.MatchEvents.FindAsync(id);
@@ -39,7 +39,7 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"Admin"})]
+    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddGoalEventAsync(
         NorskballDbContext dbContext,
         string matchId,
@@ -68,7 +68,7 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"Admin"})]
+    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddCardEventAsync(
         NorskballDbContext dbContext,
         string matchId,
@@ -98,7 +98,7 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"Admin"})]
+    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddSubstitutionEventAsync(
         NorskballDbContext dbContext,
         string matchId,

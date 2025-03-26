@@ -23,7 +23,6 @@ public class ScraperHostedService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        return; //TODO: implement this again once deploying to production
         _logger.LogInformation("Starting player scraper service");
         _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 

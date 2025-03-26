@@ -41,6 +41,12 @@ export interface AppSettings {
 // Create a reactive configuration object
 const config = ref<AppSettings>(appSettings);
 
+// Use environment variable for API URL
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+// Update the config line to use the environment variable
+config.value.api.base_url = apiBaseUrl;
+
 // Fix the async function without await warning
 // eslint-disable-next-line @typescript-eslint/require-await
 const loadEnvironmentSettings = async (): Promise<void> => {
@@ -52,7 +58,6 @@ const loadEnvironmentSettings = async (): Promise<void> => {
     if (import.meta.env.DEV) {
       console.log('Loading development settings');
       // Example: Override API URL for development
-      // config.value.api.base_url = 'http://localhost:8080/api';
 
       // Add football API configuration if not present
       if (!config.value.football_api) {

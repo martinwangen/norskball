@@ -425,3 +425,11 @@
 /Users/wangen/Repos/Norskball/backend/src/Norskball/obj/Debug/net9.0/Norskball.genruntimeconfig.cache
 /Users/wangen/Repos/Norskball/backend/src/Norskball/obj/Debug/net9.0/ref/Norskball.dll
 /Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/HtmlAgilityPack.dll
+/Users/wangen/Repos/Norskball/backend/src/Norskball/obj/Debug/net9.0/Norskball.sourcelink.json
+/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/Google.Apis.dll
+/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/Google.Apis.Auth.dll
+/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/Google.Apis.Core.dll
+/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/Newtonsoft.Json.dll
+/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/System.Management.dll
+/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/runtimes/win/lib/net7.0/System.Management.dll

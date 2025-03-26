@@ -5,26 +5,16 @@ using Norskball.GraphQL.Queries;
 using Norskball.GraphQL.Mutations;
 using Norskball.Extensions;
 using Norskball.Services;
-using HotChocolate.AspNetCore;
-using HotChocolate.AspNetCore.Authorization;
 using Serilog;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Security.Claims;
-using System.Text.Encodings.Web;
-using Microsoft.Extensions.Options;
 
 namespace Norskball
 {
     public class Startup
     {
-        private const string ApiKey = "rabonaPod"; // Hardcoded API key
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,17 +25,59 @@ namespace Norskball
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add services to the container.
+            services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+
             // Add DbContext
             services.AddDbContext<NorskballDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            // Configure API Key Authentication
+            // Register services
+            services.AddScoped<IAuthService, AuthService>();
+
+            // Configure Authentication
             services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme = "ApiKey";
-                options.DefaultChallengeScheme = "ApiKey";
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthHandler>("ApiKey", options => { });
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(Configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT Key not configured"))),
+                    ClockSkew = TimeSpan.Zero, // Reduces the default 5 min clock skew
+                    RequireExpirationTime = true
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async context =>
+                    {
+                        var authService = context.HttpContext.RequestServices.GetRequiredService<IAuthService>();
+                        var userId = context.Principal?.FindFirstValue(ClaimTypes.NameIdentifier);
+                        
+                        if (userId != null)
+                        {
+                            var user = await authService.GetCurrentUserAsync(userId);
+                            if (user == null)
+                            {
+                                context.Fail("User not found");
+                                return;
+                            }
+                        }
+                    }
+                };
+            });
 
             services.AddAuthorization();
 
@@ -63,6 +95,7 @@ namespace Norskball
                 .AddType<LineupQuery>()
                 .AddType<MatchEventQuery>()
                 .AddType<StatisticsQuery>()
+                .AddType<MeQuery>()
                 .AddType<PlayerMutations>()
                 .AddType<TeamMutations>()
                 .AddType<MatchMutations>()
@@ -75,15 +108,17 @@ namespace Norskball
                 .AddFiltering()
                 .AddSorting();
 
-            // Add CORS if needed
+            // Configure CORS
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll",
                     builder =>
                     {
-                        builder.AllowAnyOrigin()
-                               .AllowAnyMethod()
-                               .AllowAnyHeader();
+                        builder
+                            .WithOrigins("https://localhost:9000")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials();
                     });
             });
 
@@ -103,9 +138,11 @@ namespace Norskball
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Configure the HTTP request pipeline.
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
@@ -121,46 +158,9 @@ namespace Norskball
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGraphQL().RequireAuthorization();
+                endpoints.MapGraphQL();
+                endpoints.MapControllers();
             });
-        }
-    }
-
-    public class ApiKeyAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
-    {
-        private const string ApiKey = "rabonaPod"; // Same API key as above
-
-        public ApiKeyAuthHandler(
-            IOptionsMonitor<AuthenticationSchemeOptions> options,
-            ILoggerFactory logger,
-            UrlEncoder encoder,     
-            ISystemClock clock)
-            : base(options, logger, encoder, clock)
-        {
-        }
-
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-        {
-            if (!Request.Headers.TryGetValue("X-API-Key", out var apiKeyHeaderValues))
-            {
-                return Task.FromResult(AuthenticateResult.Fail("API Key is missing"));
-            }
-
-            var providedApiKey = apiKeyHeaderValues.ToString();
-
-            if (providedApiKey != ApiKey)
-            {
-                return Task.FromResult(AuthenticateResult.Fail("Invalid API Key"));
-            }
-
-            var claims = new[] {
-                new Claim(ClaimTypes.Name, "ApiUser"),
-            };
-            var identity = new ClaimsIdentity(claims, Scheme.Name);
-            var principal = new ClaimsPrincipal(identity);
-            var ticket = new AuthenticationTicket(principal, Scheme.Name);
-
-            return Task.FromResult(AuthenticateResult.Success(ticket));
         }
     }
 } 

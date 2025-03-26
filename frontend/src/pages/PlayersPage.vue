@@ -33,7 +33,7 @@
       <template v-slot:body-cell-team_logo="props">
         <q-td :props="props" class="text-center">
           <team-logo
-            :team="teams.find(t => t.id === props.row.team_id)"
+            :team-id="props.row.teamId"
             size="md"
           />
         </q-td>
@@ -54,7 +54,6 @@
       <template v-slot:body-cell-actions="props">
         <q-td :props="props" class="q-gutter-sm">
           <q-btn flat round color="primary" icon="edit" @click="editPlayer(props.row)" />
-          <q-btn flat round color="negative" icon="delete" @click="confirmDelete(props.row)" />
         </q-td>
       </template>
     </q-table>
@@ -112,21 +111,6 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-
-    <!-- Delete Confirmation -->
-    <q-dialog v-model="deleteDialog">
-      <q-card>
-        <q-card-section class="row items-center">
-          <q-avatar icon="warning" color="negative" text-color="white" />
-          <span class="q-ml-sm">Are you sure you want to delete this player?</span>
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn flat label="Cancel" color="primary" v-close-popup />
-          <q-btn flat label="Delete" color="negative" @click="deletePlayer" v-close-popup />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
   </q-page>
 </template>
 
@@ -134,8 +118,8 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
-import { Position, type Player } from '../gql/__generated__/graphql';
-import { playerService, getPlayerFullName, getPositionColor, getPositionSortOrder } from '../services/playerService';
+import { Position, type Player, type PlayerInput } from '../gql/__generated__/graphql';
+import { getPlayerFullName, getPositionColor, getPositionSortOrder } from '../services/playerService';
 import { useTeamStore } from '../stores/teams';
 import TeamLogo from '../components/atoms/TeamLogo.vue';
 import { usePlayerStore } from 'src/stores/players';
@@ -146,15 +130,11 @@ const teamStore = useTeamStore();
 const playerStore = usePlayerStore();
 const loading = ref(false);
 const dialog = ref(false);
-const deleteDialog = ref(false);
 const editingPlayer = ref<Player | null>(null);
 const pagination = ref({
   page: 1,
   rowsPerPage: 10,
 });
-
-// Initialize players array
-const players = ref<Player[]>([]);
 
 const form = ref<Partial<Player>>({
   firstName: '',
@@ -202,7 +182,7 @@ const teams = computed(() => {
 const teamOptions = computed(() => {
   return [
     { label: 'All Teams', value: null },
-    ...(teams.value || []).map(team => ({ label: team.name, value: team.id }))
+    ...(teams.value || []).map(team => ({ label: team.name, value: String(team.id) }))
   ];
 });
 
@@ -211,7 +191,7 @@ const selectedTeam = ref<string | null>(null);
 const filteredPlayers = computed(() => {
   if (!playerStore.players) return [];
   if (!selectedTeam.value) return playerStore.players;
-  return playerStore.players.filter(player => player.teamId === selectedTeam.value);
+  return playerStore.getPlayersByTeam(selectedTeam.value);
 });
 
 const loadPlayers = async () => {
@@ -222,8 +202,6 @@ const loadPlayers = async () => {
     } else {
       await playerStore.fetchPlayers();
     }
-    // Update local players ref after successful fetch
-    players.value = playerStore.players || [];
   } catch (err) {
     console.error('Failed to load players:', err);
     $q.notify({
@@ -231,8 +209,6 @@ const loadPlayers = async () => {
       message: 'Failed to load players',
       icon: 'error',
     });
-    // Ensure players is an empty array on error
-    players.value = [];
   } finally {
     loading.value = false;
   }
@@ -271,12 +247,12 @@ const resetForm = () => {
 const savePlayer = async () => {
   try {
     if (editingPlayer.value?.id) {
-      await playerService.useUpdatePlayer().updatePlayer({
+      await playerStore.updatePlayer({
         ...form.value,
         id: editingPlayer.value.id
-      } as Player);
+      } as PlayerInput);
     } else {
-      await playerService.useCreatePlayer().createPlayer(form.value as Player);
+      await playerStore.createPlayer(form.value as Omit<PlayerInput, 'id' | 'createdAt' | 'updatedAt'>);
     }
     dialog.value = false;
     await loadPlayers();
@@ -290,32 +266,6 @@ const savePlayer = async () => {
     $q.notify({
       color: 'negative',
       message: `Failed to ${editingPlayer.value ? 'update' : 'create'} player`,
-      icon: 'error',
-    });
-  }
-};
-
-const confirmDelete = (player: Player) => {
-  editingPlayer.value = player;
-  deleteDialog.value = true;
-};
-
-const deletePlayer = async () => {
-  if (!editingPlayer.value?.id) return;
-
-  try {
-    await playerService.useDeletePlayer().deletePlayer(editingPlayer.value.id);
-    await loadPlayers();
-    $q.notify({
-      color: 'positive',
-      message: 'Player deleted successfully',
-      icon: 'check',
-    });
-  } catch (err) {
-    console.error('Failed to delete player:', err);
-    $q.notify({
-      color: 'negative',
-      message: 'Failed to delete player',
       icon: 'error',
     });
   }

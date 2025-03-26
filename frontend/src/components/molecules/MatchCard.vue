@@ -3,7 +3,7 @@
     <q-card-section class="match-header">
       <div class="row items-center justify-between">
         <div class="col-5 text-center">
-          <TeamLogo :team="match.homeTeam" size="50" />
+          <TeamLogo :team-id="match.homeTeam.id" size="50" />
           <div class="team-name q-mt-sm">{{ match.homeTeam?.name || 'Home Team' }}</div>
         </div>
 
@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-5 text-center">
-          <TeamLogo :team="match.awayTeam" size="50" />
+          <TeamLogo :team-id="match.awayTeam.id" size="50" />
           <div class="team-name q-mt-sm">{{ match.awayTeam?.name || 'Away Team' }}</div>
         </div>
       </div>

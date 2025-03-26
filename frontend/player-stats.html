@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Statistics</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 20px;
+            height: 100%;
+            background-color: #f0f0f0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .iframe-container {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .iframe-container h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            display: block;
+        }
+        .large iframe {
+            height: 400px;
+        }
+        .medium iframe {
+            height: 300px;
+        }
+        .small iframe {
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="iframe-container large">
+            <h3>Full Width Player Stats</h3>
+            <iframe src="http://localhost:9000/#/iframes/statistics/player/:id" allowfullscreen></iframe>
+        </div>
+        
+        <div class="iframe-container medium">
+            <h3>Medium Size Stats</h3>
+            <iframe src="http://localhost:9000/#/iframes/statistics/player/:id" allowfullscreen></iframe>
+        </div>
+        
+        <div class="iframe-container medium">
+            <h3>Medium Size Stats</h3>
+            <iframe src="http://localhost:9000/#/iframes/statistics/player/:id" allowfullscreen></iframe>
+        </div>
+        
+        <div class="iframe-container small">
+            <h3>Small Stats</h3>
+            <iframe src="http://localhost:9000/#/iframes/statistics/player/:id" allowfullscreen></iframe>
+        </div>
+        
+        <div class="iframe-container small">
+            <h3>Small Stats</h3>
+            <iframe src="http://localhost:9000/#/iframes/statistics/player/:id" allowfullscreen></iframe>
+        </div>
+    </div>
+</body>
+</html> 

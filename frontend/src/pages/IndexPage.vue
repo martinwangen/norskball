@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { teamService } from '../services/teamService';
-import { playerService } from '../services/playerService';
+import { usePlayerStore } from 'src/stores/players';
 import { matchService } from '../services/matchService';
 
 const stats = ref({
@@ -75,23 +75,23 @@ const stats = ref({
   matches: 0,
 });
 
+const playerStore = usePlayerStore();
+
 const loadStats = async () => {
   try {
-    const [teamsResponse, playersResponse, matchesResponse] = await Promise.all([
-      teamService.useTeams(1),
-      playerService.usePlayers(1),
-      matchService.useMatches(1),
+    const [teamsResponse, , matchesResponse] = await Promise.all([
+      teamService.useTeams(),
+      playerStore.fetchPlayers(),
+      matchService.useMatches()
     ]);
 
-    // Note: This is a simple way to show stats. In a real application,
-    // you would want a dedicated API endpoint for statistics
     stats.value = {
       teams: teamsResponse.teams.value?.nodes?.length ?? 0,
-      players: playersResponse.players.value?.length ?? 0,
+      players: playerStore.players.length,
       matches: matchesResponse.matches.value?.length ?? 0,
     };
   } catch (error) {
-    console.error('Failed to load stats:', error);
+    console.error('Error fetching stats:', error);
   }
 };
 

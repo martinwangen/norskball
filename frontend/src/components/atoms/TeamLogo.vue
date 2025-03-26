@@ -1,24 +1,26 @@
 <template>
   <img
-    :src="logoUrl"
-    :alt="props.team?.name || 'Team Logo'"
+    v-if="team"
+    :src="team.logo || 'https://via.placeholder.com/60?text=' + (team.name?.charAt(0) || 'T')"
+    :alt="team.name || 'Team Logo'"
     :width="logoSize"
-    :height="logoSize"
     class="team-logo"
   />
+  <q-avatar v-else :size="logoSize" color="grey-3">
+    <q-icon name="groups" :size="String(parseInt(logoSize) / 2)" color="grey-7" />
+  </q-avatar>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { getTeamLogoUrl } from '../../utils/teamLogos';
-
+import { useTeamStore } from '../../stores/teams';
 const props = defineProps<{
-  team?: {
-    name: string;
-    logo?: string;
-  };
+  teamId: string;
   size?: string | number;
 }>();
+
+const teamStore = useTeamStore();
+const team = computed(() => teamStore.getTeamById(props.teamId));
 
 const getSizeValue = (size?: string | number): string => {
   if (typeof size === 'number') return `${size}`;
@@ -33,16 +35,13 @@ const getSizeValue = (size?: string | number): string => {
 
 const logoSize = computed(() => getSizeValue(props.size));
 
-const logoUrl = computed(() => {
-  if (!props.team) return getTeamLogoUrl('', undefined, parseInt(logoSize.value));
-  return getTeamLogoUrl(props.team.name, props.team.logo, parseInt(logoSize.value));
-});
 </script>
 
 <style scoped>
 .team-logo {
   object-fit: contain;
-  border-radius: 50%;
+  width: 100%;
+  max-width: v-bind(logoSize + 'px');
 }
 
 </style>

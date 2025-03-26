@@ -34,6 +34,7 @@ export const GET_PLAYERS_BY_TEAM = gql`
       nodes {
         ...PlayerFields
       }
+      totalCount
     }
   }
   ${PLAYER_FIELDS}

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Norskball.Models;
+using Norskball.Models.Auth;
 
 namespace Norskball.Data;
 
@@ -10,13 +11,14 @@ public class NorskballDbContext : DbContext
     {
     }
 
-    public DbSet<Player> Players { get; set; } = default!;
-    public DbSet<Team> Teams { get; set; } = default!;
-    public DbSet<Match> Matches { get; set; } = default!;
+    public DbSet<Player> Players { get; set; } = null!;
+    public DbSet<Team> Teams { get; set; } = null!;
+    public DbSet<Match> Matches { get; set; } = null!;
     public DbSet<MatchEvent> MatchEvents { get; set; } = default!;
     public DbSet<Rating> Ratings { get; set; } = default!;
     public DbSet<Lineup> Lineups { get; set; } = default!;
     public DbSet<MatchPlayer> MatchPlayers { get; set; } = default!;
+    public DbSet<User> Users { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -196,6 +198,15 @@ public class NorskballDbContext : DbContext
 
             // Ignore computed property
             entity.Ignore(mp => mp.AverageRating);
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.Email).IsUnique();
+            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Name).IsRequired();
+            entity.Property(e => e.Picture).IsRequired();
         });
     }
 

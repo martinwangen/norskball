@@ -1,8 +1,7 @@
 <template>
   <div class="team-display text-center">
     <team-logo
-      :logo-url="team?.logo"
-      :team-name="team?.name"
+      :team-id="team?.id"
       :size="logoSize || '80px'"
       class="q-mb-sm"
     />
