@@ -64,6 +64,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install NumPy
+        run: pip install numpy
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
@@ -77,19 +80,24 @@ jobs:
 
       - name: Copy Configuration Files
         run: |
-          # Get the service account email from credentials
-          SA_EMAIL=$(echo '${{ secrets.GCP_SA_KEY }}' | jq -r '.client_email')
+          # Create SSH config
+          mkdir -p ~/.ssh
+          echo "Host *" > ~/.ssh/config
+          echo "    StrictHostKeyChecking no" >> ~/.ssh/config
           
           # Ensure the Norskball directory exists
-          gcloud beta compute ssh --zone=europe-north1-a norskball-vm --tunnel-through-iap --command="mkdir -p ~/Norskball" --quiet
+          gcloud compute ssh norskball-vm --zone=europe-north1-a --command="mkdir -p ~/Norskball" --quiet
           
           # Copy latest docker-compose and nginx configs
-          gcloud beta compute scp --zone=europe-north1-a --tunnel-through-iap --recurse ./docker-compose.yml ./nginx norskball-vm:~/Norskball/ --quiet
+          gcloud compute scp --zone=europe-north1-a --recurse ./docker-compose.yml ./nginx norskball-vm:~/Norskball/ --quiet
 
   deploy-services:
     needs: [deploy-infrastructure]
     runs-on: ubuntu-latest
     steps:
+      - name: Install NumPy
+        run: pip install numpy
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
@@ -103,10 +111,12 @@ jobs:
 
       - name: Deploy and Start Services
         run: |
-          # Get the service account email from credentials
-          SA_EMAIL=$(echo '${{ secrets.GCP_SA_KEY }}' | jq -r '.client_email')
+          # Create SSH config
+          mkdir -p ~/.ssh
+          echo "Host *" > ~/.ssh/config
+          echo "    StrictHostKeyChecking no" >> ~/.ssh/config
           
-          gcloud beta compute ssh norskball-vm --zone=europe-north1-a --tunnel-through-iap --command='
+          gcloud compute ssh norskball-vm --zone=europe-north1-a --command='
             cd ~/Norskball
             export DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             
