@@ -29,7 +29,7 @@ RUN quasar build --no-verify
 # Production stage
 FROM nginx:alpine
 COPY --from=build /app/dist/spa /usr/share/nginx/html
-COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 
 # Add cache control headers for index.html
 RUN echo 'location = /index.html { add_header Cache-Control "no-cache, no-store, must-revalidate"; }' >> /etc/nginx/conf.d/default.conf

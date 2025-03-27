@@ -1,248 +1,68 @@
-name: Deploy to GCP
+name: Deploy Norskball
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  check-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      backend_changed: ${{ steps.check-backend.outputs.changed }}
-      frontend_changed: ${{ steps.check-frontend.outputs.changed }}
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Generate backend hash
-        id: check-backend
-        run: |
-          BACKEND_HASH=$(find backend -type f -exec sha256sum {} \; | sort | sha256sum | cut -d' ' -f1)
-          echo "Current backend hash: $BACKEND_HASH"
-          
-          # Try to get the previous hash
-          PREV_BACKEND_HASH=$(curl -s -f -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=backend-hash" | \
-            jq -r '.artifacts[0].archive_download_url' | \
-            xargs -I {} curl -s -f -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" {} | \
-            tar xz - 2>/dev/null | cat || echo "none")
-          
-          echo "Previous backend hash: ${PREV_BACKEND_HASH:-none}"
-          
-          if [ "$BACKEND_HASH" != "${PREV_BACKEND_HASH:-none}" ]; then
-            echo "Backend changes detected"
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "$BACKEND_HASH" > backend.hash
-            tar czf backend-hash.tar.gz backend.hash
-            echo "Uploading new backend hash"
-            curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/zip" \
-              --data-binary @backend-hash.tar.gz \
-              "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=backend-hash"
-          else
-            echo "No backend changes"
-            echo "changed=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Generate frontend hash
-        id: check-frontend
-        run: |
-          FRONTEND_HASH=$(find frontend src -type f -exec sha256sum {} \; | sort | sha256sum | cut -d' ' -f1)
-          echo "Current frontend hash: $FRONTEND_HASH"
-          
-          # Try to get the previous hash
-          PREV_FRONTEND_HASH=$(curl -s -f -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=frontend-hash" | \
-            jq -r '.artifacts[0].archive_download_url' | \
-            xargs -I {} curl -s -f -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" {} | \
-            tar xz - 2>/dev/null | cat || echo "none")
-          
-          echo "Previous frontend hash: ${PREV_FRONTEND_HASH:-none}"
-          
-          if [ "$FRONTEND_HASH" != "${PREV_FRONTEND_HASH:-none}" ]; then
-            echo "Frontend changes detected"
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "$FRONTEND_HASH" > frontend.hash
-            tar czf frontend-hash.tar.gz frontend.hash
-            echo "Uploading new frontend hash"
-            curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/zip" \
-              --data-binary @frontend-hash.tar.gz \
-              "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=frontend-hash"
-          else
-            echo "No frontend changes"
-            echo "changed=false" >> $GITHUB_OUTPUT
-          fi
-
-  build-backend:
-    needs: check-changes
-    if: needs.check-changes.outputs.backend_changed == 'true'
+  deploy-backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Build with dotnet
+        run: |
+          cd backend
+          dotnet build --configuration Release
+          dotnet publish -c Release -o ./publish
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push backend
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/norskball-backend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          build-args: DOCKER_BUILDKIT=1
 
-  build-frontend:
-    needs: check-changes
-    if: needs.check-changes.outputs.frontend_changed == 'true'
+  deploy-frontend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          node-version: '20.x'
+          cache: 'yarn'
 
-      - name: Build and push frontend
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./frontend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/norskball-frontend:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          build-args: |
-            DOCKER_BUILDKIT=1
-            VITE_API_BASE_URL=https://api.norskball.no
-            VITE_API_TIMEOUT=10000
-            VITE_FOOTBALL_API_KEY=c285b65ce7ffa8f1157bcd81b7cccf71
-            VITE_GOOGLE_CLIENT_ID=266076307059-pfaiq2uh5l0dnd0t3q5p8cs7s1i7ilk2.apps.googleusercontent.com
-
-  deploy-infrastructure:
-    needs: [check-changes, build-backend, build-frontend]
-    if: always() && !failure() && !cancelled()
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install NumPy
-        run: pip install numpy
-
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: norskball
-          install_components: 'beta'
-
-      - name: Copy Configuration Files
+      - name: Install dependencies
         run: |
-          # Create SSH config
-          mkdir -p ~/.ssh
-          echo "Host *" > ~/.ssh/config
-          echo "    StrictHostKeyChecking no" >> ~/.ssh/config
-          
-          # Ensure the Norskball directory exists
-          gcloud compute ssh norskball-vm --zone=europe-north1-a --command="mkdir -p ~/Norskball" --quiet
-          
-          # Copy latest docker-compose and nginx configs
-          gcloud compute scp --zone=europe-north1-a --recurse ./docker-compose.yml ./nginx norskball-vm:~/Norskball/ --quiet
+          cd frontend
+          yarn install
 
-  deploy-services:
-    needs: [deploy-infrastructure]
-    if: always() && !failure() && !cancelled()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install NumPy
-        run: pip install numpy
-
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: norskball
-          install_components: 'beta'
-
-      - name: Deploy and Start Services
+      - name: Build frontend
         run: |
-          # Create SSH config
-          mkdir -p ~/.ssh
-          echo "Host *" > ~/.ssh/config
-          echo "    StrictHostKeyChecking no" >> ~/.ssh/config
-          
-          gcloud compute ssh norskball-vm --zone=europe-north1-a --command='
-            cd ~/Norskball
-            export DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
-            
-            # Ensure Docker permissions are correct
-            if ! groups | grep -q docker; then
-              echo "Adding user to docker group..."
-              sudo usermod -aG docker $USER
-              echo "Restarting Docker service..."
-              sudo systemctl restart docker
-              echo "Please note: You may need to reconnect for group changes to take effect"
-              # Force a new session to pick up group changes
-              exec sg docker -c "
-                # Pull new images
-                echo \"Pulling new images...\"
-                docker compose pull || exit 1
-                
-                # Start services
-                echo \"Starting services...\"
-                docker compose up -d || exit 1
-                
-                # Verify services are running
-                echo \"Verifying services...\"
-                docker compose ps
-                
-                # Check for any containers that exited
-                if [ \$(docker compose ps -q -a --filter status=exited | wc -l) -gt 0 ]; then
-                  echo \"Some containers failed to start. Checking logs...\"
-                  docker compose logs
-                  exit 1
-                fi
-              "
-            else
-              # Pull new images
-              echo "Pulling new images..."
-              docker compose pull || exit 1
-              
-              # Start services
-              echo "Starting services..."
-              docker compose up -d || exit 1
-              
-              # Verify services are running
-              echo "Verifying services..."
-              docker compose ps
-              
-              # Check for any containers that exited
-              if [ $(docker compose ps -q -a --filter status=exited | wc -l) -gt 0 ]; then
-                echo "Some containers failed to start. Checking logs..."
-                docker compose logs
-                exit 1
-              fi
-            fi
-            
-            echo "Deployment completed successfully!"
-          ' --quiet
+          cd frontend
+          yarn build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend/dist
+          publish_branch: gh-pages
