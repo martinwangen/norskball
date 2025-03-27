@@ -211,7 +211,6 @@
 /Users/wangen/Repos/Norskball/src/Norskball/obj/Debug/net9.0/ref/Norskball.dll
 /Users/wangen/Repos/Norskball/src/Norskball/bin/Debug/net9.0/HotChocolate.AspNetCore.Authorization.dll
 /Users/wangen/Repos/Norskball/src/Norskball/bin/Debug/net9.0/Serilog.Sinks.Console.dll
-/Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/appsettings.Development.json
 /Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/appsettings.json
 /Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/Norskball.staticwebassets.endpoints.json
 /Users/wangen/Repos/Norskball/backend/src/Norskball/bin/Debug/net9.0/Norskball

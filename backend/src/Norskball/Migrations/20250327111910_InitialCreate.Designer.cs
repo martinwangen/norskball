@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Norskball.Migrations
 {
     [DbContext(typeof(NorskballDbContext))]
-    [Migration("20250327094946_InitialCreate")]
+    [Migration("20250327111910_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -284,7 +284,7 @@ namespace Norskball.Migrations
 
                     b.ToTable("Ratings", t =>
                         {
-                            t.HasCheckConstraint("CK_Ratings_Score", "Score >= 1 AND Score <= 10");
+                            t.HasCheckConstraint("CK_Ratings_Score", "\"Score\" >= 1 AND \"Score\" <= 10");
                         });
                 });
 

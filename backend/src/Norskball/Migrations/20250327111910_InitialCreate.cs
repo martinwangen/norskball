@@ -233,7 +233,7 @@ namespace Norskball.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ratings", x => x.Id);
-                    table.CheckConstraint("CK_Ratings_Score", "Score >= 1 AND Score <= 10");
+                    table.CheckConstraint("CK_Ratings_Score", "\"Score\" >= 1 AND \"Score\" <= 10");
                     table.ForeignKey(
                         name: "FK_Ratings_MatchPlayers_MatchPlayerId",
                         column: x => x.MatchPlayerId,

@@ -281,7 +281,7 @@ namespace Norskball.Migrations
 
                     b.ToTable("Ratings", t =>
                         {
-                            t.HasCheckConstraint("CK_Ratings_Score", "Score >= 1 AND Score <= 10");
+                            t.HasCheckConstraint("CK_Ratings_Score", "\"Score\" >= 1 AND \"Score\" <= 10");
                         });
                 });
 

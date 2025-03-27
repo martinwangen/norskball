@@ -139,7 +139,7 @@ public class NorskballDbContext : DbContext
             entity.Property(e => e.CreatedAt).IsRequired();
 
             // Ensure score is between 1 and 10
-            entity.ToTable(t => t.HasCheckConstraint("CK_Ratings_Score", "Score >= 1 AND Score <= 10"));
+            entity.ToTable(t => t.HasCheckConstraint("CK_Ratings_Score", "\"Score\" >= 1 AND \"Score\" <= 10"));
 
             // Configure relationship with MatchPlayer
             entity.HasOne(r => r.MatchPlayer)
