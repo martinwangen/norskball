@@ -17,7 +17,6 @@ COPY frontend/ .
 # Create .env file from build arguments
 RUN echo "VITE_API_BASE_URL=$VITE_API_BASE_URL" > .env && \
     echo "VITE_API_TIMEOUT=$VITE_API_TIMEOUT" >> .env && \
-    echo "VITE_FOOTBALL_API_KEY=$VITE_FOOTBALL_API_KEY" >> .env && \
     echo "VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID" >> .env
 
 # Install dependencies

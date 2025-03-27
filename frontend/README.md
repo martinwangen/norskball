@@ -56,30 +56,6 @@ The application uses configuration files to manage environment-specific settings
    cp .env.example .env
    ```
 
-4. Edit the `.env` file to add your Football API key:
-   ```bash
-   VITE_FOOTBALL_API_KEY=your_api_key_here
-   ```
-   You can get an API key by signing up at [API-Football](https://www.api-football.com/).
-
-### Football API Integration
-
-The application integrates with the Football API to fetch real-time data about leagues, teams, fixtures, and more. This integration provides:
-
-- League rounds information
-- Match fixtures and results
-- Team and player data
-
-To use this feature:
-
-1. Sign up for an API key at [API-Football](https://www.api-football.com/)
-2. Add your API key to the `.env` file as described in the Configuration section
-3. The application will automatically use the API when available, falling back to mock data if the API is not configured or unavailable
-
-The API integration is implemented in the `api.ts` service file, with functions like:
-- `syncFootballApiRounds`: Fetches league rounds
-- `syncFootballApiFixtures`: Fetches fixtures for a league and season
-
 ### Running the Application
 
 ```bash
