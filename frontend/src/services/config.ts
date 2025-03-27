@@ -1,5 +1,4 @@
 import { ref, readonly } from 'vue';
-import appSettings from '../config/appsettings.json';
 
 // Define configuration interfaces
 export interface ApiConfig {
@@ -7,18 +6,12 @@ export interface ApiConfig {
   timeout: number;
 }
 
-// Fix the empty interface warning by adding a comment to disable the rule
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface AuthConfig {
-  // No Google auth config anymore
+  token_expiry_minutes: number;
+  refresh_token_expiry_days: number;
 }
 
-// Add football API configuration
-export interface FootballApiConfig {
-  base_url: string;
-  api_key: string;
-  host: string;
-}
+
 
 export interface FeatureConfig {
   enable_dark_mode: boolean;
@@ -30,94 +23,52 @@ export interface DefaultsConfig {
   items_per_page: number;
 }
 
+export interface LoggingConfig {
+  log_level: string;
+  enable_console_logging: boolean;
+  enable_file_logging: boolean;
+}
+
 export interface AppSettings {
   api: ApiConfig;
   auth: AuthConfig;
   features: FeatureConfig;
   defaults: DefaultsConfig;
-  football_api?: FootballApiConfig; // Make it optional for backward compatibility
+  logging: LoggingConfig;
 }
 
-// Create a reactive configuration object
-const config = ref<AppSettings>(appSettings);
-
-// Use environment variable for API URL
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
-// Update the config line to use the environment variable
-config.value.api.base_url = apiBaseUrl;
-
-// Fix the async function without await warning
-// eslint-disable-next-line @typescript-eslint/require-await
-const loadEnvironmentSettings = async (): Promise<void> => {
-  try {
-    // In a real app, we might load different settings based on the environment
-    // For example, we could load settings from a .env file or from the server
-
-    // For development, we might override some settings
-    if (import.meta.env.DEV) {
-      console.log('Loading development settings');
-      // Example: Override API URL for development
-
-      // Add football API configuration if not present
-      if (!config.value.football_api) {
-        config.value.football_api = {
-          base_url: 'https://v3.football.api-sports.io',
-          api_key: import.meta.env.VITE_FOOTBALL_API_KEY || 'YOUR_API_KEY', // Use environment variable if available
-          host: 'v3.football.api-sports.io'
-        };
-      }
-    }
-
-    // For production, we might load settings from a different source
-    if (import.meta.env.PROD) {
-      console.log('Loading production settings');
-      try {
-        // Example: Load settings from a remote source
-        // const response = await fetch('/api/config');
-        // const productionSettings = await response.json();
-        // config.value = { ...config.value, ...productionSettings };
-
-        // Add football API configuration if not present
-        if (!config.value.football_api) {
-          config.value.football_api = {
-            base_url: 'https://v3.football.api-sports.io',
-            api_key: import.meta.env.VITE_FOOTBALL_API_KEY || '', // Use environment variable
-            host: 'v3.football.api-sports.io'
-          };
-        }
-      } catch (err) {
-        console.error('Failed to load production settings:', err);
-      }
-    }
-
-    console.log('Configuration loaded:', config.value);
-  } catch (err) {
-    console.error('Error loading environment settings:', err);
+// Create a reactive configuration object with default values
+const config = ref<AppSettings>({
+  api: {
+    base_url: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001',
+    timeout: Number(import.meta.env.VITE_API_TIMEOUT) || 10000
+  },
+  auth: {
+    token_expiry_minutes: Number(import.meta.env.VITE_TOKEN_EXPIRY_MINUTES) || 60,
+    refresh_token_expiry_days: Number(import.meta.env.VITE_REFRESH_TOKEN_EXPIRY_DAYS) || 7
+  },
+  features: {
+    enable_dark_mode: import.meta.env.VITE_ENABLE_DARK_MODE === 'true',
+    enable_notifications: import.meta.env.VITE_ENABLE_NOTIFICATIONS === 'true'
+  },
+  defaults: {
+    language: import.meta.env.VITE_DEFAULT_LANGUAGE || 'en',
+    items_per_page: Number(import.meta.env.VITE_ITEMS_PER_PAGE) || 20
+  },
+  logging: {
+    log_level: import.meta.env.VITE_LOG_LEVEL || 'info',
+    enable_console_logging: import.meta.env.VITE_ENABLE_CONSOLE_LOGGING === 'true',
+    enable_file_logging: import.meta.env.VITE_ENABLE_FILE_LOGGING === 'true'
   }
-};
-
-// Initialize configuration
-loadEnvironmentSettings().catch(err => {
-  console.error('Failed to initialize configuration:', err);
 });
 
-// Export a readonly version of the configuration
+
+// Export the configuration as readonly to prevent accidental modifications
 export const appConfig = readonly(config);
 
-// Helper functions to access specific configuration sections
-export const getApiConfig = (): ApiConfig => appConfig.value.api;
-export const getAuthConfig = (): AuthConfig => appConfig.value.auth;
-export const getFeatureConfig = (): FeatureConfig => appConfig.value.features;
-export const getDefaultsConfig = (): DefaultsConfig => appConfig.value.defaults;
-export const getFootballApiConfig = (): FootballApiConfig | undefined => appConfig.value.football_api;
-
-// Export the configuration service
-export const configService = {
-  appConfig,
-  getApiConfig,
-  getAuthConfig,
-  getFeatureConfig,
-  getDefaultsConfig,
-  getFootballApiConfig
-};
+// Export individual configuration sections for convenience
+export const apiConfig = readonly(config.value.api);
+export const authConfig = readonly(config.value.auth);
+export const featureConfig = readonly(config.value.features);
+export const defaultsConfig = readonly(config.value.defaults);
+export const loggingConfig = readonly(config.value.logging);

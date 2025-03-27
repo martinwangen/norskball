@@ -14,6 +14,9 @@ import { useAuthStore } from '../stores/auth';
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_GRAPHQL_URL || 'https://localhost:5001/graphql',
   credentials: 'include',
+  fetchOptions: {
+    mode: 'cors',
+  },
 });
 
 // Add the auth link

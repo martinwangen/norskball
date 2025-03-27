@@ -29,6 +29,7 @@ backend/*.dll
 backend/*.exe
 backend/*.pdb
 backend/*.cache
+backend/appsettings.json
 backend/appsettings.Development.json
 backend/appsettings.Production.json
 
