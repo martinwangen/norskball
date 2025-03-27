@@ -195,23 +195,53 @@ jobs:
             cd ~/Norskball
             export DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             
-            # Pull new images
-            echo "Pulling new images..."
-            docker compose pull || exit 1
-            
-            # Start services
-            echo "Starting services..."
-            docker compose up -d || exit 1
-            
-            # Verify services are running
-            echo "Verifying services..."
-            docker compose ps
-            
-            # Check for any containers that exited
-            if [ $(docker compose ps -q -a --filter status=exited | wc -l) -gt 0 ]; then
-              echo "Some containers failed to start. Checking logs..."
-              docker compose logs
-              exit 1
+            # Ensure Docker permissions are correct
+            if ! groups | grep -q docker; then
+              echo "Adding user to docker group..."
+              sudo usermod -aG docker $USER
+              echo "Restarting Docker service..."
+              sudo systemctl restart docker
+              echo "Please note: You may need to reconnect for group changes to take effect"
+              # Force a new session to pick up group changes
+              exec sg docker -c "
+                # Pull new images
+                echo \"Pulling new images...\"
+                docker compose pull || exit 1
+                
+                # Start services
+                echo \"Starting services...\"
+                docker compose up -d || exit 1
+                
+                # Verify services are running
+                echo \"Verifying services...\"
+                docker compose ps
+                
+                # Check for any containers that exited
+                if [ \$(docker compose ps -q -a --filter status=exited | wc -l) -gt 0 ]; then
+                  echo \"Some containers failed to start. Checking logs...\"
+                  docker compose logs
+                  exit 1
+                fi
+              "
+            else
+              # Pull new images
+              echo "Pulling new images..."
+              docker compose pull || exit 1
+              
+              # Start services
+              echo "Starting services..."
+              docker compose up -d || exit 1
+              
+              # Verify services are running
+              echo "Verifying services..."
+              docker compose ps
+              
+              # Check for any containers that exited
+              if [ $(docker compose ps -q -a --filter status=exited | wc -l) -gt 0 ]; then
+                echo "Some containers failed to start. Checking logs..."
+                docker compose logs
+                exit 1
+              fi
             fi
             
             echo "Deployment completed successfully!"
