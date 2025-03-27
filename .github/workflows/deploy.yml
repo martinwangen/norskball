@@ -5,7 +5,77 @@ on:
     branches: [ main ]
 
 jobs:
+  check-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      backend_changed: ${{ steps.check-backend.outputs.changed }}
+      frontend_changed: ${{ steps.check-frontend.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate backend hash
+        id: check-backend
+        run: |
+          BACKEND_HASH=$(find backend -type f -exec sha256sum {} \; | sort | sha256sum | cut -d' ' -f1)
+          echo "Current backend hash: $BACKEND_HASH"
+          
+          # Try to get the previous hash
+          PREV_BACKEND_HASH=$(curl -s -f -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=backend-hash" | \
+            jq -r '.artifacts[0].archive_download_url' | \
+            xargs -I {} curl -s -f -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" {} | \
+            tar xz - 2>/dev/null | cat || echo "none")
+          
+          echo "Previous backend hash: ${PREV_BACKEND_HASH:-none}"
+          
+          if [ "$BACKEND_HASH" != "${PREV_BACKEND_HASH:-none}" ]; then
+            echo "Backend changes detected"
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "$BACKEND_HASH" > backend.hash
+            tar czf backend-hash.tar.gz backend.hash
+            echo "Uploading new backend hash"
+            curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/zip" \
+              --data-binary @backend-hash.tar.gz \
+              "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=backend-hash"
+          else
+            echo "No backend changes"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate frontend hash
+        id: check-frontend
+        run: |
+          FRONTEND_HASH=$(find frontend src -type f -exec sha256sum {} \; | sort | sha256sum | cut -d' ' -f1)
+          echo "Current frontend hash: $FRONTEND_HASH"
+          
+          # Try to get the previous hash
+          PREV_FRONTEND_HASH=$(curl -s -f -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=frontend-hash" | \
+            jq -r '.artifacts[0].archive_download_url' | \
+            xargs -I {} curl -s -f -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" {} | \
+            tar xz - 2>/dev/null | cat || echo "none")
+          
+          echo "Previous frontend hash: ${PREV_FRONTEND_HASH:-none}"
+          
+          if [ "$FRONTEND_HASH" != "${PREV_FRONTEND_HASH:-none}" ]; then
+            echo "Frontend changes detected"
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "$FRONTEND_HASH" > frontend.hash
+            tar czf frontend-hash.tar.gz frontend.hash
+            echo "Uploading new frontend hash"
+            curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/zip" \
+              --data-binary @frontend-hash.tar.gz \
+              "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?name=frontend-hash"
+          else
+            echo "No frontend changes"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
   build-backend:
+    needs: check-changes
+    if: needs.check-changes.outputs.backend_changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -30,6 +100,8 @@ jobs:
           build-args: DOCKER_BUILDKIT=1
 
   build-frontend:
+    needs: check-changes
+    if: needs.check-changes.outputs.frontend_changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -56,10 +128,12 @@ jobs:
             DOCKER_BUILDKIT=1
             VITE_API_BASE_URL=https://api.norskball.no
             VITE_API_TIMEOUT=10000
+            VITE_FOOTBALL_API_KEY=c285b65ce7ffa8f1157bcd81b7cccf71
             VITE_GOOGLE_CLIENT_ID=266076307059-pfaiq2uh5l0dnd0t3q5p8cs7s1i7ilk2.apps.googleusercontent.com
 
   deploy-infrastructure:
-    needs: [build-backend, build-frontend]
+    needs: [check-changes, build-backend, build-frontend]
+    if: always() && !failure() && !cancelled()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -93,6 +167,7 @@ jobs:
 
   deploy-services:
     needs: [deploy-infrastructure]
+    if: always() && !failure() && !cancelled()
     runs-on: ubuntu-latest
     steps:
       - name: Install NumPy
@@ -140,4 +215,4 @@ jobs:
             fi
             
             echo "Deployment completed successfully!"
-          ' --quiet 
+          ' --quiet
