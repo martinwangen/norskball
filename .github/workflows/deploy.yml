@@ -17,7 +17,7 @@ jobs:
 
       - name: Build with dotnet
         run: |
-          cd backend
+          cd backend/src/Norskball
           dotnet build --configuration Release
           dotnet publish -c Release -o ./publish
 
