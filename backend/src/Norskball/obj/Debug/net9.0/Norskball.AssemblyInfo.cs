@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Norskball")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2b66e7b84c0f01929bc1e103d11aa9dbc14fe2f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+450d493eb5431c3f9bf449d89949294245af1807")]
 [assembly: System.Reflection.AssemblyProductAttribute("Norskball")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Norskball")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
