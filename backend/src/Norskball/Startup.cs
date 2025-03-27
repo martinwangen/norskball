@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Norskball.Data;
 using Norskball.GraphQL.Base;
 using Norskball.GraphQL.Queries;
@@ -32,7 +33,7 @@ namespace Norskball
 
             // Add DbContext
             services.AddDbContext<NorskballDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             // Register services
             services.AddScoped<IAuthService, AuthService>();
