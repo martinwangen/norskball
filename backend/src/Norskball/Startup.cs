@@ -32,8 +32,25 @@ namespace Norskball
             services.AddSwaggerGen();
 
             // Add DbContext
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                // Try to get from DATABASE_URL environment variable
+                var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                if (!string.IsNullOrEmpty(databaseUrl))
+                {
+                    // Parse the DATABASE_URL format
+                    var uri = new Uri(databaseUrl);
+                    var userInfo = uri.UserInfo.Split(':');
+                    var host = uri.Host;
+                    var database = uri.LocalPath.TrimStart('/');
+                    
+                    connectionString = $"Host={host};Database={database};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
+                }
+            }
+
             services.AddDbContext<NorskballDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(connectionString));
 
             // Register services
             services.AddScoped<IAuthService, AuthService>();
