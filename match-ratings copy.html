@@ -1,0 +1,1057 @@
+<!-- Match Ratings Container -->
+<div id="match-ratings-container" style="font-family: Arial, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto;">
+    <div id="match-selector" style="margin-bottom: 20px; text-align: center;">
+        <div id="match-buttons" style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 0 10px;">
+            <!-- Match buttons will be inserted here -->
+        </div>
+    </div>
+    <div id="match-ratings-content">
+        Loading match ratings...
+    </div>
+</div>
+
+<style>
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #f8f9fa;
+    --border-color: #e0e0e0;
+    --text-color: #202124;
+    --header-bg: #f8f9fa;
+    --rating-high: #34a853;
+    --rating-medium: #fbbc05;
+    --rating-low: #ea4335;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+#match-ratings-container {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.match-button {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 200px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.match-button:hover {
+    background-color: #e8e8e8;
+    border-color: #ccc;
+}
+
+.match-button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.match-card {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.team-logo {
+    max-height: 60px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+.team-logo:hover {
+    transform: scale(1.05);
+}
+
+.score {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.player-section {
+    margin-bottom: 30px;
+}
+
+.player-section h4 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    background-color: white;
+}
+
+th {
+    background-color: var(--header-bg);
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+.rating {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.rating-high {
+    background-color: var(--rating-high);
+    color: white;
+}
+
+.rating-medium {
+    background-color: var(--rating-medium);
+    color: white;
+}
+
+.rating-low {
+    background-color: var(--rating-low);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    #match-ratings-container {
+        padding: 10px;
+    }
+    
+    .match-button {
+        width: 100%;
+        margin-bottom: 8px;
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+    }
+    
+    .match-header {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .match-header > div {
+        flex: none !important;
+    }
+    
+    .match-content {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .team-logo {
+        max-height: 40px !important;
+    }
+    
+    .score {
+        font-size: 1.5em !important;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px !important;
+    }
+}
+</style>
+
+<script>
+const mockData = {
+    "totalCount": 2,
+    "totalPages": 1,
+    "currentPage": 1,
+    "pageSize": 100,
+    "items": [
+        {
+            "id": "3ab6c9c0-0039-4009-8b4f-19b2c3d253b3",
+            "scheduledDate": "2025-03-29T18:00:00Z",
+            "score": {
+                "homeTeamScore": 0,
+                "awayTeamScore": 0
+            },
+            "homeTeam": {
+                "id": "4",
+                "name": "Fredrikstad",
+                "logo": "https://www.eliteserien.no/klubbene/_/image/4766981e-9bbc-40db-8fe5-7b633e62bf52:74fb92e49eef49f68328f9bb991b695de35a1416/height-300/FFK%20Logo.jpg",
+                "lineup": {
+                    "id": "c848a9ee-bebd-4a5b-9512-7ca29bc90b2c",
+                    "players": [
+                        {
+                            "id": "065828a0-8834-48ac-90a1-2af39182994e",
+                            "firstName": "ole",
+                            "lastName": "langbråten",
+                            "position": "17",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "188645e0-c5fc-4590-9a8f-615426270a95",
+                            "firstName": "patrick",
+                            "lastName": "metcalfe",
+                            "position": "9",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "234e10fa-c9d1-4f6a-8b36-76202095f9fc",
+                            "firstName": "jesper",
+                            "lastName": "solberg",
+                            "position": "12",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "2c9c65d6-6baf-4d8d-87c7-ca1578089086",
+                            "firstName": "leonard",
+                            "lastName": "owusu",
+                            "position": "7",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "2e88440c-3e0a-4d5d-9a08-de42630dc0e4",
+                            "firstName": "maxwell",
+                            "lastName": "woledzi",
+                            "position": "16",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "3e3c040f-e052-47b3-9671-8b13c8526c55",
+                            "firstName": "rocco",
+                            "lastName": "shein",
+                            "position": "18",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "42f8bf8e-e271-44f0-a19e-06e72130b011",
+                            "firstName": "daniel",
+                            "lastName": "eid",
+                            "position": "3",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "6f77dd87-fec3-497d-b30b-4d6c1c468ea3",
+                            "firstName": "fallou",
+                            "lastName": "fall",
+                            "position": "4",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "752786f3-5e05-4377-9f32-3eb2073324d1",
+                            "firstName": "jacob",
+                            "lastName": "hanstad",
+                            "position": "6",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "798d6d24-da57-425e-946f-ebea169fd3da",
+                            "firstName": "håvar",
+                            "lastName": "jenssen",
+                            "position": "1",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "7f864b78-d9a5-4eda-ba69-bf57993d71e0",
+                            "firstName": "benjamin",
+                            "lastName": "faraas",
+                            "position": "10",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "a5f20881-0b5a-421f-ac99-3d0e234965a7",
+                            "firstName": "kennedy",
+                            "lastName": "okpaleke",
+                            "position": "15",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "b9fbf795-1190-408a-bc1c-9fd127447736",
+                            "firstName": "emil",
+                            "lastName": "holten",
+                            "position": "11",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "bc8bc01e-5190-4c20-8221-2c3561ab48d6",
+                            "firstName": "jóannes",
+                            "lastName": "bjartalíd",
+                            "position": "13",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "be5b46f4-6193-4f81-b8f3-ffba1532ca8d",
+                            "firstName": "brage",
+                            "lastName": "skaret",
+                            "position": "2",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "c86d6dc2-9f8e-4f4a-b79f-3e439896fce2",
+                            "firstName": "imre",
+                            "lastName": "bech",
+                            "position": "5",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "edf2710b-ec17-4b04-8f07-e886ac528b4d",
+                            "firstName": "oskar",
+                            "lastName": "øhlenschlæger",
+                            "position": "8",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "fa93f633-542e-485b-a930-eab27e41b626",
+                            "firstName": "jonathan",
+                            "lastName": "fischer",
+                            "position": "14",
+                            "averageRating": 0
+                        }
+                    ]
+                }
+            },
+            "awayTeam": {
+                "id": "2",
+                "name": "Brann",
+                "logo": "https://www.eliteserien.no/klubbene/_/image/85a189b6-e6b0-49c9-a767-62a4c7dad0c1:821be56583626c06c70949c04bc85e1d8d297651/height-300/brann.jpg",
+                "lineup": {
+                    "id": "edbc296e-2ce7-4e49-82f3-68a18c6da01c",
+                    "players": [
+                        {
+                            "id": "06361500-da18-4d64-86bb-f7a60bfff267",
+                            "firstName": "joachim",
+                            "lastName": "soltvedt",
+                            "position": "12",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "140ad2b5-7bce-4f0d-ae25-cdef01e73637",
+                            "firstName": "eggert",
+                            "lastName": "aron",
+                            "position": "6",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "4d6ffc30-abcd-4007-8f6f-e46fe747a0ee",
+                            "firstName": "bård",
+                            "lastName": "finne",
+                            "position": "11",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "7363c97f-1bd7-46e1-a0fd-a79fbc699cd7",
+                            "firstName": "martin",
+                            "lastName": "børsheim",
+                            "position": "1",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "738b079c-e0cc-4193-9484-cf608eb80057",
+                            "firstName": "eivind",
+                            "lastName": "helland",
+                            "position": "3",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "97b390af-ba3f-4959-9978-1f4843771ab2",
+                            "firstName": "mathias",
+                            "lastName": "dyngeland",
+                            "position": "18",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "9e46afeb-8a1f-4ec3-ae9a-3dc67bcf344c",
+                            "firstName": "jonas",
+                            "lastName": "torsvik",
+                            "position": "13",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "a1f2337f-5b37-4614-9a66-0c38d7c01283",
+                            "firstName": "markus",
+                            "lastName": "haaland",
+                            "position": "16",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "abad1105-55a3-45a9-9376-46aa4df8185d",
+                            "firstName": "mads",
+                            "lastName": "hansen",
+                            "position": "14",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "ae81ecaf-dece-490f-b9a1-b19fce80317a",
+                            "firstName": "felix",
+                            "lastName": "horn",
+                            "position": "8",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "af2f3cb6-afb3-421d-bbee-c0814700101c",
+                            "firstName": "mads",
+                            "lastName": "sande",
+                            "position": "15",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "b2d63fee-486d-40cf-862a-720ec6b287ca",
+                            "firstName": "fredrik",
+                            "lastName": "pallesen",
+                            "position": "4",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "b4c81794-8ed2-485c-b7ba-f6a9bd8569c1",
+                            "firstName": "denzel",
+                            "lastName": "de",
+                            "position": "2",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "bbb4c434-910c-4be1-b4e0-b5b16cfb81b6",
+                            "firstName": "aune",
+                            "lastName": "heggebø",
+                            "position": "10",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "cc3ae544-a40d-477f-b9b9-abb4443b14cd",
+                            "firstName": "lars",
+                            "lastName": "remmem",
+                            "position": "9",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "ce270679-8753-40e7-a162-a7a0c4dfe665",
+                            "firstName": "martin",
+                            "lastName": "hellan",
+                            "position": "17",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "e736d991-7a9d-4eea-9829-a6e3513b2257",
+                            "firstName": "emil",
+                            "lastName": "kornvig",
+                            "position": "7",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "f28d2232-8098-4399-9066-46bebd5bb2ad",
+                            "firstName": "japhet",
+                            "lastName": "sery",
+                            "position": "5",
+                            "averageRating": 5
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "56bba049-b152-42cc-80a3-a739e9197ce4",
+            "scheduledDate": "2025-03-29T16:00:00Z",
+            "score": {
+                "homeTeamScore": 0,
+                "awayTeamScore": 0
+            },
+            "homeTeam": {
+                "id": "13",
+                "name": "Strømsgodset",
+                "logo": "https://www.eliteserien.no/klubbene/_/image/1ff07bfb-13d5-4caf-8428-36ac65f56500:5ecbcd9d19e9c1e2f291acc2f3378771052092da/height-300/Stromsgodset%20ny.jpg",
+                "lineup": {
+                    "id": "0b30c5dc-9f01-42d7-8b7a-888cd8ee1a10",
+                    "players": [
+                        {
+                            "id": "096df1ca-6710-4343-be0b-ff463e236dbf",
+                            "firstName": "herman",
+                            "lastName": "stengel",
+                            "position": "9",
+                            "averageRating": 8
+                        },
+                        {
+                            "id": "1f1eb386-ec75-47ca-bf8c-6a0c31ac3e5c",
+                            "firstName": "nikolaj",
+                            "lastName": "möller",
+                            "position": "18",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "275c01cb-028c-4571-9388-e40b250ee205",
+                            "firstName": "gustav",
+                            "lastName": "valsvik",
+                            "position": "4",
+                            "averageRating": 3
+                        },
+                        {
+                            "id": "2faa0677-14cf-45a3-8729-44039d60f8e2",
+                            "firstName": "bent",
+                            "lastName": "sørmo",
+                            "position": "2",
+                            "averageRating": 8
+                        },
+                        {
+                            "id": "4986fcc3-6da9-4e9a-aa02-a130d000d368",
+                            "firstName": "marko",
+                            "lastName": "farji",
+                            "position": "17",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "54ce1f5d-ff9a-44fb-9895-4fc38605052c",
+                            "firstName": "lars",
+                            "lastName": "vilsvik",
+                            "position": "15",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "6bd1b5b3-818d-4f35-bac2-869395315223",
+                            "firstName": "elias",
+                            "lastName": "hoff",
+                            "position": "10",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "6d524287-16e9-4d10-9a52-134bb69677c4",
+                            "firstName": "fredrik",
+                            "lastName": "kristensen",
+                            "position": "3",
+                            "averageRating": 8
+                        },
+                        {
+                            "id": "7bf337e8-4ed1-4c97-b7c3-b98e4e08ba33",
+                            "firstName": "eirik",
+                            "lastName": "holmen",
+                            "position": "1",
+                            "averageRating": 4
+                        },
+                        {
+                            "id": "970c2388-22b8-47ef-aa5c-5d8bf5341ebc",
+                            "firstName": "eirik",
+                            "lastName": "ulland",
+                            "position": "7",
+                            "averageRating": 7
+                        },
+                        {
+                            "id": "c854bf2a-562e-42d2-bc68-0c87d0a1cb08",
+                            "firstName": "jonas",
+                            "lastName": "therkelsen",
+                            "position": "12",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "c8ee882b-2d2c-43ec-9764-02dc263c61c7",
+                            "firstName": "kreshnik",
+                            "lastName": "krasniqi",
+                            "position": "14",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "ce163980-91f2-4fd1-b8ce-6200c594f3a4",
+                            "firstName": "jesper",
+                            "lastName": "taaje",
+                            "position": "5",
+                            "averageRating": 9
+                        },
+                        {
+                            "id": "ce74619a-d98e-4071-b6a7-10e07cc17969",
+                            "firstName": "fredrik",
+                            "lastName": "ardraa",
+                            "position": "8",
+                            "averageRating": 4
+                        },
+                        {
+                            "id": "e13e32d5-3537-43e3-b141-3f7d2df6bb20",
+                            "firstName": "andreas",
+                            "lastName": "heredia-randen",
+                            "position": "6",
+                            "averageRating": 3
+                        },
+                        {
+                            "id": "e4e8e71f-f873-4ed7-be95-daa9d398d946",
+                            "firstName": "logi",
+                            "lastName": "tómasson",
+                            "position": "16",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "ecd463de-90db-4472-8dfb-0f9bf318167d",
+                            "firstName": "marcus",
+                            "lastName": "mehnert",
+                            "position": "11",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "f91ea1b4-9462-47a4-abdb-327517ec73ad",
+                            "firstName": "jostein",
+                            "lastName": "ekeland",
+                            "position": "13",
+                            "averageRating": 0
+                        }
+                    ]
+                }
+            },
+            "awayTeam": {
+                "id": "10",
+                "name": "Rosenborg",
+                "logo": "https://www.eliteserien.no/klubbene/_/image/ee847d17-0d59-42fe-b990-6832786dd363:bff439a6e67a9c57a36e872ee2dbe6770910bb1e/height-300/RBK-logo.png",
+                "lineup": {
+                    "id": "5d706f16-8ba9-472f-882b-b45714022fac",
+                    "players": [
+                        {
+                            "id": "093b27d6-88d6-48b2-986f-577e1bb3aca4",
+                            "firstName": "henry",
+                            "lastName": "sletsjøe",
+                            "position": "6",
+                            "averageRating": 4
+                        },
+                        {
+                            "id": "0daa8c44-d3e3-4df3-bcc4-5e8ad0649aa9",
+                            "firstName": "luka",
+                            "lastName": "racic",
+                            "position": "14",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "10202cb5-91ca-4d00-bc7a-7ecf0758f130",
+                            "firstName": "noah",
+                            "lastName": "holm",
+                            "position": "16",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "1e1fa682-46dd-4ba7-8469-6f7e4cdd3f42",
+                            "firstName": "jonas",
+                            "lastName": "mortensen",
+                            "position": "5",
+                            "averageRating": 7
+                        },
+                        {
+                            "id": "2e73814e-2fe7-499a-ac0a-5a88f7774705",
+                            "firstName": "rasmus",
+                            "lastName": "sandberg",
+                            "position": "1",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "41755e8a-c527-4c6e-9542-1738086ad17c",
+                            "firstName": "adrian",
+                            "lastName": "pereira",
+                            "position": "2",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "709694ed-9ae2-42d6-aa9c-f0589d8cd912",
+                            "firstName": "håkon",
+                            "lastName": "volden",
+                            "position": "4",
+                            "averageRating": 8
+                        },
+                        {
+                            "id": "709881be-9823-4313-be6c-b0e04eb94bc0",
+                            "firstName": "ole",
+                            "lastName": "sæter",
+                            "position": "18",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "70c5ee41-11a8-412a-8d5b-ea045c804d9e",
+                            "firstName": "noah",
+                            "lastName": "sahsah",
+                            "position": "17",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "7ef9e8ca-7538-4e3a-8de4-83a01155bec7",
+                            "firstName": "mikkel",
+                            "lastName": "konradsen",
+                            "position": "15",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "8c4c4359-15c6-4d9d-b082-6245d028731d",
+                            "firstName": "moustafa",
+                            "lastName": "zeidan",
+                            "position": "9",
+                            "averageRating": 4
+                        },
+                        {
+                            "id": "aeaa6fc7-5035-4d82-8910-180367133362",
+                            "firstName": "emil",
+                            "lastName": "konradsen",
+                            "position": "11",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "b4f488be-66c8-4c4d-84d7-ca0e3e06f235",
+                            "firstName": "marius",
+                            "lastName": "broholm",
+                            "position": "8",
+                            "averageRating": 6
+                        },
+                        {
+                            "id": "b7503259-85f1-4e07-94f8-3c40767e8b77",
+                            "firstName": "ísak",
+                            "lastName": "thorvaldsson",
+                            "position": "12",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "cb75d193-e64b-494a-b0b5-90dc72a55409",
+                            "firstName": "erlend",
+                            "lastName": "dahl",
+                            "position": "3",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "d641502a-03a3-4593-a39b-57d19bf9d1ec",
+                            "firstName": "jesper",
+                            "lastName": "reitan-sunde",
+                            "position": "13",
+                            "averageRating": 0
+                        },
+                        {
+                            "id": "d95c2dbd-7515-423b-bd13-736bb2b5b6ef",
+                            "firstName": "dino",
+                            "lastName": "islamovic",
+                            "position": "10",
+                            "averageRating": 5
+                        },
+                        {
+                            "id": "ecf7b25d-ba2c-4713-b6d2-97cbdd03ec20",
+                            "firstName": "iver",
+                            "lastName": "fossum",
+                            "position": "7",
+                            "averageRating": 6
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+};
+
+
+async function fetchMatchRatings() {
+    try {
+        const response = await fetch('http://localhost:5000/api/matches/ratings/elementor');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Return mock data if the response is empty or has no items
+        if (!data || !data.items || data.items.length === 0) {
+            return mockData;
+        }
+        
+        return data;
+    } catch (error) {
+        console.error('Error fetching match ratings:', error);
+        return mockData;
+    }
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('nb-NO', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+function capitalizeName(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
+
+function getRatingClass(rating) {
+    if (!rating) return '';
+    if (rating >= 7) return 'rating-high';
+    if (rating >= 5) return 'rating-medium';
+    return 'rating-low';
+}
+
+function sortPlayersByPosition(players) {
+    return [...players].sort((a, b) => {
+        const posA = parseInt(a.position);
+        const posB = parseInt(b.position);
+        return posA - posB;
+    });
+}
+
+function separatePlayers(players) {
+    const starters = players.filter(player => parseInt(player.position) <= 11);
+    const substitutes = players.filter(player => parseInt(player.position) > 11);
+    return { starters, substitutes };
+}
+
+function createMatchSelector(matches) {
+    const buttonsContainer = document.getElementById('match-buttons');
+    if (!buttonsContainer) return;
+
+    // Clear existing buttons
+    buttonsContainer.innerHTML = '';
+
+    // Add match buttons
+    matches.forEach((match, index) => {
+        const button = document.createElement('button');
+        button.className = 'match-button';
+        button.style.cssText = `
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            min-width: 200px;
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        `;
+        button.textContent = `${match.homeTeam.name} vs ${match.awayTeam.name}`;
+        
+        // Add hover effect
+        button.onmouseover = () => {
+            button.style.backgroundColor = '#e8e8e8';
+            button.style.borderColor = '#ccc';
+        };
+        button.onmouseout = () => {
+            button.style.backgroundColor = '#f8f8f8';
+            button.style.borderColor = '#ddd';
+        };
+
+        // Add click handler
+        button.onclick = () => {
+            // Remove active class from all buttons
+            document.querySelectorAll('.match-button').forEach(btn => {
+                btn.style.backgroundColor = '#f8f8f8';
+                btn.style.borderColor = '#ddd';
+            });
+            
+            // Add active class to clicked button
+            button.style.backgroundColor = '#e0e0e0';
+            button.style.borderColor = '#999';
+            
+            // Display selected match
+            displayMatchRatings({ items: [match] });
+        };
+
+        buttonsContainer.appendChild(button);
+    });
+
+    // Set first button as active by default
+    if (buttonsContainer.firstChild) {
+        buttonsContainer.firstChild.style.backgroundColor = '#e0e0e0';
+        buttonsContainer.firstChild.style.borderColor = '#999';
+    }
+}
+
+function displayMatchRatings(data) {
+    const container = document.getElementById('match-ratings-content');
+    if (!container) return;
+
+    if (!data.items || data.items.length === 0) {
+        container.innerHTML = '<p>Ingen kamper funnet</p>';
+        return;
+    }
+
+    if (!document.getElementById('match-buttons').children.length) {
+        createMatchSelector(data.items);
+    }
+
+    const matchesHtml = data.items.map(match => {
+        const homePlayers = sortPlayersByPosition(match.homeTeam.lineup.players);
+        const awayPlayers = sortPlayersByPosition(match.awayTeam.lineup.players);
+        
+        const homePlayersSeparated = separatePlayers(homePlayers);
+        const awayPlayersSeparated = separatePlayers(awayPlayers);
+
+        return `
+        <div class="match-card">
+            <div class="match-header">
+                <div style="flex: 1; text-align: center;">
+                    <img src="${match.homeTeam.logo}" alt="${match.homeTeam.name}" class="team-logo">
+                    <h3 style="margin: 0;">${match.homeTeam.name}</h3>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <h2 class="score">${match.score.homeTeamScore} - ${match.score.awayTeamScore}</h2>
+                    <p style="margin: 5px 0;">${formatDate(match.scheduledDate)}</p>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <img src="${match.awayTeam.logo}" alt="${match.awayTeam.name}" class="team-logo">
+                    <h3 style="margin: 0;">${match.awayTeam.name}</h3>
+                </div>
+            </div>
+            
+            <div class="match-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4>${match.homeTeam.name} - Spillervurderinger</h4>
+                    
+                    <div class="player-section">
+                        <h4>Startellever</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${homePlayersSeparated.starters.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="player-section">
+                        <h4>Innbyttere</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${homePlayersSeparated.substitutes.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>${match.awayTeam.name} - Spillervurderinger</h4>
+                    
+                    <div class="player-section">
+                        <h4>Startellever</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${awayPlayersSeparated.starters.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="player-section">
+                        <h4>Innbyttere</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${awayPlayersSeparated.substitutes.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `}).join('');
+
+    container.innerHTML = matchesHtml;
+}
+
+// Initialize the display
+async function init() {
+    const data = await fetchMatchRatings();
+    createMatchSelector(data.items);
+    // Show first match by default
+    if (data.items && data.items.length > 0) {
+        displayMatchRatings({ items: [data.items[0]] });
+    }
+}
+
+// Run when the script loads
+init();
+</script> 

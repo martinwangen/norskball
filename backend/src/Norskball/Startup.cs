@@ -13,6 +13,7 @@ using System.Text;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Norskball.GraphQL.Authorization;
+using System.Text.Json.Serialization;
 
 namespace Norskball
 {
@@ -29,7 +30,11 @@ namespace Norskball
         public void ConfigureServices(IServiceCollection services)
         {
             // Add services to the container.
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
@@ -59,6 +64,7 @@ namespace Norskball
 
             // Register services
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
 
             // Configure Authentication
             services.AddAuthentication(options =>
@@ -185,7 +191,7 @@ namespace Norskball
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQL();
-                endpoints.MapControllers();
+                endpoints.MapControllers().AllowAnonymous();
             });
         }
     }

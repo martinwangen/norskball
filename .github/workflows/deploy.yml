@@ -84,11 +84,15 @@ jobs:
           VITE_GOOGLE_CLIENT_ID=266076307059-pfaiq2uh5l0dnd0t3q5p8cs7s1i7ilk2.apps.googleusercontent.com \
           yarn build
 
+      - name: Create CNAME file
+        run: |
+          cd frontend/dist/spa
+          echo "norskball.no" > CNAME
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend/dist/spa
           publish_branch: gh-pages
-          force: true
           commit_message: "Deploy frontend to GitHub Pages [skip ci]"

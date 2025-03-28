@@ -29,6 +29,7 @@ public class PlayerScraper
 
     public async Task ScrapeAllTeamsAsync(CancellationToken cancellationToken)
     {
+        return;
         // Fetch all teams
         var teams = await _dbContext.Teams
             .Where(t => t.Website != null)

@@ -1,0 +1,509 @@
+<!-- Match Ratings Container -->
+<div id="match-ratings-container" style="font-family: Arial, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto;">
+    <div id="match-selector" style="margin-bottom: 20px; text-align: center;">
+        <div id="match-buttons" style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 0 10px;">
+            <!-- Match buttons will be inserted here -->
+        </div>
+    </div>
+    <div id="match-ratings-content">
+        Loading match ratings...
+    </div>
+</div>
+
+<style>
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #f8f9fa;
+    --border-color: #e0e0e0;
+    --text-color: #202124;
+    --header-bg: #f8f9fa;
+    --rating-high: #34a853;
+    --rating-medium: #fbbc05;
+    --rating-low: #ea4335;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+#match-ratings-container {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.match-button {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 200px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.match-button:hover {
+    background-color: #e8e8e8;
+    border-color: #ccc;
+}
+
+.match-button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.match-card {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.team-logo {
+    max-height: 60px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+.team-logo:hover {
+    transform: scale(1.05);
+}
+
+.score {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.player-section {
+    margin-bottom: 30px;
+}
+
+.player-section h4 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    background-color: white;
+}
+
+th {
+    background-color: var(--header-bg);
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+.rating {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.rating-high {
+    background-color: var(--rating-high);
+    color: white;
+}
+
+.rating-medium {
+    background-color: var(--rating-medium);
+    color: white;
+}
+
+.rating-low {
+    background-color: var(--rating-low);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    #match-ratings-container {
+        padding: 10px;
+    }
+    
+    .match-button {
+        width: 100%;
+        margin-bottom: 8px;
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+    }
+    
+    .match-header {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .match-header > div {
+        flex: none !important;
+    }
+    
+    .match-content {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .team-logo {
+        max-height: 40px !important;
+    }
+    
+    .score {
+        font-size: 1.5em !important;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px !important;
+    }
+}
+</style>
+
+<script>
+
+async function fetchMatchRatings() {
+    try {
+        const response = await fetch('http://localhost:5000/api/matches/ratings/elementor');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Return mock data if the response is empty or has no items
+        if (!data || !data.items || data.items.length === 0) {
+            throw new Error('Ingen kamper funnet');
+        }
+        
+        return data;
+    } catch (error) {
+        console.error('Error fetching match ratings:', error);
+        return { error: error.message };
+    }
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('nb-NO', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+function capitalizeName(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
+
+function getRatingClass(rating) {
+    if (!rating) return '';
+    if (rating >= 7) return 'rating-high';
+    if (rating >= 5) return 'rating-medium';
+    return 'rating-low';
+}
+
+function sortPlayersByPosition(players) {
+    return [...players].sort((a, b) => {
+        const posA = parseInt(a.position);
+        const posB = parseInt(b.position);
+        return posA - posB;
+    });
+}
+
+function separatePlayers(players) {
+    const starters = players.filter(player => parseInt(player.position) <= 11);
+    const substitutes = players.filter(player => parseInt(player.position) > 11);
+    return { starters, substitutes };
+}
+
+function createMatchSelector(matches) {
+    const buttonsContainer = document.getElementById('match-buttons');
+    if (!buttonsContainer) return;
+
+    // Clear existing buttons
+    buttonsContainer.innerHTML = '';
+
+    // Add match buttons
+    matches.forEach((match, index) => {
+        const button = document.createElement('button');
+        button.className = 'match-button';
+        button.style.cssText = `
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            min-width: 200px;
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        `;
+        button.textContent = `${match.homeTeam.name} vs ${match.awayTeam.name}`;
+        
+        // Add hover effect
+        button.onmouseover = () => {
+            button.style.backgroundColor = '#e8e8e8';
+            button.style.borderColor = '#ccc';
+        };
+        button.onmouseout = () => {
+            button.style.backgroundColor = '#f8f8f8';
+            button.style.borderColor = '#ddd';
+        };
+
+        // Add click handler
+        button.onclick = () => {
+            // Remove active class from all buttons
+            document.querySelectorAll('.match-button').forEach(btn => {
+                btn.style.backgroundColor = '#f8f8f8';
+                btn.style.borderColor = '#ddd';
+            });
+            
+            // Add active class to clicked button
+            button.style.backgroundColor = '#e0e0e0';
+            button.style.borderColor = '#999';
+            
+            // Display selected match
+            displayMatchRatings({ items: [match] });
+        };
+
+        buttonsContainer.appendChild(button);
+    });
+
+    // Set first button as active by default
+    if (buttonsContainer.firstChild) {
+        buttonsContainer.firstChild.style.backgroundColor = '#e0e0e0';
+        buttonsContainer.firstChild.style.borderColor = '#999';
+    }
+}
+
+function displayMatchRatings(data) {
+    const container = document.getElementById('match-ratings-content');
+    if (!container) return;
+
+    if (!data.items || data.items.length === 0) {
+        container.innerHTML = '<p>Ingen kamper funnet</p>';
+        return;
+    }
+
+    if (!document.getElementById('match-buttons').children.length) {
+        createMatchSelector(data.items);
+    }
+
+    const matchesHtml = data.items.map(match => {
+        const homePlayers = sortPlayersByPosition(match.homeTeam.lineup.players);
+        const awayPlayers = sortPlayersByPosition(match.awayTeam.lineup.players);
+        
+        const homePlayersSeparated = separatePlayers(homePlayers);
+        const awayPlayersSeparated = separatePlayers(awayPlayers);
+
+        return `
+        <div class="match-card">
+            <div class="match-header">
+                <div style="flex: 1; text-align: center;">
+                    <img src="${match.homeTeam.logo}" alt="${match.homeTeam.name}" class="team-logo">
+                    <h3 style="margin: 0;">${match.homeTeam.name}</h3>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <h2 class="score">${match.score.homeTeamScore} - ${match.score.awayTeamScore}</h2>
+                    <p style="margin: 5px 0;">${formatDate(match.scheduledDate)}</p>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <img src="${match.awayTeam.logo}" alt="${match.awayTeam.name}" class="team-logo">
+                    <h3 style="margin: 0;">${match.awayTeam.name}</h3>
+                </div>
+            </div>
+            
+            <div class="match-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4>${match.homeTeam.name} - Spillervurderinger</h4>
+                    
+                    <div class="player-section">
+                        <h4>Startellever</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${homePlayersSeparated.starters.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="player-section">
+                        <h4>Innbyttere</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${homePlayersSeparated.substitutes.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>${match.awayTeam.name} - Spillervurderinger</h4>
+                    
+                    <div class="player-section">
+                        <h4>Startellever</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${awayPlayersSeparated.starters.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="player-section">
+                        <h4>Innbyttere</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Spiller</th>
+                                    <th style="text-align: center;">Vurdering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${awayPlayersSeparated.substitutes.map(player => `
+                                    <tr>
+                                        <td>${player.position}</td>
+                                        <td>${capitalizeName(player.firstName)} ${capitalizeName(player.lastName)}</td>
+                                        <td style="text-align: center;">
+                                            <span class="rating ${getRatingClass(player.averageRating)}">
+                                                ${player.averageRating || '-'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `}).join('');
+
+    container.innerHTML = matchesHtml;
+}
+
+function displayError(message) {
+    const container = document.getElementById('match-ratings-content');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="match-card" style="text-align: center; padding: 40px;">
+            <h3 style="color: var(--rating-low); margin-bottom: 20px;">Beklager, noe gikk galt</h3>
+            <p style="font-size: 16px; color: var(--text-color);">${message}</p>
+            <p style="font-size: 14px; color: #666; margin-top: 20px;">
+                Vennligst prøv igjen senere eller kontakt support hvis problemet vedvarer.
+            </p>
+        </div>
+    `;
+}
+
+// Initialize the display
+async function init() {
+    const data = await fetchMatchRatings();
+    
+    if (data.error) {
+        displayError(data.error);
+        return;
+    }
+    
+    createMatchSelector(data.items);
+    // Show first match by default
+    if (data.items && data.items.length > 0) {
+        displayMatchRatings({ items: [data.items[0]] });
+    }
+}
+
+// Run when the script loads
+init();
+</script> 

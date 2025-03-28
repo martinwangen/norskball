@@ -2,7 +2,7 @@
   <q-layout
     view="hHh lpR fFf"
     container
-    style="height: 100vh;"
+    style="height: 100vh;overflow: hidden;"
   >
 
     <q-page-container>
@@ -28,5 +28,16 @@
 <style lang="scss">
 .q-toolbar {
   min-height: 60px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 </style>

@@ -36,6 +36,13 @@ $selected-background: rgba($accent, 0.2);  // More subtle selection highlight
 // Drawer active/selected state
 $drawer-selected-background: rgba($accent, 0.15);  // More subtle drawer highlight
 
+// Custom color variables for dark theme
+$surface: $surface-dark;
+$surface-variant: lighten($surface-dark, 5%);
+$border: $border-dark;
+$on-surface: #ffffff;
+$on-primary: #ffffff;
+
 // Global CSS for text selection
 ::-moz-selection {
   color: $selected-text-color;
@@ -59,13 +66,13 @@ $drawer-selected-background: rgba($accent, 0.15);  // More subtle drawer highlig
 // Additional custom styles
 .body--dark {
   .q-card {
-    background: $surface-dark;
-    border: 1px solid $border-dark;
+    background: $surface;
+    border: 1px solid $border;
   }
 
   .q-table {
-    background: $surface-dark;
-    border: 1px solid $border-dark;
+    background: $surface;
+    border: 1px solid $border;
     
     tbody tr {
       &:hover {
@@ -89,4 +96,15 @@ $drawer-selected-background: rgba($accent, 0.15);  // More subtle drawer highlig
       }
     }
   }
+}
+
+// CSS Variables for use in components
+:root {
+  --q-color-surface: #{$surface};
+  --q-color-surface-variant: #{$surface-variant};
+  --q-color-border: #{$border};
+  --q-color-on-surface: #{$on-surface};
+  --q-color-primary: #{$primary};
+  --q-color-secondary: #{$secondary};
+  --q-color-on-primary: #{$on-primary};
 }
