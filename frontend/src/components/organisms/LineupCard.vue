@@ -150,7 +150,7 @@
               <q-item-section>
                 <q-select
                   v-model="sub.player"
-                  :options="getAvailablePlayersByPosition(Position.Substitute)"
+                  :options="getAvailablePlayersByPosition(Position.Undefined)"
                   :option-label="(opt) => getPlayerName(opt)"
                   label="Select Substitute"
                   outlined
@@ -440,7 +440,8 @@ const initializePositions = () => {
   // Map formation enum to numbers
   switch (formationValue) {
     case Formation.FormationCustom:
-      // Custom formation means all players are available for selection in the starting positions
+      // For custom formation, we'll set all non-goalkeeper positions to undefined
+      defenders = 0; midfielders = 0; forwards = 0;
       break;
     case Formation.Formation442:
       defenders = 4; midfielders = 4; forwards = 2;
@@ -496,6 +497,14 @@ const initializePositions = () => {
   for (let i = 0; i < forwards; i++) {
     startingPositions.value[currentIndex].role = Position.Forward;
     currentIndex++;
+  }
+
+  // For custom formation, set all remaining positions to undefined
+  if (formationValue === Formation.FormationCustom) {
+    while (currentIndex < startingPositions.value.length) {
+      startingPositions.value[currentIndex].role = Position.Undefined;
+      currentIndex++;
+    }
   }
 
   // Initialize substitutes (always 7)
@@ -599,8 +608,8 @@ const getAvailablePlayersByPosition = (position: Position) => {
       .map(p => p.player.playerId)
   ]);
 
-  //if position is substitute, dont filter by position
-  if (position === Position.Substitute) {
+  //if position is undefined, dont filter by position
+  if (position === Position.Undefined) {
     return teamPlayers
       .filter(player => !selectedIds.has(player.id))
       .map(player => ({
@@ -893,10 +902,14 @@ const startRating = async () => {
       try {
         const result = await ratingService.useAddSimpleRating().addSimpleRating(player.id, 5);
         if (result?.matchPlayer?.ratings) {
-          // Update the player's ratings in the starting positions
+          // Update the player's ratings in the starting positions by creating a new object
           const position = startingPositions.value.find(p => p.player?.id === player.id);
           if (position?.player) {
-            position.player.ratings = result.matchPlayer.ratings;
+            position.player = {
+              ...position.player,
+              ratings: result.matchPlayer.ratings,
+              averageRating: result.matchPlayer.averageRating
+            };
           }
         }
       } catch (error) {
@@ -1008,6 +1021,20 @@ const validatePlayerSelection = (playerId: string, currentPosition: number): boo
 // Add formation validation
 const validateFormation = computed(() => {
   const formationValue = selectedFormation.value;
+
+  // For custom formation, always return valid
+  if (formationValue === Formation.FormationCustom) {
+    return {
+      isValid: true,
+      expected: { defenders: 0, midfielders: 0, forwards: 0 },
+      current: {
+        defenders: startingPositions.value.filter(p => p.role === Position.Defender).length,
+        midfielders: startingPositions.value.filter(p => p.role === Position.Midfielder).length,
+        forwards: startingPositions.value.filter(p => p.role === Position.Forward).length
+      }
+    };
+  }
+
   let defenders = 4, midfielders = 4, forwards = 2; // Default 4-4-2
 
   // Map formation enum to numbers

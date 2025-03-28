@@ -18,6 +18,28 @@ export type Scalars = {
   UUID: { input: any; output: any; }
 };
 
+/** A connection to a list of items. */
+export type AllMatchRatingsOnlyRatedPlayersConnection = {
+  __typename?: 'AllMatchRatingsOnlyRatedPlayersConnection';
+  /** A list of edges. */
+  edges?: Maybe<Array<AllMatchRatingsOnlyRatedPlayersEdge>>;
+  /** A flattened list of the nodes. */
+  nodes?: Maybe<Array<Match>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** Identifies the total count of items in the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** An edge in a connection. */
+export type AllMatchRatingsOnlyRatedPlayersEdge = {
+  __typename?: 'AllMatchRatingsOnlyRatedPlayersEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']['output'];
+  /** The item at the end of the edge. */
+  node: Match;
+};
+
 /** Defines when a policy shall be executed. */
 export enum ApplyPolicy {
   /** After the resolver was executed. */
@@ -532,6 +554,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addCardEvent: MatchEvent;
   addGoalEvent: MatchEvent;
+  addHalftimeEvent: MatchEvent;
   addMatch: Match;
   addMatchEvent: MatchEvent;
   addMatchPlayer: MatchPlayer;
@@ -582,6 +605,14 @@ export type MutationAddGoalEventArgs = {
   minuteOfMatch: Scalars['Int']['input'];
   scorerId: Scalars['String']['input'];
   teamId: Scalars['String']['input'];
+  timestamp: Scalars['DateTime']['input'];
+};
+
+
+/** Represents the mutations available. */
+export type MutationAddHalftimeEventArgs = {
+  addedMinutes: Scalars['Int']['input'];
+  matchId: Scalars['String']['input'];
   timestamp: Scalars['DateTime']['input'];
 };
 
@@ -870,7 +901,6 @@ export enum Position {
   Forward = 'FORWARD',
   Goalkeeper = 'GOALKEEPER',
   Midfielder = 'MIDFIELDER',
-  Substitute = 'SUBSTITUTE',
   Undefined = 'UNDEFINED'
 }
 
@@ -884,11 +914,13 @@ export type PositionOperationFilterInput = {
 /** Represents the queries available. */
 export type Query = {
   __typename?: 'Query';
+  allMatchRatingsOnlyRatedPlayers?: Maybe<AllMatchRatingsOnlyRatedPlayersConnection>;
   /** Get detailed player statistics with flexible sorting and time period filtering */
   detailedPlayerStats: Array<DetailedPlayerStats>;
   lineup?: Maybe<Lineup>;
   matchEvents?: Maybe<MatchEventsConnection>;
   matchPlayers?: Maybe<MatchPlayersConnection>;
+  matchRatingsOnlyRatedPlayers: Array<Match>;
   matches?: Maybe<MatchesConnection>;
   players?: Maybe<PlayersConnection>;
   ratings?: Maybe<RatingsConnection>;
@@ -900,6 +932,18 @@ export type Query = {
   teams?: Maybe<TeamsConnection>;
   /** Get top rated players across all matches */
   topPlayers: Array<PlayerStats>;
+};
+
+
+/** Represents the queries available. */
+export type QueryAllMatchRatingsOnlyRatedPlayersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  beforeDate?: InputMaybe<Scalars['DateTime']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  order?: InputMaybe<Array<MatchSortInput>>;
+  where?: InputMaybe<MatchFilterInput>;
 };
 
 
@@ -938,6 +982,12 @@ export type QueryMatchPlayersArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   order?: InputMaybe<Array<MatchPlayerSortInput>>;
   where?: InputMaybe<MatchPlayerFilterInput>;
+};
+
+
+/** Represents the queries available. */
+export type QueryMatchRatingsOnlyRatedPlayersArgs = {
+  matchId: Scalars['String']['input'];
 };
 
 
