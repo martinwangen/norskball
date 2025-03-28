@@ -4,7 +4,7 @@
       {{ homeScore }} - {{ awayScore }}
     </div>
     <div v-else class="text-h3 text-weight-bold text-grey">
-      vs
+      {{ $t('matches.vs') }}
     </div>
     <div class="text-subtitle1 q-mt-sm">
       {{ formattedDate }}

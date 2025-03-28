@@ -9,7 +9,7 @@
     </q-item-section>
     <q-item-section>
       <q-item-label>{{ player.name }}</q-item-label>
-      <q-item-label caption>{{ player.position }}</q-item-label>
+      <q-item-label caption>{{ $t(`players.positions.${player.position.toLowerCase()}`) }}</q-item-label>
     </q-item-section>
     <q-item-section side>
       <q-chip dense :color="teamColor" text-color="white">{{ player.number }}</q-chip>

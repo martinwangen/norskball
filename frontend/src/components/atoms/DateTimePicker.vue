@@ -4,16 +4,12 @@
       :class="[(hideBottomSlot ? 'hide-bottom-slot' : ''), (hideTimePart ? 'col-12' : 'col-7')]" stack-label
       :label="propsTs.label" v-model="datePart" :dense=isDense type="date" @focus="emit('hasFocus')" :readonly=readOnly
       :hint=datePartHint>
-      <q-tooltip v-if="hideBottomSlot && pickerDate?.hasError == true" class="errorTooltip text-body2">Please enter a
-        valid
-        date</q-tooltip>
+      <q-tooltip v-if="hideBottomSlot && pickerDate?.hasError == true" class="errorTooltip text-body2">{{ $t('common.error') }}</q-tooltip>
     </q-input>
     <q-input ref="pickerTime" stack-label class="col-5" :label="(propsTs.label == undefined ? undefined : '')" :disable="disable"
       :class="[hideBottomSlot ? 'hide-bottom-slot' : '']" v-model="timePart" :rules="[validateDateTime]" :dense=isDense
       type="time" v-if="!hideTimePart" @focus="emit('hasFocus')" :readonly=readOnly>
-      <q-tooltip v-if="hideBottomSlot && pickerTime?.hasError == true" class="errorTooltip text-body2">Please enter a
-        valid time
-      </q-tooltip>
+      <q-tooltip v-if="hideBottomSlot && pickerTime?.hasError == true" class="errorTooltip text-body2">{{ $t('common.error') }}</q-tooltip>
     </q-input>
   </div>
 </template>
@@ -37,6 +33,9 @@
 import type { PropType } from 'vue';
 import { computed, ref } from 'vue';
 import { QInput, date } from 'quasar';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const propsTs = defineProps({
   modelValue: {
@@ -110,10 +109,10 @@ defineExpose({
 function validateDateTime(value: string) {
   if (propsTs.supressValiation) return true;
   if (value == null || value == undefined)
-    return "Please enter a valid date";
+    return t('common.error');
   const result = Date.parse(value);
   if (result == null || result == undefined)
-    return "Please enter a valid date";
+    return t('common.error');
   return true;
 }
 

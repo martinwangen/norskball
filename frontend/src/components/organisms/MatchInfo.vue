@@ -2,7 +2,7 @@
   <div class="match-info">
     <q-card flat bordered>
       <q-card-section>
-        <div class="text-h6">Match Information</div>
+        <div class="text-h6">{{ $t('matches.information') }}</div>
       </q-card-section>
 
       <q-separator />
@@ -13,21 +13,21 @@
             <q-list>
               <q-item>
                 <q-item-section>
-                  <q-item-label caption>Date & Time</q-item-label>
+                  <q-item-label caption>{{ $t('match.date') }}</q-item-label>
                   <q-item-label>{{ formatDate(match.scheduledDate) }}</q-item-label>
                 </q-item-section>
               </q-item>
 
               <q-item>
                 <q-item-section>
-                  <q-item-label caption>Status</q-item-label>
-                  <q-item-label>{{ match.status }}</q-item-label>
+                  <q-item-label caption>{{ $t('match.status.title') }}</q-item-label>
+                  <q-item-label>{{ $t(`matches.status.${match.status.toLowerCase()}`) }}</q-item-label>
                 </q-item-section>
               </q-item>
 
               <q-item>
                 <q-item-section>
-                  <q-item-label caption>Score</q-item-label>
+                  <q-item-label caption>{{ $t('match.score') }}</q-item-label>
                   <q-item-label>
                     {{ match.homeTeam?.name }} {{ match.score?.homeTeamScore }} - {{ match.score?.awayTeamScore }} {{ match.awayTeam?.name }}
                   </q-item-label>
@@ -37,7 +37,7 @@
           </div>
 
           <div class="col-12 col-md-6">
-            <div class="text-subtitle2 q-mb-sm">Match Events</div>
+            <div class="text-subtitle2 q-mb-sm">{{ $t('matches.events.title') }}</div>
             <q-timeline color="primary">
               <q-timeline-entry
                 v-for="event in match.events || []"
@@ -50,10 +50,10 @@
               </q-timeline-entry>
               <q-timeline-entry
                 v-if="!match.events || match.events.length === 0"
-                title="No Events"
+                :title="$t('matches.events.noEvents')"
                 icon="sports_soccer"
               >
-                <div>No events recorded for this match yet.</div>
+                <div>{{ $t('matches.events.noEventsDescription') }}</div>
               </q-timeline-entry>
             </q-timeline>
           </div>
@@ -66,10 +66,13 @@
 <script setup lang="ts">
 import { EventType } from '../../gql/__generated__/graphql';
 import type { Match, MatchEvent } from '../../gql/__generated__/graphql';
+import { useI18n } from 'vue-i18n';
 
-defineProps<{
+const { match } = defineProps<{
   match: Match;
 }>();
+
+const { t } = useI18n();
 
 const formatDate = (dateStr: string): string => {
   if (!dateStr) return 'N/A';
@@ -94,35 +97,35 @@ const formatDate = (dateStr: string): string => {
 
 const formatEventType = (type: EventType): string => {
   switch (type) {
-    case EventType.Goal: return '⚽ Goal';
-    case EventType.YellowCard: return '🟨 Yellow Card';
-    case EventType.RedCard: return '🟥 Red Card';
-    case EventType.Substitution: return '�� Substitution';
-    case EventType.HalfTimeStart: return '⏱️ Half Time';
-    case EventType.GameEnd: return '🏁 Full Time';
+    case EventType.Goal: return '⚽ ' + t('matches.events.goal');
+    case EventType.YellowCard: return '🟨 ' + t('matches.events.yellowCard');
+    case EventType.RedCard: return '🟥 ' + t('matches.events.redCard');
+    case EventType.Substitution: return '🔄 ' + t('matches.events.substitution');
+    case EventType.HalfTimeStart: return '⏱️ ' + t('matches.events.halftime');
+    case EventType.GameEnd: return '🏁 ' + t('matches.events.fullTime');
     default: return type;
   }
 };
 
 const formatEventTitle = (event: MatchEvent): string => {
-  const playerName = event.player ? `${event.player.firstName} ${event.player.lastName}` : 'Unknown Player';
+  const playerName = event.player ? `${event.player.firstName} ${event.player.lastName}` : t('common.unknown');
   const secondaryPlayerName = event.secondaryPlayer ? `${event.secondaryPlayer.firstName} ${event.secondaryPlayer.lastName}` : '';
   const teamName = event.team?.name || '';
 
   switch (event.type) {
     case EventType.Goal:
-      return `Goal by ${playerName} (${teamName})${secondaryPlayerName ? ` - Assist by ${secondaryPlayerName}` : ''}`;
+      return t('matches.events.goalBy', { player: playerName, team: teamName, assist: secondaryPlayerName ? t('matches.events.assistBy', { player: secondaryPlayerName }) : '' });
     case EventType.YellowCard:
     case EventType.RedCard:
-      return `${event.type === EventType.YellowCard ? 'Yellow' : 'Red'} card shown to ${playerName} (${teamName})`;
+      return t(event.type === EventType.YellowCard ? 'matches.events.yellowCardTo' : 'matches.events.redCardTo', { player: playerName, team: teamName });
     case EventType.Substitution:
-      return `${playerName} replaced by ${secondaryPlayerName} (${teamName})`;
+      return t('matches.events.substitutionEvent', { playerOut: playerName, playerIn: secondaryPlayerName, team: teamName });
     case EventType.HalfTimeStart:
-      return 'Half Time';
+      return t('matches.events.halftime');
     case EventType.GameEnd:
-      return 'Full Time';
+      return t('matches.events.fullTime');
     default:
-      return event.description || 'Event';
+      return event.description || t('matches.events.event');
   }
 };
 </script>

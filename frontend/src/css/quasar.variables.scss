@@ -12,27 +12,29 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #152558;
-$secondary : #e73425;
-$accent    : #f2c05f;
+$primary   : #2c3e50;  // A deeper blue that works well with dark theme
+$secondary : #e74c3c;  // A vibrant red that pops against dark background
+$accent    : #3498db;  // A bright blue accent for highlights
 
-$dark      : #1D1D1D;
-$dark-page : #121212;
+$dark      : rgb(36, 37, 37);
+$dark-page : rgb(36, 37, 37);
 
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #31CCEC;
-$warning   : #F2C037;
+$positive  : #2ecc71;  // A softer green that's easier on the eyes
+$negative  : #e74c3c;  // Matching the secondary color for consistency
+$info      : #3498db;  // Matching the accent color
+$warning   : #f1c40f;  // A warmer yellow that's visible but not harsh
 
 // Additional custom variables
-$neutral-gray: #cfd0d2;
+$neutral-gray: #95a5a6;  // A softer gray that's more readable on dark backgrounds
+$surface-dark: rgb(42, 43, 43);  // Slightly lighter than dark for surface elements
+$border-dark: rgb(50, 51, 51);   // For subtle borders
 
 // Selection colors
-$selected-text-color: $dark;
-$selected-background: rgba($accent, 0.3);
+$selected-text-color: #ffffff;  // White text for better contrast
+$selected-background: rgba($accent, 0.2);  // More subtle selection highlight
 
 // Drawer active/selected state
-$drawer-selected-background: rgba($accent, 0.7);
+$drawer-selected-background: rgba($accent, 0.15);  // More subtle drawer highlight
 
 // Global CSS for text selection
 ::-moz-selection {
@@ -49,7 +51,42 @@ $drawer-selected-background: rgba($accent, 0.7);
 .q-drawer {
   .q-item.q-router-link--active {
     background: $drawer-selected-background !important;
-    color: $dark !important;
+    color: $accent !important;  // Using accent color for better visibility
     font-weight: 500;
+  }
+}
+
+// Additional custom styles
+.body--dark {
+  .q-card {
+    background: $surface-dark;
+    border: 1px solid $border-dark;
+  }
+
+  .q-table {
+    background: $surface-dark;
+    border: 1px solid $border-dark;
+    
+    tbody tr {
+      &:hover {
+        background: rgba($accent, 0.05);
+      }
+    }
+  }
+
+  .q-btn {
+    &.q-btn--flat {
+      &:hover {
+        background: rgba($accent, 0.1);
+      }
+    }
+  }
+
+  .q-field {
+    &.q-field--focused {
+      .q-field__control {
+        background: rgba($accent, 0.05);
+      }
+    }
   }
 }

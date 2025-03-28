@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="q-pa-md">
-      <div class="text-h4 q-mb-md">Teams</div>
+      <div class="text-h4 q-mb-md">{{ $t('teams.title') }}</div>
 
       <div v-if="loading" class="flex justify-center q-pa-xl">
         <q-spinner color="primary" size="3em" />
@@ -50,7 +50,7 @@
             <div v-if="hasNextPage" class="full-width text-center q-pa-sm">
               <q-btn
                 color="primary"
-                label="Load More"
+                :label="$t('teams.table.loadMore')"
                 :loading="loadingMore"
                 @click="loadMore"
               />
@@ -67,7 +67,9 @@ import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { Team } from '../gql/__generated__/graphql';
 import { teamService } from '../services/teamService';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const router = useRouter();
 const loadingMore = ref(false);
 const error = ref<string | null>(null);
@@ -82,14 +84,14 @@ const totalCount = computed(() => teams.value?.teams.totalCount || 0);
 const columns = [
   {
     name: 'team',
-    label: 'Team',
+    label: t('teams.table.team'),
     field: 'name',
     align: 'left' as const,
     sortable: true
   },
   {
     name: 'league',
-    label: 'League',
+    label: t('teams.table.league'),
     field: 'league',
     align: 'left' as const,
     sortable: true

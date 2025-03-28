@@ -50,7 +50,8 @@ export const matchService = {
   useMatch(id: string) {
     const filter = { id: { eq: id } };
     const { result, loading, error, refetch } = useQuery(GET_MATCH_DETAILS, {
-      filter
+      filter,
+      fetchPolicy: 'network-only'
     });
 
     // Update store when data changes

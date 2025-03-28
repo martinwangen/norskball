@@ -14,7 +14,7 @@
       no-caps
       color="primary"
       :to="`/teams/${team.id}`"
-      :label="buttonLabel"
+      :label="$t('teams.viewTeam')"
       class="q-mt-sm"
     />
   </div>
@@ -27,10 +27,8 @@ import type { Team } from '../../gql/__generated__/graphql';
 withDefaults(defineProps<{
   team?: Team | undefined;
   logoSize?: string | undefined;
-  buttonLabel?: string;
 }>(), {
-  logoSize: '80px',
-  buttonLabel: 'View Team'
+  logoSize: '80px'
 });
 </script>
 

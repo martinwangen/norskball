@@ -23,6 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Initialize from localStorage
   const storedToken = localStorage.getItem('auth_token');
+
   if (storedToken) {
     token.value = storedToken;
     isAuthenticated.value = true;
@@ -82,7 +83,6 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function checkAuth() {
     const storedToken = localStorage.getItem('auth_token');
-    console.log('Checking auth with stored token:', storedToken);
 
     if (!storedToken) {
       isAuthenticated.value = false;
@@ -105,7 +105,10 @@ export const useAuthStore = defineStore('auth', () => {
       const data = await response.json();
       user.value = data;
       token.value = storedToken;
+      localStorage.setItem('auth_token', data.token);
       isAuthenticated.value = true;
+      console.log('User data:', data);
+      isAdmin.value = data.user.roles.includes('admin');
     } catch (error) {
       console.error('Token verification error:', error);
       isAuthenticated.value = false;

@@ -31,7 +31,8 @@ export default defineConfig((ctx) => {
     boot: [
       'i18n',
       'pinia',
-      'apollo'
+      'apollo',
+      'auth'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
@@ -69,7 +70,7 @@ export default defineConfig((ctx) => {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: ctx.dev ? { NODE_ENV: 'development' } : { NODE_ENV: 'production' },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

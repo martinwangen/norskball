@@ -1,7 +1,7 @@
 <template>
   <img
     :src="avatarUrl"
-    :alt="props.alt || (props.player ? `${props.player.firstName} ${props.player.lastName}` : 'Player Avatar')"
+    :alt="props.alt || (props.player ? `${props.player.firstName} ${props.player.lastName}` : $t('players.avatar'))"
     :width="props.size || '40'"
     :height="props.size || '40'"
     class="player-avatar"

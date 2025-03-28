@@ -3,7 +3,7 @@
     <div class="q-pa-md">
       <q-btn
         icon="arrow_back"
-        label="Back to Players"
+        :label="$t('players.detail.backToPlayers')"
         flat
         color="primary"
         to="/players"
@@ -24,7 +24,7 @@
           <div class="col-xs-12 col-md-4 flex flex-center">
             <q-card flat bordered class="player-card">
               <q-img
-                :src="player.imageUrl || 'https://via.placeholder.com/300?text=No+Photo'"
+                :src="player.imageUrl || 'https://via.placeholder.com/300?text=' + $t('players.detail.noPhoto')"
                 style="height: 300px"
                 fit="contain"
                 class="player-photo"
@@ -37,7 +37,7 @@
 
                 <div class="absolute-bottom text-subtitle2 text-center bg-dark q-pa-xs">
                   <q-badge :color="getPositionColor(player.position)" class="q-mr-xs">
-                    {{ player.position }}
+                    {{ $t(`players.positions.${player.position.toLowerCase()}`) }}
                   </q-badge>
                 </div>
               </q-img>
@@ -55,7 +55,7 @@
                   class="q-mt-sm"
                 />
                 <div class="text-subtitle1 q-mt-xs">
-                  Rating: {{ playerRating.toFixed(1) }}
+                  {{ $t('players.detail.rating', { rating: playerRating.toFixed(1) }) }}
                 </div>
               </q-card-section>
             </q-card>
@@ -68,17 +68,17 @@
             <q-list bordered separator>
               <q-item v-if="player.dateOfBirth">
                 <q-item-section>
-                  <q-item-label caption>Birth Date</q-item-label>
+                  <q-item-label caption>{{ $t('players.detail.birthDate') }}</q-item-label>
                   <q-item-label>{{ formatDate(player.dateOfBirth) }}</q-item-label>
                 </q-item-section>
               </q-item>
 
               <q-item>
                 <q-item-section>
-                  <q-item-label caption>Position</q-item-label>
+                  <q-item-label caption>{{ $t('players.position') }}</q-item-label>
                   <q-item-label>
                     <q-badge :color="getPositionColor(player.position)">
-                      {{ player.position }}
+                      {{ $t(`players.positions.${player.position.toLowerCase()}`) }}
                     </q-badge>
                   </q-item-label>
                 </q-item-section>
@@ -86,7 +86,7 @@
 
               <q-item v-if="player.teamId">
                 <q-item-section>
-                  <q-item-label caption>Team</q-item-label>
+                  <q-item-label caption>{{ $t('players.detail.team') }}</q-item-label>
                   <q-item-label class="row items-center">
                     <team-logo
                       v-if="team"
@@ -98,7 +98,7 @@
                       no-caps
                       color="primary"
                       :to="`/teams/${player.teamId}`"
-                      :label="team?.name || 'View Team'"
+                      :label="team?.name || $t('players.detail.viewTeam')"
                     />
                   </q-item-label>
                 </q-item-section>
@@ -109,7 +109,7 @@
 
         <!-- Rate Player -->
         <div class="q-mt-lg">
-          <h2 class="text-h5">Rate Player</h2>
+          <h2 class="text-h5">{{ $t('players.detail.ratePlayer') }}</h2>
           <q-card flat bordered>
             <q-card-section>
               <div class="row items-center">
@@ -123,14 +123,14 @@
                     icon-selected="star"
                   />
                   <div class="text-subtitle1 q-mt-sm" v-if="userRating > 0">
-                    Your rating: {{ userRating.toFixed(1) }}
+                    {{ $t('players.detail.yourRating', { rating: userRating.toFixed(1) }) }}
                   </div>
                 </div>
 
                 <div class="col-12 col-md-6 q-mt-md q-mt-md-none">
                   <q-btn
                     color="primary"
-                    label="Submit Rating"
+                    :label="$t('players.detail.submitRating')"
                     :disable="userRating === 0"
                     @click="submitRating"
                   />
@@ -143,7 +143,7 @@
 
       <div v-else class="text-center q-pa-xl">
         <q-icon name="sports_soccer" size="4em" color="grey-7" />
-        <p class="text-h6 text-grey-7">Player not found</p>
+        <p class="text-h6 text-grey-7">{{ $t('players.detail.playerNotFound') }}</p>
       </div>
     </div>
   </q-page>
@@ -159,7 +159,9 @@ import TeamLogo from '../components/atoms/TeamLogo.vue';
 import { date } from 'quasar';
 import { useQuasar } from 'quasar';
 import { usePlayerStore } from 'src/stores/players';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const route = useRoute();
 const player = ref<Player | null>(null);
 const team = ref<Team | null>(null);
@@ -186,7 +188,7 @@ const submitRating = () => {
     playerRating.value = userRating.value;
     $q.notify({
       type: 'positive',
-      message: `Thank you for rating ${getPlayerFullName(player.value)}!`
+      message: t('players.detail.ratingSubmitted', { name: getPlayerFullName(player.value) })
     });
     userRating.value = 0;
   }

@@ -20,8 +20,8 @@ namespace Norskball.GraphQL.Queries
     {
         _httpContextAccessor = httpContextAccessor;
     }
-
-        [UsePaging(MaxPageSize = 50, IncludeTotalCount = true), UseProjection, UseFiltering, UseSorting]
+    
+    [UsePaging(MaxPageSize = 50, IncludeTotalCount = true), UseProjection, UseFiltering, UseSorting]
         public IQueryable<Match> GetMatches(NorskballDbContext db)
         {
 

@@ -8,7 +8,7 @@
       @click="toggleRating"
     >
       <q-tooltip>
-        {{ rating || 'Click to rate' }}
+        {{ rating || $t('rating.clickToRate') }}
       </q-tooltip>
     </q-icon>
   </div>

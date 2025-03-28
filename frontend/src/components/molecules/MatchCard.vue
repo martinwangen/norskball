@@ -4,7 +4,7 @@
       <div class="row items-center justify-between">
         <div class="col-5 text-center">
           <TeamLogo :team-id="match.homeTeam.id" size="50" />
-          <div class="team-name q-mt-sm">{{ match.homeTeam?.name || 'Home Team' }}</div>
+          <div class="team-name q-mt-sm">{{ match.homeTeam?.name || $t('matches.homeTeam') }}</div>
         </div>
 
         <div class="col-2 text-center">
@@ -13,16 +13,16 @@
           </div>
           <div v-else-if="match.status === Status.InProgress" class="score-display text-primary">
             {{ match.score.homeTeamScore }} - {{ match.score.awayTeamScore }}
-            <q-badge color="green" class="q-mt-xs">LIVE</q-badge>
+            <q-badge color="green" class="q-mt-xs">{{ $t('matches.live') }}</q-badge>
           </div>
           <div v-else class="vs-display">
-            vs
+            {{ $t('matches.vs') }}
           </div>
         </div>
 
         <div class="col-5 text-center">
           <TeamLogo :team-id="match.awayTeam.id" size="50" />
-          <div class="team-name q-mt-sm">{{ match.awayTeam?.name || 'Away Team' }}</div>
+          <div class="team-name q-mt-sm">{{ match.awayTeam?.name || $t('matches.awayTeam') }}</div>
         </div>
       </div>
     </q-card-section>
@@ -41,12 +41,12 @@
         </div>
       </div>
       <div class="text-caption q-mt-sm">
-        {{ match.homeTeam?.stadium || 'TBD' }}
+        {{ match.homeTeam?.stadium || $t('matches.tbd') }}
       </div>
     </q-card-section>
 
     <q-card-actions align="right">
-      <q-btn flat color="primary" label="View Details" :to="`/matches/${match.id}`" />
+      <q-btn flat color="primary" :label="$t('matches.viewDetails')" :to="`/matches/${match.id}`" />
     </q-card-actions>
   </q-card>
 </template>
@@ -55,6 +55,9 @@
 import { useRouter } from 'vue-router';
 import { type Match, Status } from '../../gql/__generated__/graphql';
 import TeamLogo from '../atoms/TeamLogo.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 interface Props {
   match: Match;
@@ -89,12 +92,12 @@ const formatDate = (dateString: string) => {
 
 const formatMatchStatus = (status: Status) => {
   switch (status) {
-    case Status.Scheduled: return 'Scheduled';
-    case Status.InProgress: return 'Live';
-    case Status.Completed: return 'COMPLETED';
-    case Status.Postponed: return 'Postponed';
-    case Status.Cancelled: return 'Cancelled';
-    default: return 'Unknown';
+    case Status.Scheduled: return t('matches.status.scheduled');
+    case Status.InProgress: return t('matches.status.live');
+    case Status.Completed: return t('matches.status.finished');
+    case Status.Postponed: return t('matches.status.postponed');
+    case Status.Cancelled: return t('matches.status.cancelled');
+    default: return t('common.unknown');
   }
 };
 

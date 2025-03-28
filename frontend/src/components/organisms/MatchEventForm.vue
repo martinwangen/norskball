@@ -133,9 +133,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { EventType } from '../../gql/__generated__/graphql';
-import type { Match, Player } from '../../gql/__generated__/graphql';
+import type { Match, MatchEvent, Player } from '../../gql/__generated__/graphql';
 import { matchService } from '../../services/matchService';
 import { getPlayerFullName } from '../../services/playerService';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   match: Match;
@@ -143,7 +144,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'event-added'): void;
+  (e: 'event-added', event: MatchEvent): void;
   (e: 'cancel'): void;
 }>();
 
@@ -157,6 +158,8 @@ const homeScore = ref<number | null>(null);
 const awayScore = ref<number | null>(null);
 const loading = ref(false);
 
+const { t } = useI18n();
+
 // Initialize scores from match
 if (props.match.score) {
   homeScore.value = props.match.score.homeTeamScore;
@@ -165,14 +168,14 @@ if (props.match.score) {
 
 const getEventTitle = computed(() => {
   switch (props.eventType) {
-    case EventType.Goal: return 'Add Goal';
-    case EventType.OwnGoal: return 'Add Own Goal';
-    case EventType.YellowCard: return 'Add Yellow Card';
-    case EventType.RedCard: return 'Add Red Card';
-    case EventType.Substitution: return 'Add Substitution';
-    case EventType.HalfTimeStart: return 'Add Halftime';
-    case EventType.GameEnd: return 'End Game';
-    default: return 'Add Event';
+    case EventType.Goal: return t('matches.events.addGoal');
+    case EventType.OwnGoal: return t('matches.events.addOwnGoal');
+    case EventType.YellowCard: return t('matches.events.addYellowCard');
+    case EventType.RedCard: return t('matches.events.addRedCard');
+    case EventType.Substitution: return t('matches.events.addSubstitution');
+    case EventType.HalfTimeStart: return t('matches.events.addHalftime');
+    case EventType.GameEnd: return t('matches.events.endGame');
+    default: return t('matches.events.addEvent');
   }
 });
 
@@ -196,14 +199,14 @@ const getPlayerLabel = computed(() => {
   switch (props.eventType) {
     case EventType.Goal:
     case EventType.OwnGoal:
-      return 'Goalscorer';
+      return t('matches.events.goalscorer');
     case EventType.Substitution:
-      return 'Substitute Out';
+      return t('matches.events.substituteOut');
     case EventType.YellowCard:
     case EventType.RedCard:
-      return 'Player';
+      return t('matches.events.player');
     default:
-      return 'Player';
+      return t('matches.events.player');
   }
 });
 
@@ -242,7 +245,7 @@ const handleSubmit = async () => {
     }
 
     // Add the event
-    await addMatchEvent({
+    const event = await addMatchEvent({
       matchId: props.match.id,
       type: props.eventType,
       minuteOfMatch: props.eventType === EventType.HalfTimeStart ? 45 : minuteOfMatch.value,
@@ -268,7 +271,7 @@ const handleSubmit = async () => {
       });
     }
 
-    emit('event-added');
+    emit('event-added', event);
   } catch (error) {
     console.error('Error adding match event:', error);
   } finally {

@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="q-pa-md">
-      <div class="text-h4 q-mb-md">Matches</div>
+      <div class="text-h4 q-mb-md">{{ $t('matches.title') }}</div>
 
       <div v-if="loading" class="flex justify-center q-pa-xl">
         <q-spinner color="primary" size="3em" />
@@ -14,7 +14,7 @@
       <div v-else>
         <!-- Live Matches -->
         <div v-if="liveMatches.length > 0" class="q-mb-xl">
-          <div class="text-h5 q-mb-md">Live Matches</div>
+          <div class="text-h5 q-mb-md">{{ $t('matches.live') }}</div>
           <div class="row q-col-gutter-md">
             <div v-for="match in liveMatches" :key="match.id" class="col-12 col-md-6">
               <q-card flat bordered class="match-card" @click="goToMatch(match.id)">
@@ -38,7 +38,7 @@
                       <div class="text-h6">
                         {{ match.score.homeTeamScore }} - {{ match.score.awayTeamScore }}
                       </div>
-                      <div class="text-caption text-red">LIVE</div>
+                      <div class="text-caption text-red">{{ $t('matches.live') }}</div>
                     </div>
                     <div class="col-5">
                       <div class="row items-center">
@@ -88,13 +88,13 @@
                         <div class="text-h6">
                           {{ match.score.homeTeamScore }} - {{ match.score.awayTeamScore }}
                         </div>
-                        <div class="text-caption text-red">LIVE</div>
+                        <div class="text-caption text-red">{{ $t('matches.live') }}</div>
                       </template>
                       <template v-else-if="match.status === Status.Completed">
                         <div class="text-h6">
                           {{ match.score.homeTeamScore }} - {{ match.score.awayTeamScore }}
                         </div>
-                        <div class="text-caption">FT</div>
+                        <div class="text-caption">{{ $t('matches.status.finished') }}</div>
                       </template>
                       <template v-else>
                         <div class="text-caption">{{ formatTime(match.scheduledDate) }}</div>

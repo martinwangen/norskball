@@ -16,6 +16,8 @@ interface GoogleInitConfig {
   callback: (response: GoogleCredentialResponse) => void;
   auto_select?: boolean;
   cancel_on_tap_outside?: boolean;
+  context?: string;
+  ux_mode?: string;
 }
 
 interface GoogleCredentialResponse {
@@ -66,7 +68,9 @@ class AuthService {
             client_id: this.clientId,
             callback: this.handleCredentialResponse.bind(this),
             auto_select: false,
-            cancel_on_tap_outside: true
+            cancel_on_tap_outside: true,
+            context: 'signin',
+            ux_mode: 'popup'
           });
           this.initialized = true;
           resolve();

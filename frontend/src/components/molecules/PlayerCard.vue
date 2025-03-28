@@ -21,10 +21,10 @@
           <div class="text-h6 ellipsis-2-lines">{{ player.lastName }}</div>
           <div class="q-mt-xs">
             <q-badge :color="getPositionColor(player.position)">
-              {{ player.position }}
+              {{ $t(`players.positions.${player.position.toLowerCase()}`) }}
             </q-badge>
             <q-badge outline class="q-ml-sm" color="grey">
-              {{ player.nationality || 'Unknown' }}
+              {{ player.nationality || $t('common.unknown') }}
             </q-badge>
           </div>
           <div class="text-caption q-mt-xs">
@@ -38,7 +38,7 @@
     <q-separator />
 
     <q-card-actions align="right">
-      <q-btn flat color="primary" label="View Profile" :to="'/players/' + player.id" />
+      <q-btn flat color="primary" :label="$t('players.viewProfile')" :to="'/players/' + player.id" />
     </q-card-actions>
   </q-card>
 </template>

@@ -24,7 +24,7 @@
 
     <!-- Team Info -->
     <q-card v-if="team">
-      <q-card-section :class="[isEditing ? 'bg-primary' : 'bg-negative']" class="text-white">
+      <q-card-section :class="[!isEditing ? 'bg-primary' : 'bg-negative']" class="text-white">
         <div class="row items-center justify-between">
           <div>
             <div class="text-h6">{{ team.name }}</div>
@@ -32,7 +32,7 @@
           </div>
           <div class="row q-gutter-sm">
             <q-btn
-              v-if="!isEditing"
+              v-if="!isEditing && isAuthorized"
               color="white"
               text-color="primary"
               icon="edit"
@@ -40,7 +40,7 @@
               @click="startEditing"
             />
             <q-btn
-              v-if="!isEditing && !ratingService.isRating.value"
+              v-if="!isEditing && isAuthorized && !isRating"
               color="white"
               text-color="primary"
               icon="star"
@@ -48,7 +48,7 @@
               @click="startRating"
             />
             <q-btn
-              v-if="ratingService.isRating.value"
+              v-if="isRating"
               color="white"
               text-color="primary"
               icon="close"
@@ -111,7 +111,7 @@
                       :max="10"
                       icon="star_border"
                       icon-selected="star"
-                      :disable="!ratingService.isRating.value || ratingLoading"
+                      :disable="!isRating || ratingLoading"
                       @update:model-value="(val) => {
                         if (position.player) {
                           console.log('Rating updated for player:', position.player.id, 'value:', val);
@@ -120,7 +120,7 @@
                       }"
                     />
                     <q-btn
-                      v-if="ratingService.isRating.value && position.player && getMatchPlayerRating(position.player) > 0"
+                      v-if="isRating && position.player && getMatchPlayerRating(position.player) > 0"
                       flat
                       round
                       dense
@@ -150,7 +150,7 @@
               <q-item-section>
                 <q-select
                   v-model="sub.player"
-                  :options="availableSubstitutes"
+                  :options="getAvailablePlayersByPosition(Position.Substitute)"
                   :option-label="(opt) => getPlayerName(opt)"
                   label="Select Substitute"
                   outlined
@@ -197,7 +197,7 @@
                       :max="10"
                       icon="star_border"
                       icon-selected="star"
-                      :disable="!ratingService.isRating.value || ratingLoading"
+                      :disable="!isRating || ratingLoading"
                       @update:model-value="(val) => {
                         if (sub.player) {
                           console.log('Rating updated for substitute:', sub.player.id, 'value:', val);
@@ -206,7 +206,7 @@
                       }"
                     />
                     <q-btn
-                      v-if="ratingService.isRating.value && sub.player && getMatchPlayerRating(sub.player) > 0"
+                      v-if="isRating && sub.player && getMatchPlayerRating(sub.player) > 0"
                       flat
                       round
                       dense
@@ -290,6 +290,8 @@ import type { Lineup, Team, MatchPlayer } from 'src/gql/__generated__/graphql';
 import { usePlayerStore } from 'src/stores/players';
 import { ratingService } from '../../services/ratingService';
 import { useQuasar } from 'quasar';
+import { useAuthStore } from 'src/stores/auth';
+import { lineupService } from '../../services/lineupService';
 
 // Define our own types for lineup functionality
 type LineupPosition = {
@@ -308,20 +310,23 @@ type LineupValidation = {
   message: string;
 };
 
+type PlayerName = {
+  firstName: string;
+  lastName: string;
+};
+
 const props = defineProps<{
+  matchId: string;
   team: Team;
   loading?: boolean;
   lineup?: Lineup;
 }>();
 
-const emit = defineEmits<{
-  (e: 'update:lineup', lineup: Lineup): void;
-  (e: 'save'): void;
-  (e: 'add-player-click'): void;
-  (e: 'update:team', team: Team): void;
-}>();
 
 const playerStore = usePlayerStore();
+const authStore = useAuthStore();
+const isAuthorized = computed(() => authStore.isAdmin);
+
 const teamPlayers = playerStore.playersByTeam[props.team.id] || [];
 
 const formationOptions = [
@@ -358,6 +363,7 @@ const originalFormation = ref<Formation>(Formation.Formation442);
 const $q = useQuasar();
 const saveLoading = ref(false);
 const ratingLoading = ref(false);
+const isRating = ref(false);
 
 // Start editing
 const startEditing = () => {
@@ -546,7 +552,7 @@ const createLineup = (): Lineup => {
   return {
     id: props.lineup?.id || '',
     teamId: props.team.id,
-    matchId: props.lineup?.matchId || '',
+    matchId: props.matchId,
     formation: selectedFormation.value,
     players: [
       ...startingPositions.value
@@ -580,29 +586,36 @@ const createLineup = (): Lineup => {
   };
 };
 
-// Computed properties for player filtering
-const availableSubstitutes = computed(() => {
-  const teamPlayers = playerStore.playersByTeam[props.team.id] || [];
-  const selectedIds = new Set([
-    ...startingPositions.value.map(p => p.player?.playerId),
-    ...substitutes.value.map(p => p.player?.playerId),
-  ]);
-  return teamPlayers.filter(p => !selectedIds.has(p.id));
-});
-
 const getAvailablePlayersByPosition = (position: Position) => {
   const teamPlayers = playerStore.playersByTeam[props.team.id] || [];
+
+  // Create a set of all selected player IDs (both starters and substitutes)
   const selectedIds = new Set([
-    ...startingPositions.value.map(p => p.player?.playerId),
-    ...substitutes.value.map(p => p.player?.playerId),
+    ...startingPositions.value
+      .filter(p => p.player)
+      .map(p => p.player.playerId),
+    ...substitutes.value
+      .filter(p => p.player)
+      .map(p => p.player.playerId)
   ]);
 
-  // Get the current player for this position
-  const currentPlayer = startingPositions.value.find(p => p.role === position)?.player;
-
+  //if position is substitute, dont filter by position
+  if (position === Position.Substitute) {
+    return teamPlayers
+      .filter(player => !selectedIds.has(player.id))
+      .map(player => ({
+        id: '',
+        playerId: player.id,
+        lineupId: props.lineup?.id || '',
+        isStarter: true,
+        position: position.toString(),
+        teamId: props.team.id,
+        player: player
+      }));
+  }
   return teamPlayers
     .filter(player => position === player.position)
-    .filter(player => !selectedIds.has(player.id) || player.id === currentPlayer?.playerId)
+    .filter(player => !selectedIds.has(player.id))
     .map(player => ({
       id: '',
       playerId: player.id,
@@ -795,7 +808,7 @@ const autoFillLineup = async () => {
 };
 
 // Modify handleSave to also exit edit mode
-const handleSave = () => {
+const handleSave = async () => {
   if (!validateFormation.value.isValid) {
     $q.notify({
       color: 'negative',
@@ -807,21 +820,24 @@ const handleSave = () => {
   try {
     saveLoading.value = true;
     const lineup = createLineup();
-    emit('update:lineup', lineup);
-    emit('save');
-    isEditing.value = false;
 
-    // After saving, update the positions with the new match player IDs
-    if (props.lineup) {
-      // Update starting positions
+    // Save the lineup using the lineup service
+    const savedLineup = await lineupService.useSaveLineup().saveLineup(lineup);
+
+    if (savedLineup) {
+      // Update the positions with the new match player IDs
       startingPositions.value.forEach(pos => {
         if (pos.player) {
-          const savedPlayer = props.lineup?.players.find(p =>
-            p.playerId === pos.player?.playerId &&
-            parseInt(p.position) === pos.number
+          const savedPlayer = savedLineup.players.find(p =>
+            p.playerId === pos.player?.playerId
           );
           if (savedPlayer) {
-            pos.player = savedPlayer;
+            pos.player = {
+              ...pos.player,
+              id: savedPlayer.id,
+              lineupId: savedPlayer.lineupId,
+              player: pos.player.player // Preserve the original player data
+            };
           }
         }
       });
@@ -829,33 +845,70 @@ const handleSave = () => {
       // Update substitutes
       substitutes.value.forEach(sub => {
         if (sub.player) {
-          const savedPlayer = props.lineup?.players.find(p =>
-            p.playerId === sub.player?.playerId &&
-            parseInt(p.position) === sub.number
+          const savedPlayer = savedLineup.players.find(p =>
+            p.playerId === sub.player?.playerId
           );
           if (savedPlayer) {
-            sub.player = savedPlayer;
+            sub.player = {
+              ...sub.player,
+              id: savedPlayer.id,
+              lineupId: savedPlayer.lineupId,
+              player: sub.player.player // Preserve the original player data
+            };
           }
         }
       });
     }
+
+    isEditing.value = false;
   } finally {
     saveLoading.value = false;
   }
 };
 
 // Helper functions
-const getPlayerName = (player: MatchPlayer | null) => {
-  if (!player?.player) return '';
-  return `${player.player.firstName} ${player.player.lastName}`;
+const isPlayerName = (player: MatchPlayer | PlayerName): player is PlayerName => {
+  return 'firstName' in player && 'lastName' in player && !('player' in player);
 };
 
-const startRating = () => {
-  void ratingService.startRatingMode(props.lineup?.players || []);
+const getPlayerName = (player: MatchPlayer | null | PlayerName) => {
+  if (!player) return '';
+  if ('player' in player) {
+    return `${player.player.firstName} ${player.player.lastName}`;
+  }
+  if (isPlayerName(player)) {
+    return `${player.firstName} ${player.lastName}`;
+  }
+  return '';
+};
+
+const startRating = async () => {
+  // Get all starting players
+  const startingPlayers = startingPositions.value.map(pos => pos.player).filter(p => p !== null);
+  console.log('Starting players:', startingPlayers);
+
+  // Set default rating of 5 for players without ratings
+  for (const player of startingPlayers) {
+    if (!player.ratings || player.ratings.length === 0) {
+      try {
+        const result = await ratingService.useAddSimpleRating().addSimpleRating(player.id, 5);
+        if (result?.matchPlayer?.ratings) {
+          // Update the player's ratings in the starting positions
+          const position = startingPositions.value.find(p => p.player?.id === player.id);
+          if (position?.player) {
+            position.player.ratings = result.matchPlayer.ratings;
+          }
+        }
+      } catch (error) {
+        console.error('Error setting default rating for player:', error);
+      }
+    }
+  }
+  isRating.value = true;
 };
 
 const stopRating = () => {
-  ratingService.stopRatingMode();
+  isRating.value = false;
 };
 
 const updatePlayerRating = async (playerId: string, rating: number) => {
@@ -870,7 +923,27 @@ const updatePlayerRating = async (playerId: string, rating: number) => {
     }
 
     ratingLoading.value = true;
-    await ratingService.updatePlayerRating(playerId, rating);
+    const result = await ratingService.useAddSimpleRating().addSimpleRating(playerId, rating);
+
+    if (result?.matchPlayer?.ratings) {
+      // Update the player's ratings in both starting positions and substitutes
+      const startingPosition = startingPositions.value.find(p => p.player?.id === playerId);
+      if (startingPosition?.player) {
+        startingPosition.player = {
+          ...result.matchPlayer,
+          player: startingPosition.player.player // Preserve the original player data
+        };
+      }
+
+      const substitute = substitutes.value.find(s => s.player?.id === playerId);
+      if (substitute?.player) {
+        substitute.player = {
+          ...result.matchPlayer,
+          player: substitute.player.player // Preserve the original player data
+        };
+      }
+    }
+
     $q.notify({
       color: 'positive',
       message: 'Rating updated successfully'
@@ -919,7 +992,7 @@ const validatePlayerSelection = (playerId: string, currentPosition: number): boo
   );
 
   const isSelectedInSubstitutes = substitutes.value.some(
-    sub => sub.player?.playerId === playerId
+    sub => sub.player?.playerId === playerId && sub.number !== currentPosition
   );
 
   if (isSelectedInStarting || isSelectedInSubstitutes) {

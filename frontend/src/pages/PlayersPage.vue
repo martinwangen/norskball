@@ -1,8 +1,8 @@
 <template>
   <q-page padding>
     <div class="row items-center justify-between q-mb-md">
-      <h1 class="text-h4 q-my-none">Players</h1>
-      <q-btn color="primary" icon="add" label="Add Player" @click="openAddDialog" />
+      <h1 class="text-h4 q-my-none">{{ $t('players.title') }}</h1>
+      <q-btn color="primary" icon="add" :label="$t('players.addPlayer')" @click="openAddDialog" />
     </div>
 
     <!-- Filters -->
@@ -10,7 +10,7 @@
       <q-select
         v-model="selectedTeam"
         :options="teamOptions"
-        label="Filter by Team"
+        :label="$t('players.filterByTeam')"
         option-value="value"
         clearable
         emit-value
@@ -46,7 +46,7 @@
             text-color="white"
             size="sm"
           >
-            {{ props.row.position }}
+            {{ $t(`players.positions.${props.row.position.toLowerCase()}`) }}
           </q-chip>
         </q-td>
       </template>
@@ -62,50 +62,50 @@
     <q-dialog v-model="dialog" persistent>
       <q-card style="min-width: 350px">
         <q-card-section>
-          <div class="text-h6">{{ editingPlayer ? 'Edit Player' : 'Add Player' }}</div>
+          <div class="text-h6">{{ editingPlayer ? $t('players.editPlayer') : $t('players.addPlayer') }}</div>
         </q-card-section>
 
         <q-card-section>
           <q-form @submit="savePlayer" class="q-gutter-md">
             <q-input
               v-model="form.firstName"
-              label="First Name"
-              :rules="[val => !!val || 'First name is required']"
+              :label="$t('players.form.firstName')"
+              :rules="[val => !!val || $t('players.form.firstNameRequired')]"
             />
             <q-input
               v-model="form.lastName"
-              label="Last Name"
-              :rules="[val => !!val || 'Last name is required']"
+              :label="$t('players.form.lastName')"
+              :rules="[val => !!val || $t('players.form.lastNameRequired')]"
             />
             <q-input
               v-model="form.dateOfBirth"
-              label="Date of Birth"
+              :label="$t('players.form.dateOfBirth')"
               type="date"
-              :rules="[val => !!val || 'Date of birth is required']"
+              :rules="[val => !!val || $t('players.form.dateOfBirthRequired')]"
             />
             <q-select
               v-model="form.position"
               :options="['GK', 'DF', 'MF', 'FW']"
-              label="Position"
-              :rules="[val => !!val || 'Position is required']"
+              :label="$t('players.form.position')"
+              :rules="[val => !!val || $t('players.form.positionRequired')]"
             />
             <q-input
               v-model="form.nationality"
-              label="Nationality"
-              :rules="[val => !!val || 'Nationality is required']"
+              :label="$t('players.form.nationality')"
+              :rules="[val => !!val || $t('players.form.nationalityRequired')]"
             />
             <q-select
               v-model="form.teamId"
               :options="teams"
               option-value="id"
               option-label="name"
-              label="Team"
-              :rules="[val => !!val || 'Team is required']"
+              :label="$t('players.form.team')"
+              :rules="[val => !!val || $t('players.form.teamRequired')]"
             />
 
             <div class="row justify-end q-mt-md">
-              <q-btn label="Cancel" color="primary" flat v-close-popup />
-              <q-btn label="Save" type="submit" color="primary" class="q-ml-sm" />
+              <q-btn :label="$t('common.cancel')" color="primary" flat v-close-popup />
+              <q-btn :label="$t('common.save')" type="submit" color="primary" class="q-ml-sm" />
             </div>
           </q-form>
         </q-card-section>
@@ -123,7 +123,9 @@ import { getPlayerFullName, getPositionColor, getPositionSortOrder } from '../se
 import { useTeamStore } from '../stores/teams';
 import TeamLogo from '../components/atoms/TeamLogo.vue';
 import { usePlayerStore } from 'src/stores/players';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const $q = useQuasar();
 const router = useRouter();
 const teamStore = useTeamStore();
@@ -149,30 +151,30 @@ const form = ref<Partial<Player>>({
 const columns = [
   {
     name: 'team_logo',
-    label: 'Team',
+    label: t('players.table.team'),
     field: 'team_id',
     align: 'center' as const,
   },
   {
     name: 'name',
-    label: 'Name',
+    label: t('players.table.name'),
     field: (row: Player) => getPlayerFullName(row),
     align: 'left' as const,
     sortable: true
   },
   {
     name: 'position',
-    label: 'Position',
+    label: t('players.table.position'),
     field: (row: Player) => row.position,
     format: (val: string) => val,
     sortable: true,
     sort: (a: string, b: string) => getPositionSortOrder(a as Position) - getPositionSortOrder(b as Position),
     align: 'center' as const
   },
-  { name: 'nationality', label: 'Nationality', field: 'nationality', align: 'left' as const },
-  { name: 'dateOfBirth', label: 'Date of Birth', field: 'dateOfBirth', align: 'left' as const, sortable: true },
-  { name: 'jerseyNumber', label: 'Jersey', field: 'jerseyNumber', align: 'center' as const },
-  { name: 'actions', label: 'Actions', field: 'actions', align: 'center' as const },
+  { name: 'nationality', label: t('players.table.nationality'), field: 'nationality', align: 'left' as const },
+  { name: 'dateOfBirth', label: t('players.table.dateOfBirth'), field: 'dateOfBirth', align: 'left' as const, sortable: true },
+  { name: 'jerseyNumber', label: t('players.table.jersey'), field: 'jerseyNumber', align: 'center' as const },
+  { name: 'actions', label: t('players.table.actions'), field: 'actions', align: 'center' as const },
 ];
 
 const teams = computed(() => {
@@ -181,7 +183,7 @@ const teams = computed(() => {
 
 const teamOptions = computed(() => {
   return [
-    { label: 'All Teams', value: null },
+    { label: t('players.allTeams'), value: null },
     ...(teams.value || []).map(team => ({ label: team.name, value: String(team.id) }))
   ];
 });

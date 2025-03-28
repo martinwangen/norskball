@@ -17,6 +17,7 @@
       />
 
       <match-event-bar
+        v-show="authStore.isAuthenticated"
         :match="match"
         @update:match="updateMatch"
       />

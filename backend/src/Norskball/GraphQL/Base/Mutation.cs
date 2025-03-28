@@ -4,6 +4,7 @@ using HotChocolate.Authorization;
 namespace Norskball.GraphQL.Base
 {
     [GraphQLDescription("Represents the mutations available.")]
-    [Authorize]
+    [Authorize(Roles = new[] { "admin" })]
+
     public class Mutation { }
 }

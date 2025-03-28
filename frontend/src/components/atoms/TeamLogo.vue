@@ -2,7 +2,7 @@
   <img
     v-if="team"
     :src="team.logo || 'https://via.placeholder.com/60?text=' + (team.name?.charAt(0) || 'T')"
-    :alt="team.name || 'Team Logo'"
+    :alt="team.name || $t('teams.logo')"
     :width="logoSize"
     class="team-logo"
   />

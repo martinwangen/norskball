@@ -1,9 +1,9 @@
 <template>
   <q-card class="player-stat-card">
     <q-card-section class="text-center">
-      <div class="text-h6 stat-title">{{ title }}</div>
+      <div class="text-h6 stat-title">{{ $t(title) }}</div>
       <div class="text-h3 stat-value q-mt-sm" :class="valueClass">{{ value }}</div>
-      <div class="text-caption q-mt-xs text-grey-7">{{ subtitle }}</div>
+      <div class="text-caption q-mt-xs text-grey-7">{{ subtitle ? $t(subtitle) : '' }}</div>
     </q-card-section>
   </q-card>
 </template>

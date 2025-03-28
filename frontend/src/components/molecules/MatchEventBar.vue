@@ -11,7 +11,7 @@
             icon="play_arrow"
             @click="startMatch"
           >
-            <q-tooltip>Start Match</q-tooltip>
+            <q-tooltip>{{ $t('matches.startMatch') }}</q-tooltip>
           </q-btn>
         </template>
 
@@ -25,7 +25,7 @@
               icon="sports_soccer"
               @click="showEventDialog(EventType.Goal)"
             >
-              <q-tooltip>Add Goal</q-tooltip>
+              <q-tooltip>{{ $t('matches.addGoal') }}</q-tooltip>
             </q-btn>
             <q-btn
               flat
@@ -34,7 +34,7 @@
               icon="sports_soccer"
               @click="showEventDialog(EventType.OwnGoal)"
             >
-              <q-tooltip>Add Own Goal</q-tooltip>
+              <q-tooltip>{{ $t('matches.addOwnGoal') }}</q-tooltip>
             </q-btn>
             <q-btn
               flat
@@ -43,7 +43,7 @@
               icon="square"
               @click="showEventDialog(EventType.YellowCard)"
             >
-              <q-tooltip>Add Yellow Card</q-tooltip>
+              <q-tooltip>{{ $t('matches.addYellowCard') }}</q-tooltip>
             </q-btn>
             <q-btn
               flat
@@ -52,7 +52,7 @@
               icon="square"
               @click="showEventDialog(EventType.RedCard)"
             >
-              <q-tooltip>Add Red Card</q-tooltip>
+              <q-tooltip>{{ $t('matches.addRedCard') }}</q-tooltip>
             </q-btn>
             <q-btn
               flat
@@ -61,7 +61,7 @@
               icon="swap_vert"
               @click="showEventDialog(EventType.Substitution)"
             >
-              <q-tooltip>Add Substitution</q-tooltip>
+              <q-tooltip>{{ $t('matches.addSubstitution') }}</q-tooltip>
             </q-btn>
             <q-btn
               flat
@@ -70,7 +70,7 @@
               icon="timer"
               @click="showEventDialog(EventType.HalfTimeStart)"
             >
-              <q-tooltip>Add Halftime</q-tooltip>
+              <q-tooltip>{{ $t('matches.addHalftime') }}</q-tooltip>
             </q-btn>
           </template>
           <template v-else>
@@ -81,7 +81,7 @@
               icon="play_arrow"
               @click="resumeMatch"
             >
-              <q-tooltip>Resume Match</q-tooltip>
+              <q-tooltip>{{ $t('matches.resumeMatch') }}</q-tooltip>
             </q-btn>
           </template>
           <q-btn
@@ -91,7 +91,7 @@
             icon="stop"
             @click="endMatch"
           >
-            <q-tooltip>End Match</q-tooltip>
+            <q-tooltip>{{ $t('matches.endMatch') }}</q-tooltip>
           </q-btn>
         </template>
       </q-card-section>

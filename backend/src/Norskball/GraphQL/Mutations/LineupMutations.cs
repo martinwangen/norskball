@@ -21,20 +21,30 @@ public class LineupMutations
             .FirstOrDefaultAsync(m => m.Id == lineup.MatchId)
             ?? throw new Exception($"Could not find match with ID {lineup.MatchId}");
 
-        if (string.IsNullOrEmpty(lineup.Id))
+        // Check for existing lineup with same match and team
+        var existingLineup = await dbContext.Lineups
+            .Include(l => l.Players)
+            .FirstOrDefaultAsync(l => l.MatchId == lineup.MatchId && l.TeamId == lineup.TeamId);
+
+        if (existingLineup != null)
         {
-            lineup = await CreateNewLineupAsync(dbContext, lineup, match);
+            // Update existing lineup
+            existingLineup.Formation = lineup.Formation;
+            existingLineup.IsStarting = lineup.IsStarting;
+            existingLineup.UpdatedAt = DateTime.UtcNow;
+            
+            // Update match players
+            await UpdateMatchPlayersAsync(dbContext, existingLineup, lineup.Players);
+            
+            return await dbContext.Lineups
+                .Include(l => l.Players)
+                .FirstOrDefaultAsync(l => l.Id == existingLineup.Id);
         }
         else
         {
-            lineup = await UpdateExistingLineupAsync(dbContext, lineup);
+            // Create new lineup
+            return await CreateNewLineupAsync(dbContext, lineup, match);
         }
-
-        await UpdateMatchPlayersAsync(dbContext, lineup);
-        
-        return await dbContext.Lineups
-            .Include(l => l.Players)
-            .FirstOrDefaultAsync(l => l.Id == lineup.Id);
     }
 
     private void ValidateLineup(Lineup lineup)
@@ -95,32 +105,20 @@ public class LineupMutations
         return lineup;
     }
 
-    private async Task<Lineup> UpdateExistingLineupAsync(NorskballDbContext dbContext, Lineup lineup)
+    private async Task UpdateMatchPlayersAsync(NorskballDbContext dbContext, Lineup existingLineup, List<MatchPlayer> newPlayers)
     {
-        var existing = await dbContext.Lineups
-            .Include(l => l.Players)
-            .FirstOrDefaultAsync(l => l.Id == lineup.Id)
-            ?? throw new Exception($"Could not find lineup with ID {lineup.Id}");
-
-        existing.Formation = lineup.Formation;
-        existing.IsStarting = lineup.IsStarting;
-        existing.UpdatedAt = DateTime.UtcNow;
-        
-        await dbContext.SaveChangesAsync();
-        return existing;
-    }
-
-    private async Task UpdateMatchPlayersAsync(NorskballDbContext dbContext, Lineup lineup)
-    {
-        var playerIds = lineup.Players.Select(p => p.Id).ToList();
+        // Get existing match players
         var existingMatchPlayers = await dbContext.MatchPlayers
-            .Where(mp => mp.LineupId == lineup.Id)
+            .Where(mp => mp.LineupId == existingLineup.Id)
             .ToListAsync();
 
+        // Create sets for efficient lookup
         var existingPlayerIds = existingMatchPlayers.Select(mp => mp.PlayerId).ToHashSet();
+        var newPlayerIds = newPlayers.Select(p => p.PlayerId).ToHashSet();
 
+        // Find players to remove (in existing but not in new)
         var playersToRemove = existingMatchPlayers
-            .Where(mp => !playerIds.Contains(mp.PlayerId))
+            .Where(mp => !newPlayerIds.Contains(mp.PlayerId))
             .ToList();
         
         if (playersToRemove.Any())
@@ -128,22 +126,33 @@ public class LineupMutations
             dbContext.MatchPlayers.RemoveRange(playersToRemove);
         }
 
-        var newMatchPlayers = lineup.Players
-            .Where(player => !existingPlayerIds.Contains(player.Id))
+        // Find players to add (in new but not in existing)
+        var playersToAdd = newPlayers
+            .Where(player => !existingPlayerIds.Contains(player.PlayerId))
             .Select(player => new MatchPlayer
             {
                 Id = Guid.NewGuid().ToString(),
-                LineupId = lineup.Id,
-                TeamId = lineup.TeamId,
+                LineupId = existingLineup.Id,
+                TeamId = existingLineup.TeamId,
                 PlayerId = player.PlayerId,
                 IsStarter = true,
                 Position = player.Position
             })
             .ToList();
 
-        if (newMatchPlayers.Any())
+        if (playersToAdd.Any())
         {
-            dbContext.MatchPlayers.AddRange(newMatchPlayers);
+            dbContext.MatchPlayers.AddRange(playersToAdd);
+        }
+
+        // Update positions for existing players
+        foreach (var existingPlayer in existingMatchPlayers)
+        {
+            var newPlayer = newPlayers.FirstOrDefault(p => p.PlayerId == existingPlayer.PlayerId);
+            if (newPlayer != null)
+            {
+                existingPlayer.Position = newPlayer.Position;
+            }
         }
 
         await dbContext.SaveChangesAsync();

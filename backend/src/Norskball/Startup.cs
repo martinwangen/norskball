@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Norskball.GraphQL.Authorization;
 
 namespace Norskball
 {
@@ -129,6 +131,9 @@ namespace Norskball
                 .AddProjections()
                 .AddFiltering()
                 .AddSorting();
+
+            // Register the custom authorization handler
+            services.AddScoped<HotChocolate.Authorization.IAuthorizationHandler, HotChocolateUserAuthorizationHandler>();
 
             // Configure CORS
             services.AddCors(options =>

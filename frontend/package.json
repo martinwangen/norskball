@@ -27,6 +27,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vue": "^3.4.15",
+    "vue-country-flag-next": "^2.3.2",
     "vue-i18n": "^11.0.0",
     "vue-router": "^4.0.12"
   },

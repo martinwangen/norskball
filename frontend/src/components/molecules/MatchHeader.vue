@@ -5,7 +5,7 @@
         {{ getStatusText(status) }}
       </match-badge>
       <match-badge v-if="status === Status.InProgress" color="red" class="q-ml-xs">
-        LIVE
+        {{ $t('matches.live') }}
       </match-badge>
     </div>
 
@@ -18,7 +18,7 @@
         icon="edit"
         @click="startEditing"
       >
-        <q-tooltip>Edit match details</q-tooltip>
+        <q-tooltip>{{ $t('matches.editDetails') }}</q-tooltip>
       </q-btn>
 
       <div v-else class="row items-center q-gutter-sm">
@@ -37,7 +37,7 @@
           icon="check"
           @click="saveChanges"
         >
-          <q-tooltip>Save changes</q-tooltip>
+          <q-tooltip>{{ $t('common.save') }}</q-tooltip>
         </q-btn>
         <q-btn
           flat
@@ -46,7 +46,7 @@
           icon="close"
           @click="cancelEditing"
         >
-          <q-tooltip>Cancel</q-tooltip>
+          <q-tooltip>{{ $t('common.cancel') }}</q-tooltip>
         </q-btn>
       </div>
     </div>
@@ -54,19 +54,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { Status } from '../../gql/__generated__/graphql';
 import MatchBadge from '../atoms/MatchBadge.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
+const props = defineProps<{
+  status: Status;
+  isAdmin?: boolean;
+  editable?: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:status', status: Status): void;
+}>();
+
+const isEditing = ref(false);
+const editedStatus = ref(props.status);
 
 // Get status text
 const getStatusText = (status: Status): string => {
   switch (status) {
-    case Status.Scheduled: return 'Scheduled';
-    case Status.InProgress: return 'Live';
-    case Status.Completed: return 'Finished';
-    case Status.Postponed: return 'Postponed';
-    case Status.Cancelled: return 'Cancelled';
-    default: return 'Unknown';
+    case Status.Scheduled: return t('matches.status.scheduled');
+    case Status.InProgress: return t('matches.status.live');
+    case Status.Completed: return t('matches.status.finished');
+    case Status.Postponed: return t('matches.status.postponed');
+    case Status.Cancelled: return t('matches.status.cancelled');
+    default: return t('common.unknown');
   }
 };
 
@@ -82,23 +98,12 @@ const getStatusColor = (status: Status): string => {
   }
 };
 
-const props = defineProps<{
-  status: Status;
-  isAdmin?: boolean;
-  editable?: boolean;
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:status', status: Status): void;
-}>();
-
-const isEditing = ref(false);
-const editedStatus = ref(props.status);
-
-const statusOptions = Object.values(Status).map(status => ({
-  label: getStatusText(status),
-  value: status
-}));
+const statusOptions = computed(() =>
+  Object.values(Status).map(status => ({
+    label: getStatusText(status),
+    value: status
+  }))
+);
 
 const startEditing = () => {
   if (!props.editable) return;

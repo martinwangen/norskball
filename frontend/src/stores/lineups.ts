@@ -15,8 +15,10 @@ export const useLineupStore = defineStore('lineup', {
   }),
 
   getters: {
-    getLineupByteam_id: (state) => (team_id: string) => {
-      return Object.values(state.lineups).find(lineup => lineup.teamId === team_id);
+    getLineupByTeamAndMatch: (state) => (teamId: string, matchId: string) => {
+      return Object.values(state.lineups).find(lineup =>
+        lineup.teamId === teamId && lineup.matchId === matchId
+      );
     },
     getLineupById: (state) => (id: string) => {
       return state.lineups[id];

@@ -870,6 +870,7 @@ export enum Position {
   Forward = 'FORWARD',
   Goalkeeper = 'GOALKEEPER',
   Midfielder = 'MIDFIELDER',
+  Substitute = 'SUBSTITUTE',
   Undefined = 'UNDEFINED'
 }
 

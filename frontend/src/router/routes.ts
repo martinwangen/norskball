@@ -112,7 +112,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/IFrames/PlayerStatistics.vue'),
         props: true,
         meta: {
-          requiresAuth: true,
+          requiresAuth: false,
           allowedActions: ['view', 'create', 'edit']
         }
       },
@@ -122,17 +122,17 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/IFrames/TeamStatistics.vue'),
         props: true,
         meta: {
-          requiresAuth: true,
+          requiresAuth: false,
           allowedActions: ['view', 'create', 'edit']
         }
       },
       {
-        path: 'statistics/match/:id',
+        path: 'statistics/matches',
         name: 'match-ratings',
         component: () => import('pages/IFrames/MatchRatings.vue'),
         props: true,
         meta: {
-          requiresAuth: true,
+          requiresAuth: false,
           allowedActions: ['view', 'create', 'edit']
         }
       }

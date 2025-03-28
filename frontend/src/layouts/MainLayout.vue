@@ -16,10 +16,11 @@
         />
 
         <q-toolbar-title>
-          Norskball
+          {{ $t('layout.appName') }}
         </q-toolbar-title>
 
         <q-space />
+        <language-switcher />
 
         <!-- Dark Mode Toggle -->
         <q-btn
@@ -27,9 +28,9 @@
           round
           :icon="isDark ? 'dark_mode' : 'light_mode'"
           @click="toggleDarkMode"
-          :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+          :aria-label="isDark ? $t('layout.darkMode.switchToLight') : $t('layout.darkMode.switchToDark')"
         >
-          <q-tooltip>{{ isDark ? 'Switch to light mode' : 'Switch to dark mode' }}</q-tooltip>
+          <q-tooltip>{{ isDark ? $t('layout.darkMode.switchToLight') : $t('layout.darkMode.switchToDark') }}</q-tooltip>
         </q-btn>
 
         <div v-if="authStore.isAuthenticated" class="row items-center">
@@ -37,20 +38,20 @@
             <q-list>
               <q-item clickable v-close-popup @click="handleLogout">
                 <q-item-section>
-                  <q-item-label>Logout</q-item-label>
+                  <q-item-label>{{ $t('auth.logout') }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
           </q-btn-dropdown>
         </div>
-        <q-btn v-else flat label="Login" @click="handleLogin" :loading="loading" />
+        <q-btn v-else flat :label="$t('auth.login')" @click="handleLogin" :loading="loading" />
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above :width="200" :breakpoint="500" bordered>
       <q-list>
         <q-item-label header class="text-grey-8">
-          Navigation
+          {{ $t('layout.navigation') }}
         </q-item-label>
 
         <q-item clickable v-ripple to="/" exact>
@@ -58,7 +59,7 @@
             <q-icon name="home" />
           </q-item-section>
           <q-item-section>
-            Home
+            {{ $t('layout.menu.home') }}
           </q-item-section>
         </q-item>
 
@@ -67,7 +68,7 @@
             <q-icon name="groups" />
           </q-item-section>
           <q-item-section>
-            Teams
+            {{ $t('layout.menu.teams') }}
           </q-item-section>
         </q-item>
 
@@ -76,7 +77,7 @@
             <q-icon name="sports" />
           </q-item-section>
           <q-item-section>
-            Players
+            {{ $t('layout.menu.players') }}
           </q-item-section>
         </q-item>
 
@@ -85,7 +86,7 @@
             <q-icon name="sports_soccer" />
           </q-item-section>
           <q-item-section>
-            Matches
+            {{ $t('layout.menu.matches') }}
           </q-item-section>
         </q-item>
 
@@ -94,7 +95,7 @@
             <q-icon name="analytics" />
           </q-item-section>
           <q-item-section>
-            Statistics
+            {{ $t('layout.menu.statistics') }}
           </q-item-section>
         </q-item>
 
@@ -103,14 +104,14 @@
             <q-icon name="star" />
           </q-item-section>
           <q-item-section>
-            Ratings
+            {{ $t('layout.menu.ratings') }}
           </q-item-section>
         </q-item>
 
         <q-separator />
 
         <q-item-label header class="text-grey-8">
-          Leagues
+          {{ $t('layout.leagues') }}
         </q-item-label>
 
         <q-item clickable v-ripple to="/leagues/eliteserien" exact>
@@ -118,7 +119,7 @@
             <q-icon name="emoji_events" />
           </q-item-section>
           <q-item-section>
-            Eliteserien
+            {{ $t('layout.menu.eliteserien') }}
           </q-item-section>
         </q-item>
       </q-list>
@@ -132,7 +133,7 @@
       <q-toolbar>
         <q-toolbar-title>
           <div class="text-caption">
-            &copy; {{ new Date().getFullYear() }} Football Ratings App
+            {{ $t('layout.copyright', { year: new Date().getFullYear() }) }}
           </div>
         </q-toolbar-title>
       </q-toolbar>
@@ -145,7 +146,7 @@ import { ref, computed, onMounted } from 'vue';
 import { useQuasar } from 'quasar';
 import { authService } from '../services/auth';
 import { useAuthStore } from '../stores/auth';
-
+import LanguageSwitcher from '../components/LanguageSwitcher.vue';
 const $q = useQuasar();
 const authStore = useAuthStore();
 const leftDrawerOpen = ref(false);

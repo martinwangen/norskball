@@ -7,7 +7,7 @@
     <q-separator />
 
     <q-card-actions align="right">
-      <q-btn flat color="primary" label="View Team" :to="'/teams/' + team.id" />
+      <q-btn flat color="primary" :label="$t('teams.viewTeam')" :to="'/teams/' + team.id" />
     </q-card-actions>
   </q-card>
 </template>
