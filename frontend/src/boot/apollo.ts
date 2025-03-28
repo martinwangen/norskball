@@ -14,7 +14,7 @@ import { formatApolloParams } from '../utils/graphql';
 
 // Create the http link
 const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_GRAPHQL_URL || 'http://localhost:5001/graphql',
+  uri: import.meta.env.VITE_API_BASE_URL + '/graphql',
   credentials: 'include',
   fetchOptions: {
     mode: 'cors',

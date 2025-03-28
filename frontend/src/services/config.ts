@@ -40,7 +40,7 @@ export interface AppSettings {
 // Create a reactive configuration object with default values
 const config = ref<AppSettings>({
   api: {
-    base_url: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001',
+    base_url: import.meta.env.VITE_API_BASE_URL + '/graphql',
     timeout: Number(import.meta.env.VITE_API_TIMEOUT) || 10000
   },
   auth: {

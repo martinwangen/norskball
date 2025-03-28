@@ -90,3 +90,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend/dist/spa
           publish_branch: gh-pages
+          force: true
+          commit_message: "Deploy frontend to GitHub Pages [skip ci]"
