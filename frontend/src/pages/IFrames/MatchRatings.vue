@@ -120,7 +120,7 @@ const selectedMatch = computed(() => {
   return processedRatings.value.find(match => match.id === selectedMatchId.value) || null;
 });
 
-const { loading: queryLoading, onResult } = useQuery(GetAllMatchRatingsOnlyRatedPlayers, {
+const { loading: queryLoading, onResult: onResult,onError: onError } = useQuery(GetAllMatchRatingsOnlyRatedPlayers, {
   variables: {
     beforeDate: new Date().toISOString()
   }
@@ -138,6 +138,12 @@ onResult(({ data }) => {
     }
   }
 });
+
+onError((error) => {
+  console.error('Error fetching match ratings:', error);
+  ratings.value = mockratings.data.allMatchRatingsOnlyRatedPlayers.nodes;
+  selectedMatchId.value = mockratings[0].id;
+});
 </script>
 
 <style scoped>
@@ -147,6 +153,7 @@ onResult(({ data }) => {
   gap: 2rem;
   max-width: 1800px;
   margin: 0 auto;
+  overflow-y: auto;
 }
 
 .match-list-container {
@@ -155,6 +162,21 @@ onResult(({ data }) => {
 
 .match-display-container {
   width: 100%;
+  overflow-y: auto;
+
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.match-ratings-container::-webkit-scrollbar,
+.match-display-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.match-ratings-container,
+.match-display-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Theme-specific styles */
@@ -178,5 +200,15 @@ onResult(({ data }) => {
 
 :deep(.q-table th) {
   background: var(--q-color-surface-variant);
+}
+
+@media (max-width: 768px) {
+  .match-ratings-container {
+    height: calc(100vh - 1rem);
+  }
+
+  .match-display-container {
+    max-height: calc(100vh - 250px);
+  }
 }
 </style>
