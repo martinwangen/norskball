@@ -222,8 +222,8 @@ public class NorskballDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.HasIndex(e => e.Email).IsUnique();
             entity.Property(e => e.Email).IsRequired();
-            entity.Property(e => e.Name).IsRequired();
-            entity.Property(e => e.Picture).IsRequired();
+            entity.Property(e => e.Name);
+            entity.Property(e => e.Picture);
         });
     }
 

@@ -54,9 +54,11 @@ public class AuthService : IAuthService
         }
         else
         {
-            // Update existing user's information
-            user.Name = request.Name;
-            user.Picture = request.Picture;
+            // Update existing user's information, only if the new values are not null
+            if (!string.IsNullOrEmpty(request.Name))
+                user.Name = request.Name;
+            if (!string.IsNullOrEmpty(request.Picture))
+                user.Picture = request.Picture;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
