@@ -53,5 +53,16 @@ public class MatchType : ObjectType<Match>
         descriptor.Field(m => m.AwayTeamLineup)
             .Description("The away team's lineup for this match")
             .Type<LineupType>();
+
+        descriptor.Field(m => m.Rating)
+            .Description("The dice rating for the match (1-6)")
+            .Type<IntType>();
+
+        descriptor.Field(m => m.Referee)
+            .Description("The referee for this match")
+            .Type<RefereeType>();
+
+        descriptor.Field(m => m.RefereeId)
+            .Description("The ID of the referee for this match");
     }
 } 

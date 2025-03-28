@@ -40,7 +40,7 @@
             <div class="text-subtitle2 q-mb-sm">Match Events</div>
             <q-timeline color="primary">
               <q-timeline-entry
-                v-for="event in match.events"
+                v-for="event in match.events || []"
                 :key="event.id"
                 :title="formatEventTitle(event)"
                 :subtitle="`${event.minuteOfMatch}' - ${formatEventType(event.type)}`"
@@ -49,7 +49,7 @@
                 <div v-if="event.description">{{ event.description }}</div>
               </q-timeline-entry>
               <q-timeline-entry
-                v-if="match.events.length === 0"
+                v-if="!match.events || match.events.length === 0"
                 title="No Events"
                 icon="sports_soccer"
               >
@@ -64,7 +64,6 @@
 </template>
 
 <script setup lang="ts">
-import { date } from 'quasar';
 import { EventType } from '../../gql/__generated__/graphql';
 import type { Match, MatchEvent } from '../../gql/__generated__/graphql';
 
@@ -75,7 +74,19 @@ defineProps<{
 const formatDate = (dateStr: string): string => {
   if (!dateStr) return 'N/A';
   try {
-    return date.formatDate(dateStr, 'MMMM D, YYYY [at] h:mm A');
+    const date = new Date(dateStr);
+    // Add 1 hour for timezone
+    date.setHours(date.getHours() + 1);
+    const formattedDate = date.toLocaleString('nb-NO', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+    // Remove "kl." and replace comma+space with line break
+    return formattedDate.replace('kl.', '').replace(', ', '\n').trim();
   } catch {
     return dateStr;
   }
@@ -86,7 +97,9 @@ const formatEventType = (type: EventType): string => {
     case EventType.Goal: return '⚽ Goal';
     case EventType.YellowCard: return '🟨 Yellow Card';
     case EventType.RedCard: return '🟥 Red Card';
-    case EventType.Substitution: return '🔄 Substitution';
+    case EventType.Substitution: return '�� Substitution';
+    case EventType.HalfTimeStart: return '⏱️ Half Time';
+    case EventType.GameEnd: return '🏁 Full Time';
     default: return type;
   }
 };
@@ -104,6 +117,10 @@ const formatEventTitle = (event: MatchEvent): string => {
       return `${event.type === EventType.YellowCard ? 'Yellow' : 'Red'} card shown to ${playerName} (${teamName})`;
     case EventType.Substitution:
       return `${playerName} replaced by ${secondaryPlayerName} (${teamName})`;
+    case EventType.HalfTimeStart:
+      return 'Half Time';
+    case EventType.GameEnd:
+      return 'Full Time';
     default:
       return event.description || 'Event';
   }

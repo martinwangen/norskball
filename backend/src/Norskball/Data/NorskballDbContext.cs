@@ -19,10 +19,20 @@ public class NorskballDbContext : DbContext
     public DbSet<Lineup> Lineups { get; set; } = default!;
     public DbSet<MatchPlayer> MatchPlayers { get; set; } = default!;
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Referee> Referees { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        // Configure Referee entity
+        modelBuilder.Entity<Referee>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+        });
 
         // Configure Player entity
         modelBuilder.Entity<Player>(entity =>
@@ -71,6 +81,7 @@ public class NorskballDbContext : DbContext
             entity.Property(e => e.Status).IsRequired();
             entity.Property(e => e.CreatedAt).IsRequired();
             entity.Property(e => e.UpdatedAt).IsRequired();
+            entity.Property(e => e.Rating).HasDefaultValue(null);
 
             // Configure Score as owned entity
             entity.OwnsOne(m => m.Score);
@@ -95,6 +106,12 @@ public class NorskballDbContext : DbContext
             entity.HasOne(m => m.AwayTeamLineup)
                 .WithMany()
                 .HasForeignKey(m => m.AwayTeamLineupId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure relationship with Referee
+            entity.HasOne(m => m.Referee)
+                .WithMany(r => r.Matches)
+                .HasForeignKey(m => m.RefereeId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
 

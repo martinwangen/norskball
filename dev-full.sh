@@ -102,10 +102,10 @@ FRONTEND_PID=$!
 CODEGEN_PID=$!
 
 echo -e "${BLUE}=== Development Environment Started ===${NC}"
-echo -e "${GREEN}Backend:${NC} https://localhost:5001"
+echo -e "${GREEN}Backend:${NC} http://localhost:5001"
 echo -e "${GREEN}Frontend:${NC} http://localhost:3000"
-echo -e "${GREEN}GraphQL Playground:${NC} https://localhost:5001/graphql"
-echo -e "${GREEN}Health Checks:${NC} https://localhost:5001/health"
+echo -e "${GREEN}GraphQL Playground:${NC} http://localhost:5001/graphql"
+echo -e "${GREEN}Health Checks:${NC} http://localhost:5001/health"
 echo -e "${YELLOW}Press Ctrl+C to terminate all processes.${NC}"
 
 # Wait for all processes to finish

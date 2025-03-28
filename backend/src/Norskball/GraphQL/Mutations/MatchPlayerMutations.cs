@@ -10,7 +10,6 @@ namespace Norskball.GraphQL.Mutations;
 [ExtendObjectType(typeof(Mutation))]
 public class MatchPlayerMutations
 {
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchPlayer> AddMatchPlayerAsync(NorskballDbContext dbContext, MatchPlayer matchPlayer)
     {
         dbContext.MatchPlayers.Add(matchPlayer);
@@ -18,7 +17,6 @@ public class MatchPlayerMutations
         return matchPlayer;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchPlayer> UpdateMatchPlayerAsync(NorskballDbContext dbContext, MatchPlayer matchPlayer)
     {
         dbContext.MatchPlayers.Update(matchPlayer);
@@ -26,7 +24,6 @@ public class MatchPlayerMutations
         return matchPlayer;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchPlayer> DeleteMatchPlayerAsync(NorskballDbContext dbContext, string id)
     {
         var matchPlayer = await dbContext.MatchPlayers.FindAsync(id);
@@ -39,7 +36,6 @@ public class MatchPlayerMutations
         return matchPlayer;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchPlayer> SubstitutePlayerAsync(NorskballDbContext dbContext, string matchPlayerId, DateTime substitutionTime)
     {
         var matchPlayer = await dbContext.MatchPlayers.FindAsync(matchPlayerId);

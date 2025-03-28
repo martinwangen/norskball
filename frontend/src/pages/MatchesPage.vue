@@ -21,7 +21,18 @@
                 <q-card-section>
                   <div class="row items-center">
                     <div class="col-5 text-right">
-                      <div class="text-subtitle1">{{ match.homeTeam.name }}</div>
+                      <div class="row items-center justify-end">
+                        <div class="text-subtitle1 q-mr-md">{{ match.homeTeam.name }}</div>
+                        <q-avatar size="32px">
+                          <q-img
+                            v-if="match.homeTeam.logo"
+                            :src="match.homeTeam.logo"
+                            :alt="match.homeTeam.name"
+                            fit="contain"
+                          />
+                          <q-icon v-else name="sports_soccer" size="24px" />
+                        </q-avatar>
+                      </div>
                     </div>
                     <div class="col-2 text-center">
                       <div class="text-h6">
@@ -30,7 +41,18 @@
                       <div class="text-caption text-red">LIVE</div>
                     </div>
                     <div class="col-5">
-                      <div class="text-subtitle1">{{ match.awayTeam.name }}</div>
+                      <div class="row items-center">
+                        <q-avatar size="32px">
+                          <q-img
+                            v-if="match.awayTeam.logo"
+                            :src="match.awayTeam.logo"
+                            :alt="match.awayTeam.name"
+                            fit="contain"
+                          />
+                          <q-icon v-else name="sports_soccer" size="24px" />
+                        </q-avatar>
+                        <div class="text-subtitle1 q-ml-md">{{ match.awayTeam.name }}</div>
+                      </div>
                     </div>
                   </div>
                 </q-card-section>
@@ -48,10 +70,27 @@
                 <q-card-section>
                   <div class="row items-center">
                     <div class="col-5 text-right">
-                      <div class="text-subtitle1">{{ match.homeTeam.name }}</div>
+                      <div class="row items-center justify-end">
+                        <div class="text-subtitle1 q-mr-md">{{ match.homeTeam.name }}</div>
+                        <q-avatar size="32px">
+                          <q-img
+                            v-if="match.homeTeam.logo"
+                            :src="match.homeTeam.logo"
+                            :alt="match.homeTeam.name"
+                            fit="contain"
+                          />
+                          <q-icon v-else name="sports_soccer" size="24px" />
+                        </q-avatar>
+                      </div>
                     </div>
                     <div class="col-2 text-center">
-                      <template v-if="match.status === Status.Completed">
+                      <template v-if="match.status === Status.InProgress">
+                        <div class="text-h6">
+                          {{ match.score.homeTeamScore }} - {{ match.score.awayTeamScore }}
+                        </div>
+                        <div class="text-caption text-red">LIVE</div>
+                      </template>
+                      <template v-else-if="match.status === Status.Completed">
                         <div class="text-h6">
                           {{ match.score.homeTeamScore }} - {{ match.score.awayTeamScore }}
                         </div>
@@ -62,7 +101,18 @@
                       </template>
                     </div>
                     <div class="col-5">
-                      <div class="text-subtitle1">{{ match.awayTeam.name }}</div>
+                      <div class="row items-center">
+                        <q-avatar size="32px">
+                          <q-img
+                            v-if="match.awayTeam.logo"
+                            :src="match.awayTeam.logo"
+                            :alt="match.awayTeam.name"
+                            fit="contain"
+                          />
+                          <q-icon v-else name="sports_soccer" size="24px" />
+                        </q-avatar>
+                        <div class="text-subtitle1 q-ml-md">{{ match.awayTeam.name }}</div>
+                      </div>
                     </div>
                   </div>
                 </q-card-section>

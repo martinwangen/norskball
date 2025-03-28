@@ -4,15 +4,17 @@ import {
   ApolloClient,
   createHttpLink,
   from,
+  ApolloLink,
 } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { ApolloClients, provideApolloClient } from '@vue/apollo-composable';
 import { useAuthStore } from '../stores/auth';
+import { formatApolloParams } from '../utils/graphql';
 
 // Create the http link
 const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_GRAPHQL_URL || 'https://localhost:5001/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URL || 'http://localhost:5001/graphql',
   credentials: 'include',
   fetchOptions: {
     mode: 'cors',
@@ -23,7 +25,6 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   const authStore = useAuthStore();
   const token = authStore.getToken();
-  console.log('Apollo client using token:', token);
 
   return {
     headers: {
@@ -31,6 +32,14 @@ const authLink = setContext((_, { headers }) => {
       authorization: token ? `Bearer ${token}` : '',
     }
   };
+});
+
+// Parameter formatting link
+const formatParamsLink = new ApolloLink((operation, forward) => {
+  if (operation.variables) {
+    operation.variables = formatApolloParams({ variables: operation.variables }).variables;
+  }
+  return forward(operation);
 });
 
 // Error handling link
@@ -58,13 +67,13 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 // Create the Apollo Client instance
 const apolloClient = new ApolloClient({
-  link: from([errorLink, authLink, httpLink]),
+  link: from([formatParamsLink, errorLink, authLink, httpLink]),
   cache: new InMemoryCache(),
   defaultOptions: {
     watchQuery: {
       fetchPolicy: 'cache-and-network',
     },
-  },
+  }
 });
 
 export { apolloClient };

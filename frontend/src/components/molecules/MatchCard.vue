@@ -54,7 +54,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { type Match, Status } from '../../gql/__generated__/graphql';
-import { date } from 'quasar';
 import TeamLogo from '../atoms/TeamLogo.vue';
 
 interface Props {
@@ -70,7 +69,19 @@ const navigateToMatch = () => {
 
 const formatDate = (dateString: string) => {
   try {
-    return date.formatDate(dateString, 'MMM D, YYYY - h:mm A');
+    const date = new Date(dateString);
+    // Add 1 hour for timezone
+    date.setHours(date.getHours() + 1);
+    const formattedDate = date.toLocaleString('nb-NO', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+    // Remove "kl." and replace comma+space with line break
+    return formattedDate.replace('kl.', '').replace(', ', '\n').trim();
   } catch {
     return dateString;
   }

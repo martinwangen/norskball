@@ -16,6 +16,11 @@
         @update:match="updateMatch"
       />
 
+      <match-event-bar
+        :match="match"
+        @update:match="updateMatch"
+      />
+
       <match-lineups
         :match="match"
         :loading="loading"
@@ -23,22 +28,53 @@
         @update:match="updateMatch"
       />
 
+      <match-info
+        :match="match"
+      />
 
+      <div v-if="isAdmin" class="row justify-end q-mb-md">
+        <q-btn
+          color="primary"
+          icon="add"
+          label="Add Event"
+          @click="showEventForm = true"
+        />
+      </div>
+
+      <q-dialog v-model="showEventForm" persistent>
+        <q-card style="min-width: 500px">
+          <match-event-form
+            :match="match"
+            :event-type="selectedEventType"
+            @event-added="handleEventAdded"
+            @cancel="showEventForm = false"
+          />
+        </q-card>
+      </q-dialog>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { matchService } from 'src/services/matchService';
+import { useAuthStore } from 'src/stores/auth';
 import type { Match } from 'src/gql/__generated__/graphql';
+import { EventType } from 'src/gql/__generated__/graphql';
 import MatchDetailHeader from 'src/components/organisms/MatchDetailHeader.vue';
+import MatchEventBar from 'src/components/molecules/MatchEventBar.vue';
 import MatchLineups from 'src/components/organisms/MatchLineups.vue';
-
+import MatchInfo from 'src/components/organisms/MatchInfo.vue';
+import MatchEventForm from 'src/components/organisms/MatchEventForm.vue';
 
 const route = useRoute();
-const { match, loading, error } = matchService.useMatch(route.params.id as string);
+const authStore = useAuthStore();
+const isAdmin = computed(() => authStore.isAuthenticated);
+const showEventForm = ref(false);
+const selectedEventType = ref<EventType>(EventType.Goal); // Default to Goal event type
 
+const { match, loading, error, refetch } = matchService.useMatch(route.params.id as string);
 
 const updateMatch = async (updatedMatch: Match) => {
   try {
@@ -47,6 +83,11 @@ const updateMatch = async (updatedMatch: Match) => {
   } catch (error) {
     console.error('Error updating match:', error);
   }
+};
+
+const handleEventAdded = async () => {
+  showEventForm.value = false;
+  await refetch();
 };
 </script>
 

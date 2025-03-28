@@ -19,12 +19,19 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null);
   const isAuthenticated = ref(false);
   const token = ref<string | null>(null);
+  const isAdmin = ref(false);
 
   // Initialize from localStorage
   const storedToken = localStorage.getItem('auth_token');
   if (storedToken) {
     token.value = storedToken;
     isAuthenticated.value = true;
+  }
+
+  function setUser(newUser: User | null) {
+    console.log('Setting user:', newUser);
+    user.value = newUser;
+    isAdmin.value = newUser?.roles?.includes('admin') ?? false;
   }
 
   async function loginWithGoogle(requestBody: { idToken: string; email: string; name: string; picture: string }) {
@@ -47,7 +54,7 @@ export const useAuthStore = defineStore('auth', () => {
       console.log('Received auth response:', data);
 
       // Store user and token
-      user.value = data.user;
+      setUser(data.user);
       token.value = data.token;
       isAuthenticated.value = true;
       localStorage.setItem('auth_token', data.token);
@@ -119,6 +126,7 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     user,
     isAuthenticated,
+    isAdmin,
     token,
     loginWithGoogle,
     logout,

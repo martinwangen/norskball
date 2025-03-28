@@ -4,10 +4,14 @@ export const LINEUP_FIELDS = gql`
   fragment LineupFields on Lineup {
     id
     teamId
+    matchId
     formation
     isStarting
     players {
       id
+      playerId
+      lineupId
+      teamId
       player {
         id
         firstName

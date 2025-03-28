@@ -15,6 +15,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
   /** The `DateTime` scalar represents an ISO-8601 compliant date time type. */
   DateTime: { input: any; output: any; }
+  UUID: { input: any; output: any; }
 };
 
 /** Defines when a policy shall be executed. */
@@ -45,6 +46,21 @@ export type DateTimeOperationFilterInput = {
   nin?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   nlt?: InputMaybe<Scalars['DateTime']['input']>;
   nlte?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type DetailedPlayerStats = {
+  __typename?: 'DetailedPlayerStats';
+  assists: Scalars['Int']['output'];
+  averageRating: Scalars['Float']['output'];
+  goals: Scalars['Int']['output'];
+  highestRating: Scalars['Float']['output'];
+  matchesPlayed: Scalars['Int']['output'];
+  playerId: Scalars['String']['output'];
+  playerName: Scalars['String']['output'];
+  points: Scalars['Int']['output'];
+  ratingCount: Scalars['Int']['output'];
+  redCards: Scalars['Int']['output'];
+  yellowCards: Scalars['Int']['output'];
 };
 
 export enum EventType {
@@ -141,6 +157,7 @@ export type Lineup = {
   formation: Formation;
   id: Scalars['String']['output'];
   isStarting: Scalars['Boolean']['output'];
+  match?: Maybe<Match>;
   matchId: Scalars['String']['output'];
   players: Array<MatchPlayer>;
   team?: Maybe<Team>;
@@ -155,6 +172,7 @@ export type LineupFilterInput = {
   formation?: InputMaybe<FormationOperationFilterInput>;
   id?: InputMaybe<StringOperationFilterInput>;
   isStarting?: InputMaybe<BooleanOperationFilterInput>;
+  match?: InputMaybe<MatchFilterInput>;
   matchId?: InputMaybe<StringOperationFilterInput>;
   or?: InputMaybe<Array<LineupFilterInput>>;
   players?: InputMaybe<ListFilterInputTypeOfMatchPlayerFilterInput>;
@@ -169,6 +187,7 @@ export type LineupInput = {
   formation: Formation;
   id: Scalars['String']['input'];
   isStarting: Scalars['Boolean']['input'];
+  match?: InputMaybe<MatchInput>;
   matchId: Scalars['String']['input'];
   players: Array<MatchPlayerInput>;
   team?: InputMaybe<TeamInput>;
@@ -182,6 +201,7 @@ export type LineupSortInput = {
   formation?: InputMaybe<SortEnumType>;
   id?: InputMaybe<SortEnumType>;
   isStarting?: InputMaybe<SortEnumType>;
+  match?: InputMaybe<MatchSortInput>;
   matchId?: InputMaybe<SortEnumType>;
   team?: InputMaybe<TeamSortInput>;
   teamId?: InputMaybe<SortEnumType>;
@@ -193,6 +213,13 @@ export type ListFilterInputTypeOfMatchEventFilterInput = {
   any?: InputMaybe<Scalars['Boolean']['input']>;
   none?: InputMaybe<MatchEventFilterInput>;
   some?: InputMaybe<MatchEventFilterInput>;
+};
+
+export type ListFilterInputTypeOfMatchFilterInput = {
+  all?: InputMaybe<MatchFilterInput>;
+  any?: InputMaybe<Scalars['Boolean']['input']>;
+  none?: InputMaybe<MatchFilterInput>;
+  some?: InputMaybe<MatchFilterInput>;
 };
 
 export type ListFilterInputTypeOfMatchPlayerFilterInput = {
@@ -229,6 +256,9 @@ export type Match = {
   homeTeamLineup?: Maybe<Lineup>;
   homeTeamLineupId?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
+  rating?: Maybe<Scalars['Int']['output']>;
+  referee?: Maybe<Referee>;
+  refereeId?: Maybe<Scalars['UUID']['output']>;
   scheduledDate: Scalars['DateTime']['output'];
   score?: Maybe<Score>;
   status: Status;
@@ -239,7 +269,7 @@ export type MatchEvent = {
   __typename?: 'MatchEvent';
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
-  match: Match;
+  match?: Maybe<Match>;
   matchId: Scalars['String']['output'];
   minuteOfMatch: Scalars['Int']['output'];
   player?: Maybe<Player>;
@@ -273,7 +303,7 @@ export type MatchEventFilterInput = {
 export type MatchEventInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
-  match: MatchInput;
+  match?: InputMaybe<MatchInput>;
   matchId: Scalars['String']['input'];
   minuteOfMatch: Scalars['Int']['input'];
   player?: InputMaybe<PlayerInput>;
@@ -338,6 +368,9 @@ export type MatchFilterInput = {
   homeTeamLineupId?: InputMaybe<StringOperationFilterInput>;
   id?: InputMaybe<StringOperationFilterInput>;
   or?: InputMaybe<Array<MatchFilterInput>>;
+  rating?: InputMaybe<IntOperationFilterInput>;
+  referee?: InputMaybe<RefereeFilterInput>;
+  refereeId?: InputMaybe<UuidOperationFilterInput>;
   scheduledDate?: InputMaybe<DateTimeOperationFilterInput>;
   score?: InputMaybe<ScoreFilterInput>;
   status?: InputMaybe<StatusOperationFilterInput>;
@@ -356,6 +389,9 @@ export type MatchInput = {
   homeTeamLineup?: InputMaybe<LineupInput>;
   homeTeamLineupId?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
+  rating?: InputMaybe<Scalars['Int']['input']>;
+  referee?: InputMaybe<RefereeInput>;
+  refereeId?: InputMaybe<Scalars['UUID']['input']>;
   scheduledDate: Scalars['DateTime']['input'];
   score?: InputMaybe<ScoreInput>;
   status: Status;
@@ -460,6 +496,9 @@ export type MatchSortInput = {
   homeTeamLineup?: InputMaybe<LineupSortInput>;
   homeTeamLineupId?: InputMaybe<SortEnumType>;
   id?: InputMaybe<SortEnumType>;
+  rating?: InputMaybe<SortEnumType>;
+  referee?: InputMaybe<RefereeSortInput>;
+  refereeId?: InputMaybe<SortEnumType>;
   scheduledDate?: InputMaybe<SortEnumType>;
   score?: InputMaybe<ScoreSortInput>;
   status?: InputMaybe<SortEnumType>;
@@ -501,12 +540,14 @@ export type Mutation = {
   addSimpleRating: Rating;
   addSubstitutionEvent: MatchEvent;
   addTeam: Team;
+  createReferee: Referee;
   deleteLineup: Lineup;
   deleteMatch: Match;
   deleteMatchEvent: MatchEvent;
   deleteMatchPlayer: MatchPlayer;
   deletePlayer: Player;
   deleteRating: Rating;
+  deleteReferee: Scalars['Boolean']['output'];
   deleteTeam: Team;
   saveLineup: Lineup;
   substitutePlayer: MatchPlayer;
@@ -517,6 +558,7 @@ export type Mutation = {
   updateMatchStatus: Match;
   updatePlayer: Player;
   updateRating: Rating;
+  updateReferee?: Maybe<Referee>;
   updateTeam: Team;
 };
 
@@ -599,6 +641,12 @@ export type MutationAddTeamArgs = {
 
 
 /** Represents the mutations available. */
+export type MutationCreateRefereeArgs = {
+  input: RefereeInput;
+};
+
+
+/** Represents the mutations available. */
 export type MutationDeleteLineupArgs = {
   id: Scalars['String']['input'];
 };
@@ -631,6 +679,12 @@ export type MutationDeletePlayerArgs = {
 /** Represents the mutations available. */
 export type MutationDeleteRatingArgs = {
   id: Scalars['String']['input'];
+};
+
+
+/** Represents the mutations available. */
+export type MutationDeleteRefereeArgs = {
+  id: Scalars['UUID']['input'];
 };
 
 
@@ -694,6 +748,12 @@ export type MutationUpdatePlayerArgs = {
 /** Represents the mutations available. */
 export type MutationUpdateRatingArgs = {
   rating: RatingInput;
+};
+
+
+/** Represents the mutations available. */
+export type MutationUpdateRefereeArgs = {
+  input: RefereeInput;
 };
 
 
@@ -823,18 +883,32 @@ export type PositionOperationFilterInput = {
 /** Represents the queries available. */
 export type Query = {
   __typename?: 'Query';
+  /** Get detailed player statistics with flexible sorting and time period filtering */
+  detailedPlayerStats: Array<DetailedPlayerStats>;
   lineup?: Maybe<Lineup>;
   matchEvents?: Maybe<MatchEventsConnection>;
   matchPlayers?: Maybe<MatchPlayersConnection>;
   matches?: Maybe<MatchesConnection>;
   players?: Maybe<PlayersConnection>;
   ratings?: Maybe<RatingsConnection>;
+  referee?: Maybe<Referee>;
+  referees: Array<Referee>;
   teamLineups?: Maybe<TeamLineupsConnection>;
   /** Get average ratings for a team across all matches */
   teamRatings: Array<TeamPlayerStats>;
   teams?: Maybe<TeamsConnection>;
   /** Get top rated players across all matches */
   topPlayers: Array<PlayerStats>;
+};
+
+
+/** Represents the queries available. */
+export type QueryDetailedPlayerStatsArgs = {
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  sortBy?: InputMaybe<Scalars['String']['input']>;
+  sortOrder?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 
@@ -896,6 +970,12 @@ export type QueryRatingsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   order?: InputMaybe<Array<RatingSortInput>>;
   where?: InputMaybe<RatingFilterInput>;
+};
+
+
+/** Represents the queries available. */
+export type QueryRefereeArgs = {
+  id: Scalars['UUID']['input'];
 };
 
 
@@ -993,6 +1073,44 @@ export type RatingsEdge = {
   cursor: Scalars['String']['output'];
   /** The item at the end of the edge. */
   node: Rating;
+};
+
+export type Referee = {
+  __typename?: 'Referee';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['UUID']['output'];
+  matches: Array<Match>;
+  name: Scalars['String']['output'];
+  photoUrl?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type RefereeFilterInput = {
+  and?: InputMaybe<Array<RefereeFilterInput>>;
+  createdAt?: InputMaybe<DateTimeOperationFilterInput>;
+  id?: InputMaybe<UuidOperationFilterInput>;
+  matches?: InputMaybe<ListFilterInputTypeOfMatchFilterInput>;
+  name?: InputMaybe<StringOperationFilterInput>;
+  or?: InputMaybe<Array<RefereeFilterInput>>;
+  photoUrl?: InputMaybe<StringOperationFilterInput>;
+  updatedAt?: InputMaybe<DateTimeOperationFilterInput>;
+};
+
+export type RefereeInput = {
+  createdAt: Scalars['DateTime']['input'];
+  id: Scalars['UUID']['input'];
+  matches: Array<MatchInput>;
+  name: Scalars['String']['input'];
+  photoUrl?: InputMaybe<Scalars['String']['input']>;
+  updatedAt: Scalars['DateTime']['input'];
+};
+
+export type RefereeSortInput = {
+  createdAt?: InputMaybe<SortEnumType>;
+  id?: InputMaybe<SortEnumType>;
+  name?: InputMaybe<SortEnumType>;
+  photoUrl?: InputMaybe<SortEnumType>;
+  updatedAt?: InputMaybe<SortEnumType>;
 };
 
 export type Score = {
@@ -1181,4 +1299,19 @@ export type TeamsEdge = {
   cursor: Scalars['String']['output'];
   /** The item at the end of the edge. */
   node: Team;
+};
+
+export type UuidOperationFilterInput = {
+  eq?: InputMaybe<Scalars['UUID']['input']>;
+  gt?: InputMaybe<Scalars['UUID']['input']>;
+  gte?: InputMaybe<Scalars['UUID']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
+  lt?: InputMaybe<Scalars['UUID']['input']>;
+  lte?: InputMaybe<Scalars['UUID']['input']>;
+  neq?: InputMaybe<Scalars['UUID']['input']>;
+  ngt?: InputMaybe<Scalars['UUID']['input']>;
+  ngte?: InputMaybe<Scalars['UUID']['input']>;
+  nin?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
+  nlt?: InputMaybe<Scalars['UUID']['input']>;
+  nlte?: InputMaybe<Scalars['UUID']['input']>;
 };

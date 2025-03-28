@@ -51,4 +51,6 @@ public class Lineup
     // Navigation properties
     [ForeignKey("TeamId")]
     public Team? Team { get; set; } = default!;
+    [ForeignKey("MatchId")]
+    public Match? Match { get; set; } = default!;
 } 

@@ -31,6 +31,9 @@ namespace Norskball
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
+            // Add HttpContextAccessor
+            services.AddHttpContextAccessor();
+
             // Add DbContext
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             if (string.IsNullOrEmpty(connectionString))
@@ -113,7 +116,7 @@ namespace Norskball
                 .AddType<LineupQuery>()
                 .AddType<MatchEventQuery>()
                 .AddType<StatisticsQuery>()
-                .AddType<MeQuery>()
+                .AddType<RefereeQuery>()
                 .AddType<PlayerMutations>()
                 .AddType<TeamMutations>()
                 .AddType<MatchMutations>()
@@ -121,6 +124,7 @@ namespace Norskball
                 .AddType<RatingMutations>()
                 .AddType<MatchEventMutations>()
                 .AddType<LineupMutations>()
+                .AddType<RefereeMutations>()
                 .AddAuthorization()
                 .AddProjections()
                 .AddFiltering()

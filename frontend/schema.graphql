@@ -25,6 +25,7 @@ type Match {
   scheduledDate: DateTime!
   status: Status!
   score: Score
+  rating: Int
   createdAt: DateTime!
   updatedAt: DateTime!
   homeTeam: Team

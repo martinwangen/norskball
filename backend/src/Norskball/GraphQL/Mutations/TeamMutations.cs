@@ -17,7 +17,7 @@ namespace Norskball.GraphQL.Mutations
             return team;
         }
 
-        [Authorize(Roles = new[] {"admin"})]
+        
         public async Task<Team> UpdateTeamAsync(NorskballDbContext dbContext, Team team)
         {
             dbContext.Teams.Update(team);
@@ -25,7 +25,7 @@ namespace Norskball.GraphQL.Mutations
             return team;
         }
 
-        [Authorize(Roles = new[] {"admin"})]
+        
         public async Task<Team> DeleteTeamAsync(NorskballDbContext dbContext, string id)
         {
             var team = await dbContext.Teams.FindAsync(id);

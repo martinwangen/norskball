@@ -30,7 +30,7 @@ public class MatchEvent
 
     // Navigation properties
     [ForeignKey("MatchId")]
-    public Match Match { get; set; } = default!;
+    public Match? Match { get; set; } = default!;
     [ForeignKey("PlayerId")]
     public Player? Player { get; set; }
     [ForeignKey("SecondaryPlayerId")]

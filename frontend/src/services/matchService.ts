@@ -1,13 +1,19 @@
 import { useQuery, useMutation } from '@vue/apollo-composable';
 import { computed } from 'vue';
 import { useMatchesStore } from '../stores/matches';
+import { EventType } from '../gql/__generated__/graphql';
 import type { Match, Status, ScoreInput, MatchPlayerInput, RatingInput } from '../gql/__generated__/graphql';
 import {
   CREATE_MATCH,
   UPDATE_MATCH,
   DELETE_MATCH,
   UPDATE_MATCH_STATUS,
-  UPDATE_MATCH_SCORE
+  UPDATE_MATCH_SCORE,
+  ADD_GOAL_EVENT,
+  ADD_CARD_EVENT,
+  ADD_SUBSTITUTION_EVENT,
+  ADD_HALFTIME_EVENT,
+  ADD_MATCH_EVENT
 } from '../gql/mutations/match';
 import { UPDATE_MATCH_PLAYER } from '../gql/mutations/lineup';
 import { ADD_RATING, ADD_SIMPLE_RATING } from '../gql/mutations/rating';
@@ -304,5 +310,123 @@ export const matchService = {
 
   useAddSimpleRating() {
     return useMutation(ADD_SIMPLE_RATING);
+  },
+
+  useAddMatchEvent() {
+    const { mutate: addGoalEvent, loading: goalLoading, error: goalError } = useMutation(ADD_GOAL_EVENT);
+    const { mutate: addCardEvent, loading: cardLoading, error: cardError } = useMutation(ADD_CARD_EVENT);
+    const { mutate: addSubstitutionEvent, loading: subLoading, error: subError } = useMutation(ADD_SUBSTITUTION_EVENT);
+    const { mutate: addHalftimeEvent, loading: halftimeLoading, error: halftimeError } = useMutation(ADD_HALFTIME_EVENT);
+    const { mutate: addMatchEvent, loading: matchLoading, error: matchError } = useMutation(ADD_MATCH_EVENT);
+    const matchStore = useMatchesStore();
+
+    const execute = async (input: {
+      matchId: string;
+      type: EventType;
+      minuteOfMatch: number;
+      playerId?: string;
+      teamId?: string;
+      secondaryPlayerId?: string;
+      description?: string;
+      timestamp: string;
+    }) => {
+      try {
+        let result;
+        let addedMinutes: number;
+
+        switch (input.type) {
+          case EventType.Goal:
+          case EventType.OwnGoal:
+            if (!input.playerId || !input.teamId) {
+              throw new Error('Player ID and Team ID are required for goals');
+            }
+            result = await addGoalEvent({
+              matchId: input.matchId,
+              scorerId: input.playerId,
+              assisterId: input.secondaryPlayerId,
+              teamId: input.teamId,
+              timestamp: input.timestamp,
+              minuteOfMatch: input.minuteOfMatch,
+              isOwnGoal: input.type === EventType.OwnGoal
+            });
+            break;
+
+          case EventType.YellowCard:
+          case EventType.RedCard:
+            if (!input.playerId || !input.teamId) {
+              throw new Error('Player ID and Team ID are required for cards');
+            }
+            result = await addCardEvent({
+              matchId: input.matchId,
+              playerId: input.playerId,
+              teamId: input.teamId,
+              cardType: input.type,
+              timestamp: input.timestamp,
+              minuteOfMatch: input.minuteOfMatch
+            });
+            break;
+
+          case EventType.Substitution:
+            if (!input.playerId || !input.teamId || !input.secondaryPlayerId) {
+              throw new Error('Player ID, Team ID, and Secondary Player ID are required for substitutions');
+            }
+            result = await addSubstitutionEvent({
+              matchId: input.matchId,
+              playerOutId: input.playerId,
+              playerInId: input.secondaryPlayerId,
+              teamId: input.teamId,
+              timestamp: input.timestamp,
+              minuteOfMatch: input.minuteOfMatch
+            });
+            break;
+
+          case EventType.HalfTimeStart:
+            addedMinutes = parseInt(input.description?.split(': ')[1] || '0');
+            result = await addHalftimeEvent({
+              matchId: input.matchId,
+              timestamp: input.timestamp,
+              addedMinutes
+            });
+            break;
+
+          case EventType.GameEnd:
+            addedMinutes = parseInt(input.description?.split(': ')[1] || '0');
+            result = await addMatchEvent({
+              matchId: input.matchId,
+              type: EventType.GameEnd,
+              minuteOfMatch: 90,
+              timestamp: input.timestamp,
+              description: `Added minutes: ${addedMinutes}`
+            });
+            break;
+
+          default:
+            throw new Error(`Unsupported event type: ${input.type}`);
+        }
+
+        if (result?.data) {
+          const eventData = result.data[Object.keys(result.data)[0]];
+          // Update the match in the store
+          const matchIndex = matchStore.matches.findIndex(m => m.id === input.matchId);
+          if (matchIndex !== -1) {
+            const match = matchStore.matches[matchIndex];
+            if (!match.events) {
+              match.events = [];
+            }
+            match.events.push(eventData);
+          }
+        }
+        return result?.data;
+      } catch (err) {
+        console.error('Error adding match event:', err);
+        throw err;
+      }
+    };
+
+    return {
+      addMatchEvent: execute,
+      loading: goalLoading || cardLoading || subLoading || halftimeLoading || matchLoading,
+      error: goalError || cardError || subError || halftimeError || matchError
+    };
   }
 };

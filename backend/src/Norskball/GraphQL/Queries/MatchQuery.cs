@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Claims;
 using Norskball.Models;
 using Norskball.Data;
 using Norskball.GraphQL.Base;
@@ -13,16 +14,27 @@ namespace Norskball.GraphQL.Queries
     [ExtendObjectType(typeof(Query))]
     public class MatchQuery
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public MatchQuery(IHttpContextAccessor httpContextAccessor)
+    {
+        _httpContextAccessor = httpContextAccessor;
+    }
+
         [UsePaging(MaxPageSize = 50, IncludeTotalCount = true), UseProjection, UseFiltering, UseSorting]
-        public IQueryable<Match> Matches(NorskballDbContext db)
+        public IQueryable<Match> GetMatches(NorskballDbContext db)
         {
+
+            var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Email)?.Value;
+
             var query = db.Matches.AsNoTracking()
                 .Include(m => m.HomeTeam).ThenInclude(t => t.Players)
                 .Include(m => m.AwayTeam).ThenInclude(t=>t.Players)
                 .Include(m => m.Events)
-                .Include(m => m.HomeTeamLineup).ThenInclude(l => l.Players)
-                .Include(m => m.AwayTeamLineup).ThenInclude(l => l.Players);
-
+                .Include(m => m.HomeTeamLineup).ThenInclude(l => l.Players).ThenInclude(p => p.Ratings)
+                .Include(m => m.AwayTeamLineup).ThenInclude(l => l.Players).ThenInclude(p => p.Ratings);
+            if (userId == null) return query;
+            
             // Materialize the query
             return query;
         }

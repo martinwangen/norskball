@@ -1,12 +1,17 @@
 <template>
   <div class="match-detail-header">
     <q-card flat bordered>
-      <match-header
-        :status="match.status"
-      />
-    </q-card>
+      <q-card-section>
+        <match-header
+          :status="match.status"
+          :is-admin="isAdmin"
+          :editable="editable"
+          @update:status="updateMatchStatus"
+        />
+      </q-card-section>
 
-    <q-card flat bordered class="q-mt-md">
+      <q-separator />
+
       <q-card-section>
         <div class="row items-center q-col-gutter-lg">
           <!-- Home Team -->
@@ -24,6 +29,13 @@
               :status="match.status"
               :formatted-date="formatDate(match.scheduledDate)"
             />
+            <div class="row justify-center q-mt-sm">
+              <dice-rating
+                :model-value="match.rating"
+                :editable="editable"
+                @update:model-value="updateMatchRating"
+              />
+            </div>
           </div>
 
           <!-- Away Team -->
@@ -39,20 +51,50 @@
 </template>
 
 <script setup lang="ts">
-import { date } from 'quasar';
-import type { Match } from '../../gql/__generated__/graphql';
+import { computed } from 'vue';
+import type { Match, Status } from '../../gql/__generated__/graphql';
 import MatchHeader from '../molecules/MatchHeader.vue';
 import TeamDisplay from '../molecules/TeamDisplay.vue';
 import MatchScore from '../molecules/MatchScore.vue';
+import DiceRating from '../atoms/DiceRating.vue';
+import { useAuthStore } from '../../stores/auth';
 
-defineProps<{
+const props = defineProps<{
   match: Match;
+  editable?: boolean;
 }>();
+
+const authStore = useAuthStore();
+const isAdmin = computed(() => authStore.isAuthenticated); // TODO: Fix this
+
+const emit = defineEmits<{
+  (e: 'update:match', match: Match): void;
+}>();
+
+const updateMatchRating = (rating: number) => {
+  emit('update:match', { ...props.match, rating });
+};
+
+const updateMatchStatus = (status: Status) => {
+  emit('update:match', { ...props.match, status });
+};
 
 const formatDate = (dateStr: string): string => {
   if (!dateStr) return 'N/A';
   try {
-    return date.formatDate(dateStr, 'MMMM D, YYYY [at] h:mm A');
+    const date = new Date(dateStr);
+    // Add 1 hour for timezone
+    date.setHours(date.getHours() + 1);
+    const formattedDate = date.toLocaleString('nb-NO', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+    // Remove "kl." and replace comma+space with line break
+    return formattedDate.replace('kl.', '').replace(', ', '\n').trim();
   } catch {
     return dateStr;
   }

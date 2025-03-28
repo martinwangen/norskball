@@ -57,6 +57,8 @@ export const lineupService = {
         const result = await saveLineup({ lineup: input });
         if (result?.data?.saveLineup) {
           const savedLineup = result.data.saveLineup;
+
+          // Update the lineup in the store with the new match player IDs
           lineupStore.setLineup(savedLineup);
 
           // Update the match in the store with the new lineup

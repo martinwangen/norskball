@@ -23,3 +23,32 @@ export const GET_TEAM_RATINGS = gql`
     }
   }
 `;
+
+export const GET_DETAILED_PLAYER_STATS = gql`
+  query GetDetailedPlayerStats(
+    $sortBy: String
+    $sortOrder: String
+    $startDate: DateTime
+    $endDate: DateTime
+    $limit: Int
+  ) {
+    detailedPlayerStats(
+      sortBy: $sortBy
+      sortOrder: $sortOrder
+      startDate: $startDate
+      endDate: $endDate
+      limit: $limit
+    ) {
+      playerId
+      playerName
+      goals
+      assists
+      yellowCards
+      redCards
+      matchesPlayed
+      averageRating
+      highestRating
+      ratingCount
+    }
+  }
+`;

@@ -3,6 +3,20 @@ schema {
   mutation: Mutation
 }
 
+type DetailedPlayerStats {
+  playerId: String!
+  playerName: String!
+  goals: Int!
+  assists: Int!
+  points: Int!
+  yellowCards: Int!
+  redCards: Int!
+  matchesPlayed: Int!
+  averageRating: Float!
+  highestRating: Float!
+  ratingCount: Int!
+}
+
 "Represents a lineup in a match."
 type Lineup {
   id: String!
@@ -14,6 +28,7 @@ type Lineup {
   createdAt: DateTime!
   updatedAt: DateTime!
   team: Team
+  match: Match
 }
 
 type Match {
@@ -22,9 +37,11 @@ type Match {
   awayTeamId: String!
   homeTeamLineupId: String
   awayTeamLineupId: String
+  refereeId: UUID
   scheduledDate: DateTime!
   status: Status!
   score: Score
+  rating: Int
   createdAt: DateTime!
   updatedAt: DateTime!
   homeTeam: Team
@@ -32,6 +49,7 @@ type Match {
   events: [MatchEvent!]
   homeTeamLineup: Lineup
   awayTeamLineup: Lineup
+  referee: Referee
 }
 
 type MatchEvent {
@@ -44,7 +62,7 @@ type MatchEvent {
   secondaryPlayerId: String
   teamId: String
   description: String
-  match: Match!
+  match: Match
   player: Player
   secondaryPlayer: Player
   team: Team
@@ -128,31 +146,35 @@ type MatchesEdge {
 
 "Represents the mutations available."
 type Mutation @authorize {
-  addPlayer(player: PlayerInput!): Player! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
-  updatePlayer(player: PlayerInput!): Player! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
-  deletePlayer(id: String!): Player! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
+  createReferee(input: RefereeInput!): Referee! @cost(weight: "10")
+  updateReferee(input: RefereeInput!): Referee @cost(weight: "10")
+  deleteReferee(id: UUID!): Boolean! @cost(weight: "10")
+  addPlayer(player: PlayerInput!): Player! @cost(weight: "10")
+  updatePlayer(player: PlayerInput!): Player! @cost(weight: "10")
+  deletePlayer(id: String!): Player! @cost(weight: "10")
   addTeam(team: TeamInput!): Team! @cost(weight: "10")
-  updateTeam(team: TeamInput!): Team! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  deleteTeam(id: String!): Team! @authorize(roles: [ "admin" ]) @cost(weight: "10")
+  updateTeam(team: TeamInput!): Team! @cost(weight: "10")
+  deleteTeam(id: String!): Team! @cost(weight: "10")
   addMatch(match: MatchInput!): Match! @cost(weight: "10")
   updateMatch(match: MatchInput!): Match! @cost(weight: "10")
   deleteMatch(id: String!): Match! @cost(weight: "10")
   updateMatchStatus(id: String! status: Status!): Match! @cost(weight: "10")
   updateMatchScore(id: String! score: ScoreInput!): Match! @cost(weight: "10")
-  addMatchPlayer(matchPlayer: MatchPlayerInput!): MatchPlayer! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  updateMatchPlayer(matchPlayer: MatchPlayerInput!): MatchPlayer! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  deleteMatchPlayer(id: String!): MatchPlayer! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  substitutePlayer(matchPlayerId: String! substitutionTime: DateTime!): MatchPlayer! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  addRating(rating: RatingInput!): Rating! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
-  updateRating(rating: RatingInput!): Rating! @authorize(roles: [ "Admin", "Rater" ]) @cost(weight: "10")
-  deleteRating(id: String!): Rating! @authorize(roles: [ "admin" ]) @cost(weight: "10")
+  addMatchPlayer(matchPlayer: MatchPlayerInput!): MatchPlayer! @cost(weight: "10")
+  updateMatchPlayer(matchPlayer: MatchPlayerInput!): MatchPlayer! @cost(weight: "10")
+  deleteMatchPlayer(id: String!): MatchPlayer! @cost(weight: "10")
+  substitutePlayer(matchPlayerId: String! substitutionTime: DateTime!): MatchPlayer! @cost(weight: "10")
+  addRating(rating: RatingInput!): Rating! @cost(weight: "10")
+  updateRating(rating: RatingInput!): Rating! @cost(weight: "10")
+  deleteRating(id: String!): Rating! @cost(weight: "10")
   addSimpleRating(matchPlayerId: String! score: Int!): Rating! @cost(weight: "10")
-  addMatchEvent(matchEvent: MatchEventInput!): MatchEvent! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  updateMatchEvent(matchEvent: MatchEventInput!): MatchEvent! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  deleteMatchEvent(id: String!): MatchEvent! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  addGoalEvent(matchId: String! scorerId: String! assisterId: String teamId: String! timestamp: DateTime! minuteOfMatch: Int! isOwnGoal: Boolean! = false): MatchEvent! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  addCardEvent(matchId: String! playerId: String! teamId: String! cardType: EventType! timestamp: DateTime! minuteOfMatch: Int!): MatchEvent! @authorize(roles: [ "admin" ]) @cost(weight: "10")
-  addSubstitutionEvent(matchId: String! playerOutId: String! playerInId: String! teamId: String! timestamp: DateTime! minuteOfMatch: Int!): MatchEvent! @authorize(roles: [ "admin" ]) @cost(weight: "10")
+  addMatchEvent(matchEvent: MatchEventInput!): MatchEvent! @cost(weight: "10")
+  updateMatchEvent(matchEvent: MatchEventInput!): MatchEvent! @cost(weight: "10")
+  deleteMatchEvent(id: String!): MatchEvent! @cost(weight: "10")
+  addGoalEvent(matchId: String! scorerId: String! assisterId: String teamId: String! timestamp: DateTime! minuteOfMatch: Int! isOwnGoal: Boolean! = false): MatchEvent! @cost(weight: "10")
+  addCardEvent(matchId: String! playerId: String! teamId: String! cardType: EventType! timestamp: DateTime! minuteOfMatch: Int!): MatchEvent! @cost(weight: "10")
+  addSubstitutionEvent(matchId: String! playerOutId: String! playerInId: String! teamId: String! timestamp: DateTime! minuteOfMatch: Int!): MatchEvent! @cost(weight: "10")
+  addHalftimeEvent(matchId: String! timestamp: DateTime! addedMinutes: Int!): MatchEvent! @cost(weight: "10")
   saveLineup(lineup: LineupInput!): Lineup! @cost(weight: "10")
   deleteLineup(id: String!): Lineup! @cost(weight: "10")
 }
@@ -213,6 +235,8 @@ type PlayersEdge {
 
 "Represents the queries available."
 type Query {
+  referees: [Referee!]! @cost(weight: "10")
+  referee(id: UUID!): Referee @cost(weight: "10")
   players("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: PlayerFilterInput @cost(weight: "10") order: [PlayerSortInput!] @cost(weight: "10")): PlayersConnection @listSize(assumedSize: 35, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
   teams("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: TeamFilterInput @cost(weight: "10") order: [TeamSortInput!] @cost(weight: "10")): TeamsConnection @listSize(assumedSize: 20, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
   matches("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: MatchFilterInput @cost(weight: "10") order: [MatchSortInput!] @cost(weight: "10")): MatchesConnection @listSize(assumedSize: 50, slicingArguments: [ "first", "last" ], slicingArgumentDefaultValue: 10, sizedFields: [ "edges", "nodes" ], requireOneSlicingArgument: false) @cost(weight: "10")
@@ -225,6 +249,8 @@ type Query {
   teamRatings(teamId: String!): [TeamPlayerStats!]! @cost(weight: "10")
   "Get top rated players across all matches"
   topPlayers(limit: Int = 10): [PlayerStats!]! @cost(weight: "10")
+  "Get detailed player statistics with flexible sorting and time period filtering"
+  detailedPlayerStats(sortBy: String = "averageRating" sortOrder: String = "desc" startDate: DateTime endDate: DateTime limit: Int = 10): [DetailedPlayerStats!]! @cost(weight: "10")
 }
 
 type Rating {
@@ -254,6 +280,15 @@ type RatingsEdge {
   cursor: String!
   "The item at the end of the edge."
   node: Rating!
+}
+
+type Referee {
+  id: UUID!
+  name: String!
+  photoUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  matches: [Match!]!
 }
 
 type Score {
@@ -404,6 +439,7 @@ input LineupFilterInput {
   createdAt: DateTimeOperationFilterInput
   updatedAt: DateTimeOperationFilterInput
   team: TeamFilterInput
+  match: MatchFilterInput
 }
 
 "Represents a lineup in a match."
@@ -417,6 +453,7 @@ input LineupInput {
   createdAt: DateTime!
   updatedAt: DateTime!
   team: TeamInput
+  match: MatchInput
 }
 
 "Represents a lineup in a match."
@@ -429,12 +466,20 @@ input LineupSortInput {
   createdAt: SortEnumType @cost(weight: "10")
   updatedAt: SortEnumType @cost(weight: "10")
   team: TeamSortInput @cost(weight: "10")
+  match: MatchSortInput @cost(weight: "10")
 }
 
 input ListFilterInputTypeOfMatchEventFilterInput {
   all: MatchEventFilterInput @cost(weight: "10")
   none: MatchEventFilterInput @cost(weight: "10")
   some: MatchEventFilterInput @cost(weight: "10")
+  any: Boolean @cost(weight: "10")
+}
+
+input ListFilterInputTypeOfMatchFilterInput {
+  all: MatchFilterInput @cost(weight: "10")
+  none: MatchFilterInput @cost(weight: "10")
+  some: MatchFilterInput @cost(weight: "10")
   any: Boolean @cost(weight: "10")
 }
 
@@ -487,7 +532,7 @@ input MatchEventInput {
   secondaryPlayerId: String
   teamId: String
   description: String
-  match: MatchInput!
+  match: MatchInput
   player: PlayerInput
   secondaryPlayer: PlayerInput
   team: TeamInput
@@ -517,9 +562,11 @@ input MatchFilterInput {
   awayTeamId: StringOperationFilterInput
   homeTeamLineupId: StringOperationFilterInput
   awayTeamLineupId: StringOperationFilterInput
+  refereeId: UuidOperationFilterInput
   scheduledDate: DateTimeOperationFilterInput
   status: StatusOperationFilterInput
   score: ScoreFilterInput
+  rating: IntOperationFilterInput
   createdAt: DateTimeOperationFilterInput
   updatedAt: DateTimeOperationFilterInput
   homeTeam: TeamFilterInput
@@ -527,6 +574,7 @@ input MatchFilterInput {
   events: ListFilterInputTypeOfMatchEventFilterInput
   homeTeamLineup: LineupFilterInput
   awayTeamLineup: LineupFilterInput
+  referee: RefereeFilterInput
 }
 
 input MatchInput {
@@ -535,9 +583,11 @@ input MatchInput {
   awayTeamId: String!
   homeTeamLineupId: String
   awayTeamLineupId: String
+  refereeId: UUID
   scheduledDate: DateTime!
   status: Status!
   score: ScoreInput
+  rating: Int
   createdAt: DateTime!
   updatedAt: DateTime!
   homeTeam: TeamInput
@@ -545,6 +595,7 @@ input MatchInput {
   events: [MatchEventInput!]
   homeTeamLineup: LineupInput
   awayTeamLineup: LineupInput
+  referee: RefereeInput
 }
 
 input MatchPlayerFilterInput {
@@ -601,15 +652,18 @@ input MatchSortInput {
   awayTeamId: SortEnumType @cost(weight: "10")
   homeTeamLineupId: SortEnumType @cost(weight: "10")
   awayTeamLineupId: SortEnumType @cost(weight: "10")
+  refereeId: SortEnumType @cost(weight: "10")
   scheduledDate: SortEnumType @cost(weight: "10")
   status: SortEnumType @cost(weight: "10")
   score: ScoreSortInput @cost(weight: "10")
+  rating: SortEnumType @cost(weight: "10")
   createdAt: SortEnumType @cost(weight: "10")
   updatedAt: SortEnumType @cost(weight: "10")
   homeTeam: TeamSortInput @cost(weight: "10")
   awayTeam: TeamSortInput @cost(weight: "10")
   homeTeamLineup: LineupSortInput @cost(weight: "10")
   awayTeamLineup: LineupSortInput @cost(weight: "10")
+  referee: RefereeSortInput @cost(weight: "10")
 }
 
 input PlayerFilterInput {
@@ -690,6 +744,34 @@ input RatingSortInput {
   score: SortEnumType @cost(weight: "10")
   createdAt: SortEnumType @cost(weight: "10")
   matchPlayer: MatchPlayerSortInput @cost(weight: "10")
+}
+
+input RefereeFilterInput {
+  and: [RefereeFilterInput!]
+  or: [RefereeFilterInput!]
+  id: UuidOperationFilterInput
+  name: StringOperationFilterInput
+  photoUrl: StringOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  matches: ListFilterInputTypeOfMatchFilterInput
+}
+
+input RefereeInput {
+  id: UUID!
+  name: String!
+  photoUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  matches: [MatchInput!]!
+}
+
+input RefereeSortInput {
+  id: SortEnumType @cost(weight: "10")
+  name: SortEnumType @cost(weight: "10")
+  photoUrl: SortEnumType @cost(weight: "10")
+  createdAt: SortEnumType @cost(weight: "10")
+  updatedAt: SortEnumType @cost(weight: "10")
 }
 
 input ScoreFilterInput {
@@ -788,6 +870,21 @@ input TeamSortInput {
   updatedAt: SortEnumType @cost(weight: "10")
 }
 
+input UuidOperationFilterInput {
+  eq: UUID @cost(weight: "10")
+  neq: UUID @cost(weight: "10")
+  in: [UUID] @cost(weight: "10")
+  nin: [UUID] @cost(weight: "10")
+  gt: UUID @cost(weight: "10")
+  ngt: UUID @cost(weight: "10")
+  gte: UUID @cost(weight: "10")
+  ngte: UUID @cost(weight: "10")
+  lt: UUID @cost(weight: "10")
+  nlt: UUID @cost(weight: "10")
+  lte: UUID @cost(weight: "10")
+  nlte: UUID @cost(weight: "10")
+}
+
 "Defines when a policy shall be executed."
 enum ApplyPolicy {
   "Before the resolver was executed."
@@ -876,3 +973,5 @@ directive @specifiedBy("The specifiedBy URL points to a human-readable specifica
 
 "The `DateTime` scalar represents an ISO-8601 compliant date time type."
 scalar DateTime @specifiedBy(url: "https:\/\/www.graphql-scalars.com\/date-time")
+
+scalar UUID @specifiedBy(url: "https:\/\/tools.ietf.org\/html\/rfc4122")

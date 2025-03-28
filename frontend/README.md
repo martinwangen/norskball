@@ -36,7 +36,7 @@ The application uses configuration files to manage environment-specific settings
    ```json
    {
      "api": {
-       "baseUrl": "https://localhost:5001/graphql",
+       "baseUrl": "http://localhost:5001/graphql",
        "timeout": 10000
      },
      "auth": {},

@@ -10,7 +10,7 @@ namespace Norskball.GraphQL.Mutations;
 [ExtendObjectType(typeof(Mutation))]
 public class PlayerMutations
 {
-    [Authorize(Roles = new[] {"Admin", "Rater"})]
+    
     public async Task<Player> AddPlayerAsync(NorskballDbContext dbContext, Player player)
     {
         dbContext.Players.Add(player);
@@ -18,7 +18,7 @@ public class PlayerMutations
         return player;
     }
 
-    [Authorize(Roles = new[] {"Admin", "Rater"})]
+    
     public async Task<Player> UpdatePlayerAsync(NorskballDbContext dbContext, Player player)
     {
         dbContext.Players.Update(player);
@@ -26,7 +26,7 @@ public class PlayerMutations
         return player;
     }
 
-    [Authorize(Roles = new[] {"Admin", "Rater"})]
+    
     public async Task<Player> DeletePlayerAsync(NorskballDbContext dbContext, string id)
     {
         var player = await dbContext.Players.FindAsync(id);

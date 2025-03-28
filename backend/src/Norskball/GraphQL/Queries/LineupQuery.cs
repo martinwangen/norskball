@@ -15,6 +15,7 @@ public class LineupQuery
     {
         return await db.Lineups.AsNoTracking()
             .Include(l => l.Players)
+                .ThenInclude(p => p.Ratings)
             .Include(l => l.Team)
             .FirstOrDefaultAsync(l => l.Id == id);
     }
@@ -27,8 +28,14 @@ public class LineupQuery
     {
         var query = db.Lineups.AsNoTracking()
             .Include(l => l.Players)
+                .ThenInclude(p => p.Ratings)
             .Include(l => l.Team)
             .Where(l => l.TeamId == teamId);
+
+        if (!string.IsNullOrEmpty(matchId))
+        {
+            query = query.Where(l => l.MatchId == matchId);
+        }
 
         return await query.ToListAsync();
     }

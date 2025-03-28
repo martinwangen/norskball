@@ -10,7 +10,6 @@ namespace Norskball.GraphQL.Mutations;
 [ExtendObjectType(typeof(Mutation))]
 public class MatchEventMutations
 {
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddMatchEventAsync(NorskballDbContext dbContext, MatchEvent matchEvent)
     {
         dbContext.MatchEvents.Add(matchEvent);
@@ -18,7 +17,6 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> UpdateMatchEventAsync(NorskballDbContext dbContext, MatchEvent matchEvent)
     {
         dbContext.MatchEvents.Update(matchEvent);
@@ -26,7 +24,6 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> DeleteMatchEventAsync(NorskballDbContext dbContext, string id)
     {
         var matchEvent = await dbContext.MatchEvents.FindAsync(id);
@@ -39,7 +36,6 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddGoalEventAsync(
         NorskballDbContext dbContext,
         string matchId,
@@ -68,7 +64,6 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddCardEventAsync(
         NorskballDbContext dbContext,
         string matchId,
@@ -98,7 +93,6 @@ public class MatchEventMutations
         return matchEvent;
     }
 
-    [Authorize(Roles = new[] {"admin"})]
     public async Task<MatchEvent> AddSubstitutionEventAsync(
         NorskballDbContext dbContext,
         string matchId,
@@ -119,6 +113,27 @@ public class MatchEventMutations
             Timestamp = timestamp,
             MinuteOfMatch = minuteOfMatch,
             Description = "Substitution"
+        };
+
+        dbContext.MatchEvents.Add(matchEvent);
+        await dbContext.SaveChangesAsync();
+        return matchEvent;
+    }
+
+    public async Task<MatchEvent> AddHalftimeEventAsync(
+        NorskballDbContext dbContext,
+        string matchId,
+        DateTime timestamp,
+        int addedMinutes)
+    {
+        var matchEvent = new MatchEvent
+        {
+            Id = Guid.NewGuid().ToString(),
+            MatchId = matchId,
+            Type = EventType.HalfTimeStart,
+            Timestamp = timestamp,
+            MinuteOfMatch = 45,
+            Description = $"Added minutes: {addedMinutes}"
         };
 
         dbContext.MatchEvents.Add(matchEvent);

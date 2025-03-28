@@ -55,14 +55,6 @@
               label="Close Rating"
               @click="stopRating"
             />
-            <q-btn
-              v-if="ratingService.isRating.value"
-              color="white"
-              text-color="primary"
-              icon="save"
-              label="Save Ratings"
-              @click="saveRatings"
-            />
           </div>
         </div>
       </q-card-section>
@@ -107,26 +99,28 @@
               </template>
               <template v-else>
                 <div class="row items-center justify-between">
-                  <div>
+                  <div class="col">
                     <q-item-label>{{ getPlayerName(position.player) }}</q-item-label>
                     <q-item-label caption>{{ position.role }}</q-item-label>
                   </div>
                   <div class="row items-center">
                     <q-rating
-                      v-if="ratingService.isRating.value && position.player"
-                      :model-value="getMatchPlayerRating(position.player.id)"
+                      v-if="position.player"
+                      :model-value="getMatchPlayerRating(position.player)"
                       size="1.5em"
                       :max="10"
-                      :color="getRatingColor(getMatchPlayerRating(position.player.id))"
                       icon="star_border"
                       icon-selected="star"
+                      :disable="!ratingService.isRating.value || ratingLoading"
                       @update:model-value="(val) => {
-                        console.log('Rating updated for player:', position.player.id, 'value:', val);
-                        updatePlayerRating(position.player.id, val);
+                        if (position.player) {
+                          console.log('Rating updated for player:', position.player.id, 'value:', val);
+                          updatePlayerRating(position.player.id, val);
+                        }
                       }"
                     />
                     <q-btn
-                      v-if="ratingService.isRating.value && position.player && getMatchPlayerRating(position.player.id) > 0"
+                      v-if="ratingService.isRating.value && position.player && getMatchPlayerRating(position.player) > 0"
                       flat
                       round
                       dense
@@ -147,7 +141,7 @@
         <div class="text-subtitle2 q-mt-md q-mb-sm">Substitutes ({{ validation.substitute_count }}/8)</div>
         <q-list bordered separator>
           <template v-if="isEditing">
-            <q-item v-for="(sub, index) in substitutes" :key="index">
+            <q-item v-for="(sub, index) in substitutes" :key="sub.player?.id || index">
               <q-item-section avatar>
                 <q-avatar :color="sub.player ? 'grey-6' : 'grey'" text-color="white">
                   {{ sub.number }}
@@ -183,34 +177,36 @@
             </q-item>
           </template>
           <template v-else>
-            <q-item v-for="sub in substitutePlayers" :key="sub.player_id">
+            <q-item v-for="(sub, index) in substitutes" :key="sub.player?.id || index">
               <q-item-section avatar>
                 <q-avatar color="grey-4" text-color="grey-8">
-                  {{ sub.shirt_number }}
+                  {{ sub.number }}
                 </q-avatar>
               </q-item-section>
               <q-item-section>
                 <div class="row items-center justify-between">
-                  <div>
-                    <q-item-label>{{ sub.name }}</q-item-label>
-                    <q-item-label caption>{{ sub.position }}</q-item-label>
+                  <div class="col">
+                    <q-item-label>{{ getPlayerName(sub.player) }}</q-item-label>
+                    <q-item-label caption>{{ sub.player?.player?.position }}</q-item-label>
                   </div>
                   <div class="row items-center">
                     <q-rating
-                      v-if="ratingService.isRating.value"
-                      :model-value="getMatchPlayerRating(sub.player_id)"
+                      v-if="sub.player"
+                      :model-value="getMatchPlayerRating(sub.player)"
                       size="1.5em"
                       :max="10"
-                      :color="getRatingColor(getMatchPlayerRating(sub.player_id))"
                       icon="star_border"
                       icon-selected="star"
+                      :disable="!ratingService.isRating.value || ratingLoading"
                       @update:model-value="(val) => {
-                        console.log('Rating updated for substitute:', sub.player_id, 'value:', val);
-                        updatePlayerRating(sub.player_id, val);
+                        if (sub.player) {
+                          console.log('Rating updated for substitute:', sub.player.id, 'value:', val);
+                          updatePlayerRating(sub.player.id, val);
+                        }
                       }"
                     />
                     <q-btn
-                      v-if="ratingService.isRating.value && getMatchPlayerRating(sub.player_id) > 0"
+                      v-if="ratingService.isRating.value && sub.player && getMatchPlayerRating(sub.player) > 0"
                       flat
                       round
                       dense
@@ -218,14 +214,14 @@
                       icon="close"
                       size="sm"
                       class="q-ml-sm"
-                      @click="removePlayerRating(sub.player_id)"
+                      @click="removePlayerRating(sub.player.id)"
                     />
                   </div>
                 </div>
               </q-item-section>
             </q-item>
           </template>
-          <q-item v-if="substitutePlayers.length === 0">
+          <q-item v-if="substitutes.length === 0">
             <q-item-section>
               <q-item-label class="text-grey-7">No substitutes</q-item-label>
             </q-item-section>
@@ -267,7 +263,7 @@
               icon="save"
               label="Save Lineup"
               :disable="!validation.is_valid"
-              :loading="loading"
+              :loading="saveLoading"
               @click="handleSave"
               class="full-width"
             />
@@ -293,6 +289,7 @@ import { Formation, Position } from 'src/gql/__generated__/graphql';
 import type { Lineup, Team, MatchPlayer } from 'src/gql/__generated__/graphql';
 import { usePlayerStore } from 'src/stores/players';
 import { ratingService } from '../../services/ratingService';
+import { useQuasar } from 'quasar';
 
 // Define our own types for lineup functionality
 type LineupPosition = {
@@ -357,6 +354,10 @@ const isEditing = ref(false);
 // Store original lineup for cancel
 const originalLineup = ref<Lineup | null>(null);
 const originalFormation = ref<Formation>(Formation.Formation442);
+
+const $q = useQuasar();
+const saveLoading = ref(false);
+const ratingLoading = ref(false);
 
 // Start editing
 const startEditing = () => {
@@ -505,7 +506,6 @@ watch(selectedFormation, () => {
 
 // Watch for lineup changes
 watch(() => props.lineup, (newLineup) => {
-  console.log('Lineup changed:', newLineup);
   if (newLineup) {
     selectedFormation.value = newLineup.formation;
     initializePositions(); // Initialize positions first
@@ -518,7 +518,6 @@ watch(() => props.lineup, (newLineup) => {
 
 // Watch for team players changes
 watch(() => playerStore.playersByTeam[props.team.id], (newPlayers) => {
-  console.log('Team players changed:', newPlayers);
   if (newPlayers && newPlayers.length > 0 && props.lineup) {
     void loadPlayers();
   }
@@ -526,7 +525,6 @@ watch(() => playerStore.playersByTeam[props.team.id], (newPlayers) => {
 
 // Initialize on mount
 onMounted(async () => {
-  console.log('LineupCard mounted with lineup:', props.lineup);
   initializePositions();
 
   // Fetch team players if not already loaded
@@ -560,6 +558,8 @@ const createLineup = (): Lineup => {
           isStarter: true,
           position: p.number.toString(),
           teamId: props.team.id,
+          ratings: p.player.ratings,
+          averageRating: p.player.averageRating
         })),
       ...substitutes.value
         .filter((p): p is LineupSubstitute & { player: MatchPlayer } => p.player !== null)
@@ -570,6 +570,8 @@ const createLineup = (): Lineup => {
           isStarter: false,
           position: p.number.toString(),
           teamId: props.team.id,
+          ratings: p.player.ratings,
+          averageRating: p.player.averageRating
         })),
     ],
     createdAt: props.lineup?.createdAt || new Date().toISOString(),
@@ -577,18 +579,6 @@ const createLineup = (): Lineup => {
     isStarting: props.lineup?.isStarting || true,
   };
 };
-
-// Update the substitutePlayers computed property
-const substitutePlayers = computed(() => {
-  return substitutes.value
-    .filter((sub): sub is LineupSubstitute & { player: MatchPlayer } => sub.player !== null)
-    .map(sub => ({
-      player_id: sub.player.playerId,
-      name: `${sub.player.player?.firstName} ${sub.player.player?.lastName}`,
-      shirt_number: sub.number,
-      position: sub.player.player?.position
-    }));
-});
 
 // Computed properties for player filtering
 const availableSubstitutes = computed(() => {
@@ -645,11 +635,18 @@ const validation = computed<LineupValidation>(() => {
 
 // Player update handlers
 const updatePlayer = (index: number, player: MatchPlayer | null) => {
+  if (player && !validatePlayerSelection(player.playerId, index + 1)) {
+    return;
+  }
   startingPositions.value[index].player = player;
 };
 
 const updateSubstitute = (index: number, player: MatchPlayer | null) => {
   if (validation.value.substitute_count >= 8 && !substitutes.value[index].player) return;
+
+  if (player && !validatePlayerSelection(player.playerId, 12 + index)) {
+    return;
+  }
   substitutes.value[index].player = player;
 };
 
@@ -799,10 +796,52 @@ const autoFillLineup = async () => {
 
 // Modify handleSave to also exit edit mode
 const handleSave = () => {
-  const lineup = createLineup();
-  emit('update:lineup', lineup);
-  emit('save');
-  isEditing.value = false;
+  if (!validateFormation.value.isValid) {
+    $q.notify({
+      color: 'negative',
+      message: `Invalid formation. Expected: ${validateFormation.value.expected.defenders}-${validateFormation.value.expected.midfielders}-${validateFormation.value.expected.forwards}`
+    });
+    return;
+  }
+
+  try {
+    saveLoading.value = true;
+    const lineup = createLineup();
+    emit('update:lineup', lineup);
+    emit('save');
+    isEditing.value = false;
+
+    // After saving, update the positions with the new match player IDs
+    if (props.lineup) {
+      // Update starting positions
+      startingPositions.value.forEach(pos => {
+        if (pos.player) {
+          const savedPlayer = props.lineup?.players.find(p =>
+            p.playerId === pos.player?.playerId &&
+            parseInt(p.position) === pos.number
+          );
+          if (savedPlayer) {
+            pos.player = savedPlayer;
+          }
+        }
+      });
+
+      // Update substitutes
+      substitutes.value.forEach(sub => {
+        if (sub.player) {
+          const savedPlayer = props.lineup?.players.find(p =>
+            p.playerId === sub.player?.playerId &&
+            parseInt(p.position) === sub.number
+          );
+          if (savedPlayer) {
+            sub.player = savedPlayer;
+          }
+        }
+      });
+    }
+  } finally {
+    saveLoading.value = false;
+  }
 };
 
 // Helper functions
@@ -812,44 +851,144 @@ const getPlayerName = (player: MatchPlayer | null) => {
 };
 
 const startRating = () => {
-  ratingService.startRatingMode(props.lineup?.players || []);
+  void ratingService.startRatingMode(props.lineup?.players || []);
 };
 
 const stopRating = () => {
   ratingService.stopRatingMode();
 };
 
-const saveRatings = async () => {
-  try {
-    await ratingService.saveAllRatings();
-  } catch (error) {
-    console.error('Error saving ratings:', error);
-  }
-};
-
 const updatePlayerRating = async (playerId: string, rating: number) => {
   try {
+    // Validate rating range
+    if (rating < 1 || rating > 10) {
+      $q.notify({
+        color: 'negative',
+        message: 'Rating must be between 1 and 10'
+      });
+      return;
+    }
+
+    ratingLoading.value = true;
     await ratingService.updatePlayerRating(playerId, rating);
+    $q.notify({
+      color: 'positive',
+      message: 'Rating updated successfully'
+    });
   } catch (error) {
     console.error('Error updating player rating:', error);
+    $q.notify({
+      color: 'negative',
+      message: 'Failed to update rating'
+    });
+  } finally {
+    ratingLoading.value = false;
   }
 };
 
-const getMatchPlayerRating = (playerId: string): number => {
-  return ratingService.getPlayerRating(playerId, props.lineup?.players || []);
-};
-
-const getRatingColor = (rating: number): string => {
-  return ratingService.getRatingColor(rating);
+const getMatchPlayerRating = (player: MatchPlayer | null): number => {
+  if (!player?.ratings?.length) return 0;
+  // Just use the last rating in the array (most recent)
+  return player.ratings[player.ratings.length - 1].score;
 };
 
 const removePlayerRating = async (playerId: string) => {
   try {
+    ratingLoading.value = true;
     await ratingService.removePlayerRating(playerId);
+    $q.notify({
+      color: 'positive',
+      message: 'Rating removed successfully'
+    });
   } catch (error) {
     console.error('Error removing player rating:', error);
+    $q.notify({
+      color: 'negative',
+      message: 'Failed to remove rating'
+    });
+  } finally {
+    ratingLoading.value = false;
   }
 };
+
+// Add validation for player selection
+const validatePlayerSelection = (playerId: string, currentPosition: number): boolean => {
+  // Check if player is already selected in another position
+  const isSelectedInStarting = startingPositions.value.some(
+    pos => pos.player?.playerId === playerId && pos.number !== currentPosition
+  );
+
+  const isSelectedInSubstitutes = substitutes.value.some(
+    sub => sub.player?.playerId === playerId
+  );
+
+  if (isSelectedInStarting || isSelectedInSubstitutes) {
+    $q.notify({
+      color: 'negative',
+      message: 'Player is already selected in another position'
+    });
+    return false;
+  }
+  return true;
+};
+
+// Add formation validation
+const validateFormation = computed(() => {
+  const formationValue = selectedFormation.value;
+  let defenders = 4, midfielders = 4, forwards = 2; // Default 4-4-2
+
+  // Map formation enum to numbers
+  switch (formationValue) {
+    case Formation.Formation442:
+      defenders = 4; midfielders = 4; forwards = 2;
+      break;
+    case Formation.Formation433:
+      defenders = 4; midfielders = 3; forwards = 3;
+      break;
+    case Formation.Formation352:
+      defenders = 3; midfielders = 5; forwards = 2;
+      break;
+    case Formation.Formation343:
+      defenders = 3; midfielders = 4; forwards = 3;
+      break;
+    case Formation.Formation4231:
+      defenders = 4; midfielders = 2; forwards = 3;
+      break;
+    case Formation.Formation4321:
+      defenders = 4; midfielders = 3; forwards = 2;
+      break;
+    case Formation.Formation532:
+      defenders = 5; midfielders = 3; forwards = 2;
+      break;
+    case Formation.Formation541:
+      defenders = 5; midfielders = 4; forwards = 1;
+      break;
+    case Formation.Formation451:
+      defenders = 4; midfielders = 5; forwards = 1;
+      break;
+    case Formation.Formation523:
+      defenders = 5; midfielders = 2; forwards = 3;
+      break;
+    case Formation.Formation4141:
+      defenders = 4; midfielders = 1; forwards = 4;
+      break;
+    case Formation.Formation3142:
+      defenders = 3; midfielders = 1; forwards = 4;
+      break;
+  }
+
+  const currentDefenders = startingPositions.value.filter(p => p.role === Position.Defender).length;
+  const currentMidfielders = startingPositions.value.filter(p => p.role === Position.Midfielder).length;
+  const currentForwards = startingPositions.value.filter(p => p.role === Position.Forward).length;
+
+  return {
+    isValid: currentDefenders === defenders &&
+             currentMidfielders === midfielders &&
+             currentForwards === forwards,
+    expected: { defenders, midfielders, forwards },
+    current: { defenders: currentDefenders, midfielders: currentMidfielders, forwards: currentForwards }
+  };
+});
 </script>
 
 <style scoped>

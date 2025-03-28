@@ -7,30 +7,33 @@ import { ref } from 'vue';
 export const ratingService = {
   // State management
   isRating: ref(false),
-  temporaryRatings: ref<Record<string, number>>({}),
 
   // Rating mode management
-  startRatingMode(lineupPlayers: Array<{ playerId: string; position: string }>) {
+  async startRatingMode(lineupPlayers: Array<{ playerId: string; position: string }>) {
     console.log('Starting rating mode');
     this.isRating.value = true;
-    this.temporaryRatings.value = {};
 
-    // Set default ratings for starting players (5) and substitutes (0)
-    lineupPlayers.forEach(player => {
-      if (player.playerId) {
-        const positionNumber = parseInt(player.position);
-        const isStarter = positionNumber <= 11;
-        console.log('Initializing rating for player:', player.playerId, 'is starter:', isStarter);
-        this.temporaryRatings.value[player.playerId] = isStarter ? 5 : 0;
-      }
+    // Set default rating of 5 for all starting players
+    const startingPlayers = lineupPlayers.filter(player => {
+      if (!player.playerId) return false;
+      const positionNumber = parseInt(player.position);
+      return positionNumber <= 11; // Starting players are positions 1-11
     });
-    console.log('Initial temporary ratings:', this.temporaryRatings.value);
+
+    // Set default ratings for all starting players
+    await Promise.all(startingPlayers.map(async (player) => {
+      try {
+        console.log('Setting default rating for starting player:', player.playerId);
+        await this.savePlayerRating(player.playerId, 5);
+      } catch (error) {
+        console.error('Error setting default rating for player:', player.playerId, error);
+      }
+    }));
   },
 
   stopRatingMode() {
     console.log('Stopping rating mode');
     this.isRating.value = false;
-    this.temporaryRatings.value = {};
   },
 
   // Rating operations
@@ -46,49 +49,22 @@ export const ratingService = {
 
   async updatePlayerRating(playerId: string, rating: number) {
     console.log('Updating rating for player:', playerId, 'rating:', rating);
-    if (this.isRating.value) {
-      this.temporaryRatings.value[playerId] = rating;
-      console.log('Temporary ratings after update:', this.temporaryRatings.value);
-    } else {
-      await this.savePlayerRating(playerId, rating);
-    }
-  },
-
-  async saveAllRatings() {
-    try {
-      console.log('Starting to save ratings. Current temporary ratings:', this.temporaryRatings.value);
-      // Save all temporary ratings
-      for (const [playerId, rating] of Object.entries(this.temporaryRatings.value)) {
-        console.log('Saving rating for player:', playerId, 'rating:', rating);
-        await this.savePlayerRating(playerId, rating);
-      }
-      // Clear temporary ratings and exit rating mode
-      this.temporaryRatings.value = {};
-      this.isRating.value = false;
-    } catch (error) {
-      console.error('Error saving ratings:', error);
-      throw error;
-    }
+    await this.savePlayerRating(playerId, rating);
   },
 
   async removePlayerRating(playerId: string) {
     console.log('Removing rating for player:', playerId);
-    if (this.isRating.value) {
-      this.temporaryRatings.value[playerId] = 0;
-      console.log('Temporary ratings after removal:', this.temporaryRatings.value);
-    } else {
-      await this.savePlayerRating(playerId, 0);
-    }
+    await this.savePlayerRating(playerId, 0);
   },
 
-  getPlayerRating(playerId: string, lineupPlayers: Array<{ playerId: string; averageRating?: number | null }>): number {
-    if (this.isRating.value) {
-      return this.temporaryRatings.value[playerId] || 5;
-    }
+  getPlayerRating(playerId: string, lineupPlayers: Array<{ playerId: string; averageRating?: number | null; ratings?: Array<{ userId: string; score: number }> }>): number {
     const matchPlayer = lineupPlayers.find(p => p.playerId === playerId);
-    const rating = matchPlayer?.averageRating || 5;
-    console.log('Getting stored rating for player:', playerId, 'rating:', rating);
-    return rating;
+    if (!matchPlayer) return 0;
+
+    return matchPlayer.ratings[matchPlayer.ratings.length - 1].score;
+
+    // Fallback to average rating or 0
+    return matchPlayer.averageRating || 0;
   },
 
   // Existing mutation hooks
@@ -152,12 +128,9 @@ export const ratingService = {
 
     const execute = async (matchPlayerId: string, score: number) => {
       try {
-        console.log('Adding simple rating for player:', matchPlayerId, 'score:', score);
         const result = await addSimpleRating({
-
-            matchPlayerId: matchPlayerId,
-            score: score
-
+          matchPlayerId,
+          score
         });
 
         if (result?.data?.addSimpleRating) {
@@ -206,13 +179,13 @@ export const ratingService = {
 
   // Helper function to get rating color based on score
   getRatingColor(rating: number): string {
-    if (rating >= 9) return 'positive-10';
-    if (rating >= 8) return 'positive-8';
-    if (rating >= 7) return 'positive-6';
-    if (rating >= 6) return 'warning-8';
-    if (rating >= 5) return 'warning-6';
-    if (rating >= 4) return 'negative-8';
-    if (rating >= 3) return 'negative-10';
-    return 'negative-14';
+    if (rating >= 9) return 'positive';
+    if (rating >= 8) return 'positive';
+    if (rating >= 7) return 'positive';
+    if (rating >= 6) return 'warning';
+    if (rating >= 5) return 'warning';
+    if (rating >= 4) return 'negative';
+    if (rating >= 3) return 'negative';
+    return 'negative';
   }
 };
