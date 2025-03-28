@@ -11,9 +11,6 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         
-        // Use configuration instead
-        builder.WebHost.UseUrls(builder.Configuration["Urls"] ?? "http://*:5001");
-        
         // Configure services
         var startup = new Startup(builder.Configuration);
         startup.ConfigureServices(builder.Services);
