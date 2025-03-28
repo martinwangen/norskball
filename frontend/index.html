@@ -18,4 +18,13 @@
   <body>
     <!-- quasar:entry-point -->
   </body>
+  <script>
+    function sendHeight() {
+      const height = document.documentElement.scrollHeight; // Get the full height of the page
+      window.parent.postMessage({ iframeHeight: height }, "*");
+    }
+  
+    window.onload = sendHeight;
+    window.onresize = sendHeight;
+  </script>
 </html>

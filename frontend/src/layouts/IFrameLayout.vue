@@ -9,11 +9,11 @@
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <q-footer class="bg-transparent text-white">
       <q-toolbar>
         <q-toolbar-title>
           <div class="text-caption">
-            &copy; {{ new Date().getFullYear() }} Football Ratings App
+            <img src="@/assets/miles-logo.svg" alt="Miles logo" style="height: 30px;">
           </div>
         </q-toolbar-title>
       </q-toolbar>

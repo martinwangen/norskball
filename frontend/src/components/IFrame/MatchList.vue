@@ -82,26 +82,25 @@ onMounted(async () => {
   overflow-x: auto;
   background: var(--q-color-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .horizontal-list {
   display: flex;
   flex-direction: row;
   white-space: nowrap;
-  gap: 0.5rem;
+  gap: 0.75rem;
   min-width: min-content;
 }
 
 :deep(.q-item) {
   flex: 0 0 300px;
-  height: 75px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+  height: 80px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
   text-align: center;
-  padding: 0.5rem;
-  background: var(--q-color-surface-variant);
+  padding: 0.75rem;
+  border: 0;
 }
 
 :deep(.q-item-section) {
@@ -124,47 +123,54 @@ onMounted(async () => {
 }
 
 .team-logo {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--q-color-surface);
-  padding: 2px;
+  padding: 3px;
 }
 
 .team-name {
   font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.2;
+  color: var(--q-color-on-surface);
 }
 
 .vs {
   font-size: 0.75rem;
   opacity: 0.7;
   font-weight: 500;
+  color: var(--q-color-on-surface);
+  padding: 0.2rem 0.4rem;
+  background: var(--q-color-surface);
+  border-radius: 4px;
 }
 
 :deep(.q-item-label.caption) {
   font-size: 0.75rem;
-  opacity: 0.8;
+  opacity: 0.7;
+  color: var(--q-color-on-surface);
 }
 
 :deep(.q-item--active) {
   background: var(--q-color-primary);
-  color: var(--q-color-on-primary);
-  transform: translateY(-2px);
-  z-index: 1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 :deep(.q-item--active .team-name),
-:deep(.q-item--active .vs) {
+:deep(.q-item--active .vs),
+:deep(.q-item--active .q-item-label.caption) {
   color: var(--q-color-on-primary);
 }
 
 :deep(.q-item:hover) {
-  background: var(--q-color-primary-light);
-  color: var(--q-color-on-primary);
-  transform: translateY(-1px);
+  background: var(--q-color-dark);
+  opacity: 0.8;
+}
+
+:deep(.q-item--active:hover) {
+  background: var(--q-color-primary);
+  opacity: 1;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -176,5 +182,31 @@ onMounted(async () => {
 .match-selector-array {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+@media (max-width: 768px) {
+  :deep(.q-item) {
+    flex: 0 0 260px;
+    height: 70px;
+    padding: 0.5rem;
+  }
+
+  .team-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .team-name {
+    font-size: 0.8rem;
+  }
+
+  .vs {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.3rem;
+  }
+
+  :deep(.q-item-label.caption) {
+    font-size: 0.7rem;
+  }
 }
 </style>

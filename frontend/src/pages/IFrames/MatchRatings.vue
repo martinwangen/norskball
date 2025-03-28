@@ -27,14 +27,60 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
 import { GetAllMatchRatingsOnlyRatedPlayers } from '../../gql/queries/ratings';
 import MatchDetails from '../../components/IFrame/MatchDetails.vue';
 import MatchList from '../../components/IFrame/MatchList.vue';
-
+import { useQuasar } from 'quasar';
+import mockratings from './mockratings.json';
+const $q = useQuasar();
 const ratings = ref([]);
 const selectedMatchId = ref<string | null>(null);
+
+// Function to detect parent theme
+const detectParentTheme = () => {
+  try {
+    // Check if we're in an iframe
+    if (window.parent !== window) {
+      // Get the parent document's body background color
+      const parentBgColor = window.parent.document.body.style.backgroundColor;
+      if (parentBgColor) {
+        // Convert RGB to HSL to determine if it's dark or light
+        const rgb = parentBgColor.match(/\d+/g)?.map(Number);
+        if (rgb && rgb.length >= 3) {
+          const r = rgb[0] / 255;
+          const g = rgb[1] / 255;
+          const b = rgb[2] / 255;
+          const max = Math.max(r, g, b);
+          const min = Math.min(r, g, b);
+          const l = (max + min) / 2;
+
+          // If lightness is less than 0.5, consider it dark theme
+          if (l < 0.5) {
+            $q.dark.set(true);
+          } else {
+            $q.dark.set(false);
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Could not detect parent theme:', error);
+  }
+};
+
+// Listen for theme changes from parent
+const handleMessage = (event: MessageEvent) => {
+  if (event.data && typeof event.data.theme === 'string') {
+    $q.dark.set(event.data.theme === 'dark');
+  }
+};
+
+onMounted(() => {
+  detectParentTheme();
+  window.addEventListener('message', handleMessage);
+});
 
 const processedRatings = computed(() => {
   return ratings.value
@@ -86,6 +132,9 @@ onResult(({ data }) => {
     // Set the first match as selected by default
     if (processedRatings.value.length > 0) {
       selectedMatchId.value = processedRatings.value[0].id;
+    }else{
+      ratings.value = mockratings.data.allMatchRatingsOnlyRatedPlayers.nodes;
+      selectedMatchId.value = mockratings[0].id;
     }
   }
 });
@@ -106,5 +155,28 @@ onResult(({ data }) => {
 
 .match-display-container {
   width: 100%;
+}
+
+/* Theme-specific styles */
+:deep(.q-card) {
+  background: var(--q-color-surface);
+  border: 1px solid var(--q-color-surface-variant);
+}
+
+:deep(.q-table) {
+  background: var(--q-color-surface);
+  border: 1px solid var(--q-color-surface-variant);
+}
+
+:deep(.q-table tbody tr) {
+  background: var(--q-color-surface);
+}
+
+:deep(.q-table tbody tr:nth-child(even)) {
+  background: var(--q-color-surface-variant);
+}
+
+:deep(.q-table th) {
+  background: var(--q-color-surface-variant);
 }
 </style>
