@@ -138,7 +138,7 @@
         </q-list>
 
         <!-- Substitutes -->
-        <div class="text-subtitle2 q-mt-md q-mb-sm">Substitutes ({{ validation.substitute_count }}/8)</div>
+        <div class="text-subtitle2 q-mt-md q-mb-sm">Substitutes ({{ validation.substitute_count }}/9)</div>
         <q-list bordered separator>
           <template v-if="isEditing">
             <q-item v-for="(sub, index) in substitutes" :key="sub.player?.id || index">
@@ -158,7 +158,7 @@
                   clearable
                   emit-value
                   map-options
-                  :disable="validation.substitute_count >= 8 && !sub.player"
+                  :disable="validation.substitute_count >= 9 && !sub.player"
                   @update:model-value="updateSubstitute(index, $event)"
                 >
                   <template v-slot:option="{ itemProps, opt, selected, toggleOption }">
@@ -507,8 +507,8 @@ const initializePositions = () => {
     }
   }
 
-  // Initialize substitutes (always 7)
-  substitutes.value = Array.from({ length: 7 }, (_, i) => ({
+  // Initialize substitutes (always 9)
+  substitutes.value = Array.from({ length: 9 }, (_, i) => ({
     number: 12 + i, // Start from 12 since 1-11 are starting positions
     player: null,
   }));
@@ -642,14 +642,14 @@ const validation = computed<LineupValidation>(() => {
   const substitute_count = substitutes.value.filter(p => p.player).length;
 
   return {
-    is_valid: starting_count === 11 && substitute_count <= 8,
+    is_valid: starting_count === 11 && substitute_count <= 9,
     starting_count,
     substitute_count,
     message: starting_count < 11
       ? `Need ${11 - starting_count} more starting players`
       : starting_count > 11
         ? 'Too many starting players'
-        : substitute_count > 8
+        : substitute_count > 9
           ? 'Too many substitutes'
           : 'Valid lineup'
   };
@@ -664,7 +664,7 @@ const updatePlayer = (index: number, player: MatchPlayer | null) => {
 };
 
 const updateSubstitute = (index: number, player: MatchPlayer | null) => {
-  if (validation.value.substitute_count >= 8 && !substitutes.value[index].player) return;
+  if (validation.value.substitute_count >= 9 && !substitutes.value[index].player) return;
 
   if (player && !validatePlayerSelection(player.playerId, 12 + index)) {
     return;

@@ -1,8 +1,8 @@
 {
-  "name": "frontend",
+  "name": "NorskBall",
   "version": "0.0.1",
   "description": "Ratings of footballers after matches",
-  "productName": "ratings",
+  "productName": "NorskBall",
   "author": "martinwangen <wangen93@gmail.com>",
   "type": "module",
   "private": true,

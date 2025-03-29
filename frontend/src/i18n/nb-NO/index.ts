@@ -2,7 +2,7 @@ import type { MessageSchema } from 'src/boot/i18n';
 
 export default {
   app: {
-    title: 'Fotball Vurderinger'
+    title: 'NorskBall'
   },
   common: {
     loading: 'Laster...',
